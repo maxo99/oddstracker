@@ -1,12 +1,9 @@
-import json
-import os
-
-from oddstracker.config import DATA_DIR
 from oddstracker.domain.kambi_event import KambiEvent
 
 
 def test_one():
     pass
+
 
 def test_kambi_event_loads(sample_events):
     for i, e in enumerate(sample_events):

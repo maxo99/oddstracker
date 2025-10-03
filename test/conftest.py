@@ -1,14 +1,15 @@
-import os
-from typing import Generator
 import json
-from oddstracker.config import DATA_DIR
+import os
+from collections.abc import Generator
+
 import pytest
 
 from oddstracker.adapters.postgres_client import PostgresClient
+from oddstracker.config import DATA_DIR
 
 
 @pytest.fixture(scope="session")
-def fix_postgresclient() -> Generator[PostgresClient, None, None]:
+def fix_postgresclient() -> Generator[PostgresClient]:
     _client = PostgresClient()
     yield _client
     _client.close()
@@ -17,6 +18,6 @@ def fix_postgresclient() -> Generator[PostgresClient, None, None]:
 @pytest.fixture(scope="session")
 def sample_events() -> list[dict]:
     path = os.path.join(DATA_DIR, "nfl-matches-events.json")
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         data = json.load(f)
     return data["events"]

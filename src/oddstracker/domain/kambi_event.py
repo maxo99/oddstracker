@@ -1,4 +1,3 @@
-from typing import List
 from pydantic import BaseModel
 from sqlmodel import Field, SQLModel
 
@@ -54,6 +53,7 @@ class Outcome(BaseModel):
 class BetOffer(SQLModel):
     class SQLModelConfig:
         extra = "ignore"
+
     id: int
     closed: str
     criterion: Criterion
