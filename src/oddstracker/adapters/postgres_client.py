@@ -1,11 +1,8 @@
 import logging
-from dataclasses import dataclass
 
-import sqlmodel
-from numpy import ndarray
-from sqlalchemy import TextClause, create_engine, func, inspect, select, text
+from sqlalchemy import create_engine, inspect, text
 from sqlalchemy.orm import sessionmaker
-from sqlmodel import SQLModel, cast, not_
+from sqlmodel import SQLModel
 
 from oddstracker import config
 from oddstracker.domain.kambi_event import KambiEvent

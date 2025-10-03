@@ -14,5 +14,12 @@
         "**/*.venv": true,
         "**/*.ruff_cache": true,
         "htmlcov": true
-    }
+    },
+    "pylint.args": [
+        "--rcfile=pyproject.toml",
+        "-j"
+    ],
+    "ruff.configurationPreference": "filesystemFirst",
+    "debug.internalConsoleOptions": "openOnSessionStart"
+
 }
