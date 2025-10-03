@@ -3,15 +3,22 @@ import os
 from collections.abc import Generator
 
 import pytest
+from sqlalchemy import text
 
 from oddstracker.adapters.postgres_client import PostgresClient
 from oddstracker.config import DATA_DIR
 
+TEARDOWN = False
 
-@pytest.fixture(scope="session")
+
+@pytest.fixture(scope="function")
 def fix_postgresclient() -> Generator[PostgresClient]:
     _client = PostgresClient()
     yield _client
+    if TEARDOWN:
+        with _client.engine.connect() as conn:
+            conn.execute(text("TRUNCATE TABLE betoffer, event CASCADE"))
+            conn.commit()
     _client.close()
 
 

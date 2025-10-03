@@ -6,16 +6,16 @@ PROVIDERS = [
         "site_code": "ilaniuswarl",
         "site_specials_name": "ilani",
     },
-    {
-        "sportsbook": "Barstool",
-        "site_code": "pivuspa",
-        "site_specials_name": "barstool",
-    },
-    {
-        "sportsbook": "DraftKings",
-        "site_code": "rsiuspa",
-        "site_specials_name": "draftkings",
-    },
+    # {
+    #     "sportsbook": "Barstool",
+    #     "site_code": "pivuspa",
+    #     "site_specials_name": "barstool",
+    # },
+    # {
+    #     "sportsbook": "DraftKings",
+    #     "site_code": "rsiuspa",
+    #     "site_specials_name": "draftkings",
+    # },
 ]
 
 
@@ -61,3 +61,6 @@ class KambiProvider(BaseModel):
 
     def get_player_props_url(self, event_id: str) -> str:
         return f"{self.base_url}/betoffer/event/{event_id}.json"
+
+
+PROVIDER = KambiProvider(**PROVIDERS[0])

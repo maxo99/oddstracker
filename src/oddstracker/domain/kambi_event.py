@@ -1,4 +1,7 @@
+from datetime import UTC, datetime
+
 from pydantic import BaseModel
+from sqlalchemy import JSON, BigInteger, Column, DateTime, ForeignKey
 from sqlmodel import Field, SQLModel
 
 # class EventData(BaseModel):
@@ -50,28 +53,47 @@ class Outcome(BaseModel):
     # cashOutStatus: str
 
 
-class BetOffer(SQLModel):
-    class SQLModelConfig:
-        extra = "ignore"
+class BetOffer(SQLModel, table=True):
+    __tablename__ = "betoffer"  # type: ignore
+    model_config = {"extra": "ignore"}
 
-    id: int
+    id: int = Field(sa_column=Column(BigInteger, primary_key=True, nullable=False))
+    collected_at: datetime = Field(
+        sa_column=Column(
+            DateTime, primary_key=True, nullable=False, default=datetime.utcnow
+        )
+    )
     closed: str
-    criterion: Criterion
-    betOfferType: BetOfferType
-    eventId: int
-    outcomes: list[Outcome]
+    criterion: dict = Field(sa_column=Column(JSON))
+    betOfferType: dict = Field(sa_column=Column(JSON))
+    eventId: int = Field(
+        sa_column=Column(BigInteger, ForeignKey("event.id"), index=True, nullable=False)
+    )
+    outcomes: list = Field(sa_column=Column(JSON))
     # tags: list[str]
     sortOrder: int
     # cashOutStatus: str
 
 
 class KambiEvent(SQLModel, table=True):
-    class SQLModelConfig:
-        extra = "ignore"
+    __tablename__ = "event"  # type: ignore
+    model_config = {"extra": "ignore"}
 
-    # event: "EventData" = Field(...)
-    # betOffers: List[BetOffer] = Field(default_factory=list)
-    id: int = Field(primary_key=True, nullable=False)
+    id: int = Field(sa_column=Column(BigInteger, primary_key=True, nullable=False))
+    created_at: datetime = Field(
+        sa_column=Column(DateTime, nullable=False, default=datetime.now(UTC))
+    )
+    updated_at: datetime = Field(
+        sa_column=Column(
+            DateTime,
+            nullable=False,
+            default=datetime.now(UTC),
+            onupdate=datetime.now(UTC),
+        )
+    )
+    deleted_at: datetime | None = Field(
+        sa_column=Column(DateTime, nullable=True, default=None)
+    )
     name: str
     englishName: str
     homeName: str
@@ -80,9 +102,18 @@ class KambiEvent(SQLModel, table=True):
     group: str
     state: str
 
-    def __init__(self, **data):
-        try:
-            data = {**data.pop("event"), **data}
-            super().__init__(**data)
-        except Exception as e:
-            raise e
+
+class KambiData(BaseModel):
+    event: KambiEvent
+    betOffers: list[BetOffer]
+
+    @property
+    def eventId(self) -> int:
+        return self.event.id
+
+    @property
+    def eventName(self) -> str:
+        return self.event.englishName
+
+    def __str__(self) -> str:
+        return f"KambiData(eventId={self.eventId}, eventName={self.eventName}, betOffers={len(self.betOffers)})"
