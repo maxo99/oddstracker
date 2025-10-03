@@ -8,15 +8,16 @@ from sqlalchemy.orm import sessionmaker
 from sqlmodel import SQLModel, cast, not_
 
 from oddstracker import config
+from oddstracker.domain.kambi_event import KambiEvent
 
-# from oddstracker.domain.kambi_event import Job, SQLModel
+# from oddstracker.domain.kambi_event import Event, SQLModel
 
 logger = logging.getLogger(__name__)
 
 
 # @dataclass
 # class SimilarityResponse:
-#     jobs: list[Job]
+#     events: list[Event]
 #     scores: list[float]
 
 
@@ -39,7 +40,7 @@ class PostgresClient:
             raise e
 
     def _create_tables(self):
-        if "job" not in inspect(self.engine).get_table_names():
+        if "event" not in inspect(self.engine).get_table_names():
             logger.info("Creating Postgres tables if they do not exist")
             SQLModel.metadata.create_all(self.engine)
             logger.info("Postgres tables created/checked successfully")
@@ -67,184 +68,162 @@ class PostgresClient:
             logger.error(f"Error closing Postgres client connection: {e}")
             raise e
 
-    # def upsert_job(self, job: Job, allow_reset: bool = False):
-    #     try:
-    #         logger.info(f"Upserting job {job.id}.")
-    #         with self.session_maker() as session:
-    #             updated_job = None
-    #             existing_job = session.get(Job, job.id)
-    #             if existing_job:
-    #                 for key, value in job.model_dump().items():
-    #                     if hasattr(job, key) and "vector" in key:
-    #                         # Handle vector fields specifically
-    #                         vector_value = getattr(job, key)
-    #                         if allow_reset or (
-    #                             vector_value is not None and len(vector_value) > 0
-    #                         ):
-    #                             setattr(existing_job, key, vector_value)
-    #                     else:
-    #                         # Handle non-vector fields
-    #                         if allow_reset or (value is not None and value != ""):
-    #                             setattr(existing_job, key, value)
-    #                 updated_job = existing_job
-    #             else:
-    #                 session.add(job)
-    #                 updated_job = job
-    #             session.commit()
-    #             # Only refresh the jobs that are actually in this session
-    #             if updated_job:
-    #                 logger.info(f"Refreshing job {updated_job.id} in session.")
-    #                 session.refresh(updated_job)
-    #         logger.info(f"Upserted job {updated_job.id} successfully.")
-    #     except Exception as e:
-    #         logger.error(f"Error upserting jobs: {e}")
-    #         raise e
+    def add_event(self, event: KambiEvent):
+        try:
+            logger.info(f"Upserting event {event.id}.")
+            with self.session_maker() as session:
+                session.add(event)
+                logger.info(f"Upserted event {event.id} successfully.")
+                session.commit()
+        except Exception as e:
+            logger.error(f"Error upserting events: {e}")
+            raise e
 
-    # def upsert_jobs(self, jobs: list[Job], allow_reset: bool = False):
+    # def upsert_events(self, events: list[Event], allow_reset: bool = False):
     #     try:
-    #         logger.info(f"Upserting {len(jobs)} jobs.")
+    #         logger.info(f"Upserting {len(events)} events.")
     #         with self.session_maker() as session:
-    #             updated_jobs = []
-    #             for job in jobs:
-    #                 existing_job = session.get(Job, job.id)
-    #                 if existing_job:
-    #                     for key, value in job.model_dump().items():
-    #                         if hasattr(job, key) and "vector" in key:
+    #             updated_events = []
+    #             for event in events:
+    #                 existing_event = session.get(Event, event.id)
+    #                 if existing_event:
+    #                     for key, value in event.model_dump().items():
+    #                         if hasattr(event, key) and "vector" in key:
     #                             # Handle vector fields specifically
-    #                             vector_value = getattr(job, key)
+    #                             vector_value = getattr(event, key)
     #                             if allow_reset or (
     #                                 vector_value is not None and len(vector_value) > 0
     #                             ):
-    #                                 setattr(existing_job, key, vector_value)
+    #                                 setattr(existing_event, key, vector_value)
     #                         else:
     #                             # Handle non-vector fields
     #                             if allow_reset or (value is not None and value != ""):
-    #                                 setattr(existing_job, key, value)
-    #                     updated_jobs.append(existing_job)
+    #                                 setattr(existing_event, key, value)
+    #                     updated_events.append(existing_event)
     #                 else:
-    #                     session.add(job)
-    #                     updated_jobs.append(job)
+    #                     session.add(event)
+    #                     updated_events.append(event)
     #             session.commit()
-    #             # Only refresh the jobs that are actually in this session
-    #             if updated_jobs:
-    #                 logger.info(f"Refreshing {len(updated_jobs)} jobs in session.")
-    #             for job in updated_jobs:
-    #                 session.refresh(job)
-    #         logger.info(f"Upserted {len(updated_jobs)} jobs successfully.")
+    #             # Only refresh the events that are actually in this session
+    #             if updated_events:
+    #                 logger.info(f"Refreshing {len(updated_events)} events in session.")
+    #             for event in updated_events:
+    #                 session.refresh(event)
+    #         logger.info(f"Upserted {len(updated_events)} events successfully.")
     #     except Exception as e:
-    #         logger.error(f"Error upserting jobs: {e}")
+    #         logger.error(f"Error upserting events: {e}")
     #         raise e
 
-    # def get_jobs(self, **filters) -> list[Job]:
+    # def get_events(self, **filters) -> list[Event]:
     #     try:
-    #         logger.info(f"Fetching jobs from with {filters}")
-    #         query = select(Job)
+    #         logger.info(f"Fetching events from with {filters}")
+    #         query = select(Event)
     #         with self.session_maker() as session:
-    #             query = select(Job)
+    #             query = select(Event)
     #             if filters:
     #                 for key, value in filters.items():
     #                     if key.startswith("not_"):
     #                         # Handle "not equal" filters
     #                         actual_key = key[4:]  # Remove "not_" prefix
-    #                         query = query.where(getattr(Job, actual_key) != value)
+    #                         query = query.where(getattr(Event, actual_key) != value)
     #                     else:
     #                         # Handle regular equality filters
-    #                         query = query.where(getattr(Job, key) == value)
+    #                         query = query.where(getattr(Event, key) == value)
     #             return list(session.execute(query).scalars().all())
     #     except Exception as e:
-    #         logger.error(f"Error getting jobs: {e}")
+    #         logger.error(f"Error getting events: {e}")
     #         raise e
 
-    # def get_job_by_id(self, job_id: str) -> Job | None:
+    # def get_event_by_id(self, event_id: str) -> Event | None:
     #     try:
     #         with self.session_maker() as session:
-    #             return session.get(Job, job_id) or None
+    #             return session.get(Event, event_id) or None
     #     except Exception as e:
     #         raise e
 
     # def get_count(self, **filters) -> int:
     #     try:
     #         with self.session_maker() as session:
-    #             query = select(func.count(cast(Job.id, sqlmodel.String)))
+    #             query = select(func.count(cast(Event.id, sqlmodel.String)))
     #             if filters:
     #                 for key, value in filters.items():
     #                     if key.startswith("not_"):
     #                         actual_key = key[4:]
-    #                         query = query.where(getattr(Job, actual_key) != value)
+    #                         query = query.where(getattr(Event, actual_key) != value)
     #                     else:
-    #                         query = query.where(getattr(Job, key) == value)
+    #                         query = query.where(getattr(Event, key) == value)
     #             result = session.execute(query).scalar_one()
     #             return result
     #     except Exception as e:
-    #         logger.error(f"Error getting job count: {e}")
+    #         logger.error(f"Error getting event count: {e}")
     #         raise e
 
-    # def delete_job(self, job_id: str):
+    # def delete_event(self, event_id: str):
     #     try:
     #         with self.session_maker() as session:
-    #             job = session.get(Job, job_id)
-    #             if job:
-    #                 session.delete(job)
+    #             event = session.get(Event, event_id)
+    #             if event:
+    #                 session.delete(event)
     #                 session.commit()
     #             else:
-    #                 raise ValueError(f"Job with id {job_id} not found")
+    #                 raise ValueError(f"Event with id {event_id} not found")
     #     except Exception as e:
     #         raise e
 
     # def search_by_title_embeddings(
     #     self,
     #     title_embedding: list[float],
-    #     job_exclusion_id: str | None = None,
+    #     event_exclusion_id: str | None = None,
     #     limit: int = 5,
     #     similarity_threshold: float = 0.999,
     # ) -> SimilarityResponse:
     #     try:
-    #         logger.info("Searching jobs by title embedding")
+    #         logger.info("Searching events by title embedding")
     #         embedding_sql = self._format_embedding(title_embedding)
 
     #         with self.session_maker() as session:
-    #             dist = func.cosine_distance(Job.title_vector, embedding_sql)
+    #             dist = func.cosine_distance(Event.title_vector, embedding_sql)
 
-    #             query = select(Job, dist.label("cosine_distance")).where(
+    #             query = select(Event, dist.label("cosine_distance")).where(
     #                 dist < similarity_threshold
     #             )
-    #             if job_exclusion_id is not None:
-    #                 query = query.where(not_(Job.id == job_exclusion_id))
+    #             if event_exclusion_id is not None:
+    #                 query = query.where(not_(Event.id == event_exclusion_id))
     #             results = session.execute(query.order_by(dist).limit(limit)).all()
 
-    #             logger.info(f"Found {len(results)} jobs matching title embedding")
+    #             logger.info(f"Found {len(results)} events matching title embedding")
     #             return SimilarityResponse(
-    #                 jobs=[r[0] for r in results], scores=[1.0 - r[1] for r in results]
+    #                 events=[r[0] for r in results], scores=[1.0 - r[1] for r in results]
     #             )
     #     except Exception as e:
-    #         logger.error(f"Error searching jobs by title: {e}")
+    #         logger.error(f"Error searching events by title: {e}")
     #         raise e
 
     # def search_by_qualifications_embeddings(
     #     self,
     #     qe: list[float] | ndarray,
-    #     job_exclusion_id: str | None = None,
+    #     event_exclusion_id: str | None = None,
     #     limit: int = 5,
     #     similarity_threshold: float = 0.999,
     # ) -> SimilarityResponse:
     #     try:
-    #         logger.info("Searching jobs by qualifications embedding")
+    #         logger.info("Searching events by qualifications embedding")
     #         embedding_sql = self._format_embedding(qe)
 
     #         with self.session_maker() as session:
-    #             dist = func.cosine_distance(Job.qualifications_vector, embedding_sql)
-    #             query = select(Job, dist.label("cosine_distance")).where(
+    #             dist = func.cosine_distance(Event.qualifications_vector, embedding_sql)
+    #             query = select(Event, dist.label("cosine_distance")).where(
     #                 dist < similarity_threshold
     #             )
-    #             if job_exclusion_id is not None:
-    #                 query = query.where(not_(Job.id == job_exclusion_id))
+    #             if event_exclusion_id is not None:
+    #                 query = query.where(not_(Event.id == event_exclusion_id))
     #             results = session.execute(query.order_by(dist).limit(limit)).all()
-    #             logger.info(f"Found {len(results)} jobs similar jobs")
+    #             logger.info(f"Found {len(results)} events similar events")
     #             return SimilarityResponse(
-    #                 jobs=[r[0] for r in results], scores=[1.0 - r[1] for r in results]
+    #                 events=[r[0] for r in results], scores=[1.0 - r[1] for r in results]
     #             )
     #     except Exception as e:
-    #         logger.error(f"Error searching jobs by qualifications: {e}")
+    #         logger.error(f"Error searching events by qualifications: {e}")
     #         raise e
 
     # @staticmethod
@@ -263,12 +242,12 @@ class PostgresClient:
     #     qualifications_weight: float = 0.6,
     #     limit: int = 5,
     #     similarity_threshold: float = 0.7
-    # ) -> list[Job]:
+    # ) -> list[Event]:
     #     try:
-    #         logger.info("Searching jobs by combined title and qualifications embeddings")
+    #         logger.info("Searching events by combined title and qualifications embeddings")
 
     #         with self.session_maker() as session:
-    #             query = session.query(Job)
+    #             query = session.query(Event)
 
     #             # Build distance calculation based on available embeddings
     #             distance_expressions = []
@@ -280,25 +259,25 @@ class PostgresClient:
     #                 qual_sql = text(f"ARRAY[{qual_str}]::vector")
 
     #                 combined_distance = (
-    #                     title_weight * func.cosine_distance(Job.title_vector, title_sql) +
-    #                     qualifications_weight * func.cosine_distance(Job.qualifications_vector, qual_sql)
+    #                     title_weight * func.cosine_distance(Event.title_vector, title_sql) +
+    #                     qualifications_weight * func.cosine_distance(Event.qualifications_vector, qual_sql)
     #                 )
     #                 query = query.filter(
-    #                     Job.title_vector.isnot(None),
-    #                     Job.qualifications_vector.isnot(None)
+    #                     Event.title_vector.isnot(None),
+    #                     Event.qualifications_vector.isnot(None)
     #                 )
 
     #             elif title_embedding:
     #                 title_str = str(title_embedding).replace("[", "").replace("]", "")
     #                 title_sql = text(f"ARRAY[{title_str}]::vector")
-    #                 combined_distance = func.cosine_distance(Job.title_vector, title_sql)
-    #                 query = query.filter(Job.title_vector.isnot(None))
+    #                 combined_distance = func.cosine_distance(Event.title_vector, title_sql)
+    #                 query = query.filter(Event.title_vector.isnot(None))
 
     #             elif qualifications_embedding:
     #                 qual_str = str(qualifications_embedding).replace("[", "").replace("]", "")
     #                 qual_sql = text(f"ARRAY[{qual_str}]::vector")
-    #                 combined_distance = func.cosine_distance(Job.qualifications_vector, qual_sql)
-    #                 query = query.filter(Job.qualifications_vector.isnot(None))
+    #                 combined_distance = func.cosine_distance(Event.qualifications_vector, qual_sql)
+    #                 query = query.filter(Event.qualifications_vector.isnot(None))
 
     #             else:
     #                 raise ValueError("At least one embedding must be provided")
@@ -311,8 +290,8 @@ class PostgresClient:
     #                 .all()
     #             )
 
-    #             logger.info(f"Found {len(results)} jobs matching combined criteria")
+    #             logger.info(f"Found {len(results)} events matching combined criteria")
     #             return results
     #     except Exception as e:
-    #         logger.error(f"Error searching jobs by combined criteria: {e}")
+    #         logger.error(f"Error searching events by combined criteria: {e}")
     #         raise e

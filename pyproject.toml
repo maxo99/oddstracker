@@ -1,30 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
 [project]
-name = "oddstracker"
+name = "odds-tracker"
 version = "0.0.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "gitpython>=3.1.45",
+    "numpy>=2.3.3",
+    "psycopg2-binary>=2.9.10",
     "pydantic>=2.11.9",
     "python-dotenv>=1.1.1",
     "requests>=2.32.5",
     "sqlmodel>=0.0.25",
 ]
-[build-system]
-requires = ["uv_build>=0.8.0,<0.9.0"]
-build-backend = "uv_build"
 
+[dependency-groups]
+dev = ["ipykernel>=6.30.1", "odds-tracker","pytest>=8.4.2"]
 
 [tool.setuptools.packages.find]
 where = ['src']
 include = ['oddstracker*']
-
-[tool.uv.workspace]
-members = ["oddstracker"]
-
-[tool.uv.sources]
-oddstracker = { workspace = true }
 
 
 [tool.ruff.lint]
@@ -70,3 +70,8 @@ good-names = [
     "pk",
     "ok",
 ]
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["test"]
