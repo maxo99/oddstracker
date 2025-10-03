@@ -20,7 +20,7 @@ def test_event_store_retrieve(sample_events, fix_postgresclient):
     for i, e in enumerate(sample_events):
         logger.info(f"Adding event:{i} {e['event']['englishName']}")
         try:
-            kdata = KambiData(**e)
+            kdata = KambiData.model_validate(e)
             fix_postgresclient.add_event(kdata.event, kdata.betOffers)
         except Exception as ex:
             logger.error(f"Failed to parse event: {e['event']['englishName']}")
@@ -46,7 +46,6 @@ def test_event_store_retrieve(sample_events, fix_postgresclient):
 #     for i, e in enumerate(sample_events):
 #         logger.info(f"Parsing event:{i} {e['event']['englishName']}")
 #         try:
-           
 #         except Exception as ex:
 #             logger.error(f"Failed to parse event: {e['event']['englishName']}")
 #             raise ex

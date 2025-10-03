@@ -1,24 +1,8 @@
 from datetime import UTC, datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 from sqlalchemy import JSON, BigInteger, Column, DateTime, ForeignKey
 from sqlmodel import Field, SQLModel
-
-# class EventData(BaseModel):
-#     id: int = Field(primary_key=True, nullable=False)
-#     name: str
-#     englishName: str
-#     homeName: str
-#     awayName: str
-#     start: str
-#     group: str
-#     state: str
-#     # nameDelimiter: str
-#     # groupId: int
-#     # path: List[PathItem]
-#     # nonLiveBoCount: int
-#     # sport: str
-#     # tags: List[str]
 
 
 class Criterion(BaseModel):
@@ -50,34 +34,66 @@ class Outcome(BaseModel):
     oddsFractional: str
     oddsAmerican: str
     status: str
-    # cashOutStatus: str
+
+    @model_validator(mode="before")
+    def validate_extra_fields(cls, values):
+        if "cashOutStatus" in values:
+            values.pop("cashOutStatus")
+        return values
 
 
 class BetOffer(SQLModel, table=True):
     __tablename__ = "betoffer"  # type: ignore
-    model_config = {"extra": "ignore"}
-
     id: int = Field(sa_column=Column(BigInteger, primary_key=True, nullable=False))
     collected_at: datetime = Field(
         sa_column=Column(
-            DateTime, primary_key=True, nullable=False, default=datetime.utcnow
+            DateTime, primary_key=True, nullable=False, default=datetime.now(UTC)
         )
     )
-    closed: str
-    criterion: dict = Field(sa_column=Column(JSON))
-    betOfferType: dict = Field(sa_column=Column(JSON))
     eventId: int = Field(
         sa_column=Column(BigInteger, ForeignKey("event.id"), index=True, nullable=False)
     )
-    outcomes: list = Field(sa_column=Column(JSON))
-    # tags: list[str]
-    sortOrder: int
-    # cashOutStatus: str
+    # closed: str
+    # criterion: dict = Field(sa_column=Column(JSON))
+    # betOfferType: str = Field(sa_column=Column(JSON))
+    criterion: str
+    betOfferType: str
+    outcomes: list[Outcome] = Field(sa_column=Column(JSON))
+
+    @model_validator(mode="before")
+    def denormalize(cls, values):
+        if "cashOutStatus" in values:
+            values.pop("cashOutStatus")
+        if "tags" in values:
+            values.pop("tags")
+        if "sortOrder" in values:
+            values.pop("sortOrder")
+        if "closed" in values:
+            values.pop("closed")
+
+        if isinstance(values.get("betOfferType", None), dict):
+            _bet_offer_type = values.pop("betOfferType")
+            match _bet_offer_type.get("englishName", "").lower():
+                case "handicap":
+                    values["betOfferType"] = "Handicap"
+                case "match":
+                    values["betOfferType"] = "Match"
+                case "over/under":
+                    values["betOfferType"] = "Over/Under"
+                case _:
+                    raise ValueError(f"Unknown bet offer type: {_bet_offer_type}")
+        if isinstance(values.get("criterion", None), dict):
+            _criterion = values.pop("criterion")
+            values["criterion"] = _criterion["englishLabel"]
+
+        return values
 
 
 class KambiEvent(SQLModel, table=True):
     __tablename__ = "event"  # type: ignore
-    model_config = {"extra": "ignore"}
+
+    # class SQLModelConfig:
+    #     extra = "ignore"
 
     id: int = Field(sa_column=Column(BigInteger, primary_key=True, nullable=False))
     created_at: datetime = Field(
@@ -115,5 +131,5 @@ class KambiData(BaseModel):
     def eventName(self) -> str:
         return self.event.englishName
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         return f"KambiData(eventId={self.eventId}, eventName={self.eventName}, betOffers={len(self.betOffers)})"
