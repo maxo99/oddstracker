@@ -21,18 +21,18 @@ def collect():
     return collect_and_store_kdata()
 
 
-@app.get("/events")
+@app.get("/events", response_model_exclude_none=True)
 def events():
     return get_events()
 
 
-@app.get("/event/{event_id}")
+@app.get("/event/{event_id}", response_model_exclude_none=True)
 def event(event_id: int):
     return get_event(event_id)
 
 
 
-@app.get("/event/{event_id}/offers/{offer}")
+@app.get("/event/{event_id}/offers/{offer}", response_model_exclude_none=True)
 def event_offer(event_id: int, offer: str):
     if offer == 'moneyline':
         offer = 'match'
@@ -42,7 +42,7 @@ def event_offer(event_id: int, offer: str):
 
 
 
-@app.get("/event/{event_id}/offers")
+@app.get("/event/{event_id}/offers", response_model_exclude_none=True)
 def bet_offers(event_id: int):
     return get_bet_offers(event_id)
 
