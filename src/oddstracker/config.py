@@ -5,13 +5,14 @@ import git
 POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "postgres")
 POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
-POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
-POSTGRES_DB = os.getenv("POSTGRES_DB", "jobfinder")
-CHAT_MODE = os.getenv("CHAT_MODE", "ollama").lower()
-EMBEDDINGS_ENABLED = os.getenv("EMBEDDINGS_ENABLED", "true").lower() == "true"
+POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5444")
+POSTGRES_DB = os.getenv("POSTGRES_DB", "oddstracker")
 
 ROOT_DIR = str(git.Repo(".", search_parent_directories=True).working_tree_dir)
 DATA_DIR = os.path.join(ROOT_DIR, "data")
+
+
+APP_PORT = int(os.environ.get("APP_PORT", 8000))
 
 def get_pg_url(db: str | None = None) -> str:
     db = db or POSTGRES_DB

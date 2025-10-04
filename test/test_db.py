@@ -16,7 +16,8 @@ def test_connection(fix_postgresclient):
 
 
 def test_event_store_retrieve(sample_events, fix_postgresclient):
-    sample_events = sample_events[:5]  # Limit to first 5 events for testing
+    TEST_LIMIT = 5
+    sample_events = sample_events[:TEST_LIMIT]
     for i, e in enumerate(sample_events):
         logger.info(f"Adding event:{i} {e['event']['englishName']}")
         try:

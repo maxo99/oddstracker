@@ -1,0 +1,49 @@
+
+
+
+###
+@EVENT_ID = 1024873535
+@BASE_URL = http://localhost:8000
+
+# Health Check
+GET {{BASE_URL}}/
+
+
+###
+
+# Pull and Store new Data
+POST {{BASE_URL}}/collect
+
+
+
+###
+
+# Get all Events
+GET {{BASE_URL}}/events/
+
+
+###
+# Get a specific Event by ID
+GET {{BASE_URL}}/event/{{EVENT_ID}}
+
+
+###
+# Get a Event MoneyLine
+GET {{BASE_URL}}/event/{{EVENT_ID}}/moneyline/
+
+
+###
+# Get a Event Handicap
+GET {{BASE_URL}}/event/{{EVENT_ID}}/handicap/
+
+
+
+###
+# Get a Event OverUnder
+GET {{BASE_URL}}/event/{{EVENT_ID}}/overunder/
+
+
+###
+
+# Get all Bet Offers for a specific Event
+GET {{BASE_URL}}/event/{{EVENT_ID}}/offers

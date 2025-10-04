@@ -70,8 +70,6 @@ class PostgresClient:
         try:
             logger.info(f"Upserting event {event.id}.")
             with self.session_maker() as session:
-
-
                 existing = session.get(KambiEvent, event.id)
 
                 if not existing:
@@ -142,7 +140,7 @@ class PostgresClient:
         except Exception as e:
             logger.error(f"Error getting events: {e}")
             raise e
-    
+
     def get_bet_offers_for_event(self, event_id: int) -> list[BetOffer]:
         try:
             logger.info(f"Fetching bet offers for event ID {event_id}")
