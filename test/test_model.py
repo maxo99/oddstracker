@@ -10,7 +10,7 @@ def test_kambi_data_load(sample_events):
     for i, e in enumerate(sample_events):
         logger.info(f"Parsing event:{i} {e['event']['englishName']}")
         try:
-            kdata = KambiData.model_validate(e)
+            kdata = KambiData(**e)
             assert isinstance(kdata, KambiData)
             assert isinstance(kdata.event, KambiEvent)
             assert isinstance(kdata.betOffers, list)

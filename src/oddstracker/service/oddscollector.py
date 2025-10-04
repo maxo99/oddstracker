@@ -22,7 +22,7 @@ def collect_kdata() -> list[KambiData]:
     out = []
     try:
         for e in data:
-            kdata = KambiData.model_validate(e)
+            kdata = KambiData(**e)
             logger.debug(f"Collected: {kdata}")
             out.append(kdata)
     except Exception as ex:

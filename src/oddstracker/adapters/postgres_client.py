@@ -71,13 +71,13 @@ class PostgresClient:
             logger.info(f"Upserting event {event.id}.")
             with self.session_maker() as session:
 
-                 #TODO FIX UPSERT
-                 
+
                 existing = session.get(KambiEvent, event.id)
 
                 if not existing:
                     session.add(event)
                 else:
+                    # TODO: Validate soft delete logic
                     if existing.deleted_at is None:
                         # State was updated, mark existing as deleted and insert new
                         if existing.state != event.state:
