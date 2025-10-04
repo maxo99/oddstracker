@@ -47,3 +47,9 @@ GET {{BASE_URL}}/event/{{EVENT_ID}}/offers/overunder/
 
 # Get all Bet Offers for a specific Event
 GET {{BASE_URL}}/event/{{EVENT_ID}}/offers
+
+
+###
+
+# Get all changes across all events
+GET {{BASE_URL}}/changes

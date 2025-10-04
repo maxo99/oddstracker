@@ -154,4 +154,25 @@ class PostgresClient:
             logger.error(f"Error getting bet offers for event {event_id}: {e}")
             raise e
 
+    def get_bet_offer_history(self, bet_offer_id: int, event_id: int, limit: int = 2) -> list[BetOffer]:
+        try:
+            logger.debug(f"Fetching history for bet offer {bet_offer_id}")
+            with self.session_maker() as session:
+                result = session.execute(
+                    text(
+                        'SELECT * FROM betoffer WHERE id = :bet_offer_id AND "eventId" = :event_id '
+                        "ORDER BY collected_at DESC LIMIT :limit"
+                    ),
+                    {"bet_offer_id": bet_offer_id, "event_id": event_id, "limit": limit}
+                )
+                rows = result.fetchall()
+                bet_offers = []
+                for row in rows:
+                    bet_offer = BetOffer(**dict(row._mapping))
+                    bet_offers.append(bet_offer)
+                return bet_offers
+        except Exception as e:
+            logger.error(f"Error getting bet offer history: {e}")
+            raise e
+
 

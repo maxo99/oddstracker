@@ -3,6 +3,7 @@ from fastapi import FastAPI
 
 from oddstracker.config import APP_PORT, ROOT_DIR
 from oddstracker.domain.kambi_event import BET_OFFER_TYPES
+from oddstracker.service.oddschanges import get_all_changes
 from oddstracker.service.oddscollector import collect_and_store_kdata
 from oddstracker.service.oddsretriever import get_bet_offers, get_event, get_event_offer, get_events
 
@@ -45,6 +46,11 @@ def event_offer(event_id: int, offer: str):
 @app.get("/event/{event_id}/offers", response_model_exclude_none=True)
 def bet_offers(event_id: int):
     return get_bet_offers(event_id)
+
+
+@app.get("/changes", response_model_exclude_none=True)
+def changes():
+    return get_all_changes()
 
 
 if __name__ == "__main__":
