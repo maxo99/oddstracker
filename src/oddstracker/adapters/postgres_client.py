@@ -141,13 +141,17 @@ class PostgresClient:
             logger.error(f"Error getting events: {e}")
             raise e
 
-    def get_bet_offers_for_event(self, event_id: int) -> list[BetOffer]:
+    def get_bet_offers_for_event(self, event_id: int, offer: str | None = None) -> list[BetOffer]:
         try:
             logger.info(f"Fetching bet offers for event ID {event_id}")
             with self.session_maker() as session:
                 query = select(BetOffer).where(BetOffer.eventId == event_id)
+                if offer:
+                    query = query.where(BetOffer.betOfferType == offer)
                 bet_offers = list(session.execute(query).scalars().all())
                 return bet_offers
         except Exception as e:
             logger.error(f"Error getting bet offers for event {event_id}: {e}")
             raise e
+
+

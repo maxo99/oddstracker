@@ -2,7 +2,7 @@
 
 
 ###
-@EVENT_ID = 1024873535
+@EVENT_ID = 1024873536
 @BASE_URL = http://localhost:8000
 
 # Health Check
@@ -29,18 +29,18 @@ GET {{BASE_URL}}/event/{{EVENT_ID}}
 
 ###
 # Get a Event MoneyLine
-GET {{BASE_URL}}/event/{{EVENT_ID}}/moneyline/
+GET {{BASE_URL}}/event/{{EVENT_ID}}/offers/moneyline/
 
 
 ###
 # Get a Event Handicap
-GET {{BASE_URL}}/event/{{EVENT_ID}}/handicap/
+GET {{BASE_URL}}/event/{{EVENT_ID}}/offers/handicap/
 
 
 
 ###
 # Get a Event OverUnder
-GET {{BASE_URL}}/event/{{EVENT_ID}}/overunder/
+GET {{BASE_URL}}/event/{{EVENT_ID}}/offers/overunder/
 
 
 ###

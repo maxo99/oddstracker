@@ -30,7 +30,7 @@ from sqlmodel import Field, SQLModel
 #         if isinstance(v, int) and v > 1000:
 #             return v / 1000
 #         return v
-BET_OFFER_TYPES = ["match", "handicap", "over/under"]
+BET_OFFER_TYPES = ["match", "handicap", "overunder"]
 
 
 def _get_utc_now():
@@ -70,19 +70,20 @@ class Outcome(BaseModel):
             kwargs["label"] = kwargs.pop("englishLabel")
         return kwargs
 
-    @field_validator("name", mode="after")
-    def set_name(cls, v) -> str:
-        if isinstance(v, str):
-            return v
-        match cls.type.lower():
+    @model_validator(mode="after")
+    def set_name(self) -> "Outcome":
+        if self.name is not None:
+            return self
+        match self.type.lower():
             case "match":
-                return f"{cls.participant} MoneyLine"
+                self.name = f"{self.participant} MoneyLine"
             case "handicap":
-                return f"{cls.participant} {cls.oddsLine}"
-            case "over/under":
-                return f"{cls.label} {cls.oddsLine}"
+                self.name = f"{self.participant} {self.oddsLine}"
+            case "overunder":
+                self.name = f"{self.label} {self.oddsLine}"
             case _:
-                raise ValueError(f"Unknown outcome type: {cls.type}")
+                raise ValueError(f"Unknown outcome type: {self.type}")
+        return self
 
     def get_odds_data(self) -> dict:
         d = {
@@ -90,7 +91,7 @@ class Outcome(BaseModel):
             "fractional": self.oddsFractional,
             "american": sign_int(self.oddsAmerican),
         }
-        if self.type in ["handicap", "over/under"]:
+        if self.type in ["handicap", "overunder"]:
             d["points"] = self.oddsLine
         return d
 
@@ -100,7 +101,7 @@ class Outcome(BaseModel):
 
     @property
     def oddsLine(self) -> str | None:
-        if self.type in ["handicap", "over/under"] and self.line is not None:
+        if self.type in ["handicap", "overunder"] and self.line is not None:
             return sign_int(str(int(self.line) // 1000))
         return None
 
@@ -136,7 +137,7 @@ class BetOffer(SQLModel, table=True):
             kwargs["criterion"] = _criterion["englishLabel"]
 
         if isinstance(kwargs.get("betOfferType", None), dict):
-            _bet_offer_type = kwargs.pop("betOfferType").get("englishName", "").lower()
+            _bet_offer_type = kwargs.pop("betOfferType").get("englishName", "").replace("/", "").lower()
             kwargs["betOfferType"] = _bet_offer_type
             outcomes = []
             for o in kwargs.get("outcomes", []):
