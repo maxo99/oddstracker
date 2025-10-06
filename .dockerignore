@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.env.*
+*.env
+
+# Git
+.git/
+.gitignore
+.github/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+test/
+*.coverage
+htmlcov/
+
+# Data files (you may want to keep or exclude these)
+data/
+docker/
+
+# Jupyter
+*.ipynb
+.ipynb_checkpoints/
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+*.md
+resources.md
+CHANGELOG.md
+
+# Other
+.DS_Store
+*.log
+test.http
+justfile
