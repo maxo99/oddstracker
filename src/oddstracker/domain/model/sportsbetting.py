@@ -25,12 +25,10 @@ class Outcome(BaseModel):
 
     @model_validator(mode="before")
     def clean_unwanted_fields(cls, kwargs):
-        if "cashOutStatus" in kwargs:
-            kwargs.pop("cashOutStatus")
-        if "betOfferId" in kwargs:
-            kwargs.pop("betOfferId")
-        if "englishLabel" in kwargs:
-            kwargs["label"] = kwargs.pop("englishLabel")
+        kwargs.pop("cashOutStatus", None)
+        kwargs.pop("betOfferId", None)
+        if _english_label := kwargs.pop("englishLabel", None):
+            kwargs["label"] = _english_label
         return kwargs
 
     @model_validator(mode="after")

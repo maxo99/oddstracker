@@ -1,7 +1,5 @@
-from pydantic import model_validator
 from sqlalchemy import Column, String
 from sqlmodel import Field, SQLModel
-
 
 NFL_DATA_PI_ABBR_TO_KAMBIDATA = {
     "ARI": {"participant": "ARI Cardinals", "id": 1000043092},
@@ -107,7 +105,7 @@ class TeamData(SQLModel, table=True):
         Returns:
             TeamData instance
         """
-        _cls =  cls(
+        _cls = cls(
             team_abbr=df_row["team_abbr"],
             team_name=df_row["team_name"],
             team_id=df_row["team_id"],
