@@ -2,7 +2,7 @@
 
 
 ###
-@EVENT_ID = 1024873536
+@EVENT_ID = 1024873548
 @BASE_URL = http://localhost:8000
 
 # Health Check
@@ -11,7 +11,7 @@ GET {{BASE_URL}}/
 
 ###
 
-# Pull and Store new Data
+# Collect Odds Data
 POST {{BASE_URL}}/collect
 
 
@@ -25,6 +25,30 @@ GET {{BASE_URL}}/events/
 ###
 # Get a specific Event by ID
 GET {{BASE_URL}}/event/{{EVENT_ID}}
+
+
+
+###
+# Get teams
+GET {{BASE_URL}}/teams
+
+
+
+###
+# Get team events
+GET {{BASE_URL}}/team/KC/events
+
+
+
+###
+# Get a specific Event by ID
+GET {{BASE_URL}}/event/{{EVENT_ID}}/offers
+
+
+###
+# Get a specific Event by ID
+GET {{BASE_URL}}/event/{{EVENT_ID}}/offers?range=true
+
 
 
 ###

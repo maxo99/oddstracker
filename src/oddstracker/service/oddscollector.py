@@ -2,8 +2,8 @@ import logging
 
 import requests
 
-from oddstracker.domain.kambi_event import KambiData
-from oddstracker.domain.kambi_provider import PROVIDER
+from oddstracker.domain.model.sportsbetting import SportsBettingInfo
+from oddstracker.domain.providers import PROVIDER
 from oddstracker.service import PG_CLIENT
 
 logger = logging.getLogger(__name__)
@@ -15,7 +15,7 @@ def collect_and_store_kdata() -> dict:
     return {"status": "collected", "events": len(_kdata)}
 
 
-def pull_kdata() -> list[KambiData]:
+def pull_kdata() -> list[SportsBettingInfo]:
     try:
         resp = requests.get(PROVIDER.nfl_url, params=PROVIDER.qparams())
         data = resp.json()["events"]
@@ -26,7 +26,7 @@ def pull_kdata() -> list[KambiData]:
     out = []
     try:
         for e in data:
-            kdata = KambiData(**e)
+            kdata = SportsBettingInfo(**e)
             logger.debug(f"Collected: {kdata}")
             out.append(kdata)
     except Exception as ex:
@@ -35,12 +35,12 @@ def pull_kdata() -> list[KambiData]:
     return out
 
 
-def store_kdata(data: list[KambiData]) -> None:
+def store_kdata(data: list[SportsBettingInfo]) -> None:
     logger.info(f"Storing {len(data)} events from {PROVIDER.sportsbook}")
     for kdata in data:
         try:
             logger.info(f"Processing event: {kdata}")
-            PG_CLIENT.add_event(kdata.event, kdata.betOffers)
+            PG_CLIENT.add_event_and_betoffers(kdata.event, kdata.betOffers)
             logger.info(f"Stored: {kdata}")
         except Exception as ex:
             logger.error(ex)

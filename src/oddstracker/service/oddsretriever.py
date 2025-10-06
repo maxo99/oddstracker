@@ -13,5 +13,5 @@ def get_event_offer(event_id: int, offer: str):
     return PG_CLIENT.get_bet_offers_for_event(event_id, offer)
 
 
-def get_bet_offers(event_id: int):
-    return PG_CLIENT.get_bet_offers_for_event(event_id)
+def get_bet_offers(event_id: int, range_query: bool = False):
+    return PG_CLIENT.get_bet_offers_for_event(event_id, range_query=range_query)

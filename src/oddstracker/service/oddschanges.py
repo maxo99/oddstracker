@@ -52,20 +52,20 @@ def get_all_changes():
             history = PG_CLIENT.get_bet_offer_history(bet_offer_id, event.id, limit=2)
 
             if len(history) < 2:
-                logger.debug(f"Bet offer {bet_offer_id} has only {len(history)} collection(s), skipping")
+                logger.info(f"Bet offer {bet_offer_id} has only {len(history)} collection(s), skipping")
                 continue
 
             current = history[0]
             previous = history[1]
 
             if not _has_changed(current.outcomes, previous.outcomes):
-                logger.debug(f"Bet offer {bet_offer_id} has not changed")
+                logger.info(f"Bet offer {bet_offer_id} has not changed")
                 continue
 
             logger.info(f"Bet offer {bet_offer_id} has changed")
 
             bet_offer_data = {
-                "betOfferType": current.betOfferType,
+                "betOfferType": current.type,
                 "criterion": current.criterion,
                 "collectedAt": current.collected_at.isoformat(),
                 "outcomes": []

@@ -1,49 +1,12 @@
-from datetime import UTC, datetime
+from datetime import datetime
 
-from pydantic import BaseModel, field_serializer, field_validator, model_validator
-from sqlalchemy import JSON, BigInteger, Column, DateTime, ForeignKey
+from pydantic import BaseModel, model_validator
+from sqlalchemy import JSON, BigInteger, Boolean, Column, DateTime, ForeignKey
 from sqlmodel import Field, SQLModel
 
-# class Criterion(BaseModel):
-#     id: int
-#     label: str
-#     englishLabel: str
-#     order: list
-#     occurrenceType: str
-#     lifetime: str
+from oddstracker.utils import get_utc_now, sign_int
 
-
-# class BetOfferType(BaseModel):
-#     id: int
-#     name: str
-#     englishName: str
-
-
-# class Odds(BaseModel):
-#     decimal: float
-#     fractional: str
-#     american: str
-
-
-#     @field_validator("decimal", mode="before")
-#     def validate_decimal(cls, v):
-#         if isinstance(v, int) and v > 1000:
-#             return v / 1000
-#         return v
 BET_OFFER_TYPES = ["match", "handicap", "overunder"]
-
-
-def _get_utc_now():
-    return datetime.now(UTC)
-
-
-def sign_int(v) -> str:
-    if isinstance(v, str) and not v.startswith("-"):
-        if int(v) > 0:
-            return f"+{v}"
-        else:
-            return str(v)
-    return str(v)
 
 
 class Outcome(BaseModel):
@@ -109,25 +72,34 @@ class Outcome(BaseModel):
 class BetOffer(SQLModel, table=True):
     __tablename__ = "betoffer"  # type: ignore
     id: int = Field(sa_column=Column(BigInteger, primary_key=True, nullable=False))
-    collected_at: datetime = Field(
-        sa_column=Column(
-            DateTime, primary_key=True, nullable=False, default=_get_utc_now
-        ),
-        default_factory=_get_utc_now,
+    active: bool = Field(
+        default=True, sa_column=Column(Boolean, nullable=False, default=True)
     )
-    eventId: int = Field(
+    event_id: int = Field(
         sa_column=Column(BigInteger, ForeignKey("event.id"), index=True, nullable=False)
     )
-    # closed: str
-    # criterion: dict = Field(sa_column=Column(JSON))
+    collected_at: datetime = Field(
+        sa_column=Column(
+            DateTime, primary_key=True, nullable=False, default=get_utc_now
+        ),
+        default_factory=get_utc_now,
+    )
+    updated_at: datetime = Field(
+        sa_column=Column(
+            DateTime,
+            nullable=False,
+            default=get_utc_now,
+            onupdate=get_utc_now,
+        ),
+        default_factory=get_utc_now,
+    )
     criterion: str
-    betOfferType: str
+    type: str
     outcomes: list[dict] = Field(sa_column=Column(JSON))
-
-
+    participants: dict = Field(default_factory=dict, sa_column=Column(JSON))
 
     @model_validator(mode="before")
-    def denormalize(cls, kwargs):
+    def build_betoffer(cls, kwargs):
         kwargs.pop("cashOutStatus", None)
         kwargs.pop("tags", None)
         kwargs.pop("sortOrder", None)
@@ -136,52 +108,52 @@ class BetOffer(SQLModel, table=True):
             _criterion = kwargs.pop("criterion")
             kwargs["criterion"] = _criterion["englishLabel"]
 
+        if "eventId" in kwargs:
+            kwargs["event_id"] = kwargs.pop("eventId")
+
         if isinstance(kwargs.get("betOfferType", None), dict):
-            _bet_offer_type = kwargs.pop("betOfferType").get("englishName", "").replace("/", "").lower()
-            kwargs["betOfferType"] = _bet_offer_type
+            _bet_offer_type = (
+                kwargs.pop("betOfferType")
+                .get("englishName", "")
+                .replace("/", "")
+                .lower()
+            )
+            kwargs["type"] = _bet_offer_type
             outcomes = []
             for o in kwargs.get("outcomes", []):
-                o["type"] = kwargs["betOfferType"]
+                o["type"] = kwargs["type"]
                 outcome = Outcome.model_validate(o)
-
+                p = o.get("participant", None)
+                if p:
+                    if not kwargs.get("participants", None):
+                        kwargs["participants"] = {}
+                    kwargs["participants"].update({int(o.get("participantId", -1)): p})
                 outcomes.append(
-                    {
-                        **outcome.model_dump(),
-                        "oddsData": outcome.get_odds_data()
-                    }
-            )
+                    {**outcome.model_dump(), "oddsData": outcome.get_odds_data()}
+                )
             kwargs["outcomes"] = outcomes
         return kwargs
 
 
-
-
-
-
-class KambiEvent(SQLModel, table=True):
+class SportsEvent(SQLModel, table=True):
     __tablename__ = "event"  # type: ignore
-
-    # class SQLModelConfig:
-    #     extra = "ignore"
 
     id: int = Field(sa_column=Column(BigInteger, primary_key=True, nullable=False))
     created_at: datetime = Field(
-        sa_column=Column(DateTime, nullable=False, default=_get_utc_now),
-        default_factory=_get_utc_now,
+        sa_column=Column(DateTime, nullable=False, default=get_utc_now),
+        default_factory=get_utc_now,
     )
     updated_at: datetime = Field(
         sa_column=Column(
             DateTime,
             nullable=False,
-            default=_get_utc_now,
-            onupdate=_get_utc_now,
+            default=get_utc_now,
+            onupdate=get_utc_now,
         ),
-        default_factory=_get_utc_now,
-    )
-    deleted_at: datetime | None = Field(
-        sa_column=Column(DateTime, nullable=True, default=None), default=None
+        default_factory=get_utc_now,
     )
     name: str
+    # TODO add alias for englishName etc
     englishName: str
     homeName: str
     awayName: str
@@ -190,14 +162,14 @@ class KambiEvent(SQLModel, table=True):
     state: str
 
 
-class KambiData:
-    event: KambiEvent
+class SportsBettingInfo:
+    event: SportsEvent
     betOffers: list[BetOffer]
 
     def __init__(self, **data):
         try:
             _e = data.get("event", {})
-            self.event = KambiEvent.model_validate(_e)
+            self.event = SportsEvent.model_validate(_e)
         except Exception as e:
             raise e
         try:
@@ -212,6 +184,37 @@ class KambiData:
             raise e
 
     @property
+    def started(self) -> bool:
+        return self.event.state.lower() == "started"
+
+    @property
+    def moneyLineOffer(self) -> BetOffer | None:
+        for bo in self.betOffers:
+            if bo.type == "match":
+                return bo
+        return None
+
+    @property
+    def pointSpreadOffer(self) -> BetOffer | None:
+        for bo in self.betOffers:
+            if bo.type == "handicap":
+                return bo
+        return None
+
+    @property
+    def overUnderOffer(self) -> BetOffer | None:
+        for bo in self.betOffers:
+            if bo.type == "overunder":
+                return bo
+        return None
+
+    @property
+    def participants(self) -> dict:
+        if self.moneyLineOffer:
+            return self.moneyLineOffer.participants
+        return {"home": self.event.homeName, "away": self.event.awayName}
+
+    @property
     def eventId(self) -> int:
         return self.event.id
 
@@ -220,4 +223,4 @@ class KambiData:
         return self.event.englishName
 
     def __str__(self) -> str:
-        return f"KambiData(eventId={self.eventId}, eventName={self.eventName}, betOffers={len(self.betOffers)})"
+        return f"KambiData({self.eventId=}, {self.eventName=}, {self.participants=}, betOffers={len(self.betOffers)})"
