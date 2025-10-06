@@ -94,6 +94,14 @@ class TeamData(SQLModel, table=True):
             self.participant_id = NFL_DATA_PI_ABBR_TO_KAMBIDATA[self.team_abbr]["id"]
         return self
 
+    @staticmethod
+    def _clean_value(value) -> str | None:
+        """Convert pandas NaN to None, otherwise return the value as string"""
+        if value is None or (isinstance(value, float) and str(value) == 'nan'):
+            return None
+        return str(value) if value is not None else None
+
+
     @classmethod
     def from_nfl_data(cls, df_row) -> "TeamData":
         """
@@ -108,20 +116,20 @@ class TeamData(SQLModel, table=True):
         _cls = cls(
             team_abbr=df_row["team_abbr"],
             team_name=df_row["team_name"],
-            team_id=df_row["team_id"],
+            team_id=str(df_row["team_id"]),
             team_nick=df_row["team_nick"],
             team_conf=df_row["team_conf"],
             team_division=df_row["team_division"],
             team_color=df_row["team_color"],
-            team_color2=df_row.get("team_color2"),
-            team_color3=df_row.get("team_color3"),
-            team_color4=df_row.get("team_color4"),
-            team_logo_wikipedia=df_row.get("team_logo_wikipedia"),
-            team_logo_espn=df_row.get("team_logo_espn"),
-            team_wordmark=df_row.get("team_wordmark"),
-            team_conference_logo=df_row.get("team_conference_logo"),
-            team_league_logo=df_row.get("team_league_logo"),
-            team_logo_squared=df_row.get("team_logo_squared"),
+            team_color2=cls._clean_value(df_row.get("team_color2")),
+            team_color3=cls._clean_value(df_row.get("team_color3")),
+            team_color4=cls._clean_value(df_row.get("team_color4")),
+            team_logo_wikipedia=cls._clean_value(df_row.get("team_logo_wikipedia")),
+            team_logo_espn=cls._clean_value(df_row.get("team_logo_espn")),
+            team_wordmark=cls._clean_value(df_row.get("team_wordmark")),
+            team_conference_logo=cls._clean_value(df_row.get("team_conference_logo")),
+            team_league_logo=cls._clean_value(df_row.get("team_league_logo")),
+            team_logo_squared=cls._clean_value(df_row.get("team_logo_squared")),
         )
         return _cls.populate_kambi_fields()
 

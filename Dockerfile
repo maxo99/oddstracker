@@ -17,9 +17,7 @@ COPY src ./src
 # Install the project itself
 RUN uv sync --frozen
 
-# Expose the FastAPI port (default 8000, can be overridden via APP_PORT env var)
+# Expose FastAPI
 EXPOSE 8000
 
-# Run the FastAPI application with uvicorn
-# Port will be read from APP_PORT environment variable in the app
 CMD ["uv", "run", "python", "-m", "oddstracker.app"]

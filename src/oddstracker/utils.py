@@ -1,5 +1,7 @@
 import datetime
 
+from oddstracker.domain.model.sportsbetting import BET_OFFER_TYPES
+
 
 def get_utc_now():
     return datetime.datetime.now(datetime.UTC)
@@ -12,3 +14,13 @@ def sign_int(v) -> str:
         else:
             return str(v)
     return str(v)
+
+
+def validate_betoffer_type(offer: str):
+    if offer == "moneyline":
+        return "match"
+    if offer == "pointspread":
+        return "handicap"
+    if offer not in BET_OFFER_TYPES:
+        raise ValueError(f"Invalid offer type: {offer}. Valid types: {BET_OFFER_TYPES}")
+    return offer

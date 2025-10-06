@@ -2,11 +2,17 @@
 
 
 ###
-@EVENT_ID = 1024873548
+@EVENT_ID = 1024874548
 @BASE_URL = http://localhost:8000
 
 # Health Check
 GET {{BASE_URL}}/
+
+
+###
+
+# Get docs
+GET {{BASE_URL}}/docs
 
 
 ###

@@ -36,11 +36,11 @@ def test_event_store_retrieve(sample_events, postgres_client):
 
 
 
-# def test_get_bet_offers_for_event(sample_events, fix_postgresclient):
+# def test_get_bet_offers_for_event(sample_events, postgres_client):
 #     e = sample_events[0]
 #     event = KambiEvent(**e["event"])
 #     bet_offers = e.get("betOffers", [])
-#     fix_postgresclient.add_event(event, bet_offers)
+#     postgres_client.add_event(event, bet_offers)
 #     assert isinstance(event, KambiEvent)
 #     assert event.be
 #     for i, e in enumerate(sample_events):
@@ -51,7 +51,7 @@ def test_event_store_retrieve(sample_events, postgres_client):
 #             raise ex
 #     assert True
 #     logger.info(f"Parsed {len(sample_events)} events")
-#     events = fix_postgresclient.get_events()
+#     events = postgres_client.get_events()
 #     assert len(events) == len(sample_events)
 
 

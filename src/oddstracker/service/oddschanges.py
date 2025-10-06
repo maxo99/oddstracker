@@ -29,15 +29,15 @@ def _has_changed(current_outcomes: list[dict], previous_outcomes: list[dict]) ->
     return False
 
 
-def get_all_changes():
+async def get_all_changes():
     logger.info("Fetching all bet offer changes across events")
-    events = PG_CLIENT.get_events()
+    events = await PG_CLIENT.get_events()
 
     changes_by_event = []
 
     for event in events:
         logger.info(f"Processing changes for event {event.id}: {event.name}")
-        bet_offers = PG_CLIENT.get_bet_offers_for_event(event.id)
+        bet_offers = await PG_CLIENT.get_bet_offers_for_event(event.id)
 
         unique_bet_offer_ids = list({bo.id for bo in bet_offers})
 
@@ -49,7 +49,7 @@ def get_all_changes():
         }
 
         for bet_offer_id in unique_bet_offer_ids:
-            history = PG_CLIENT.get_bet_offer_history(bet_offer_id, event.id, limit=2)
+            history = await PG_CLIENT.get_bet_offer_history(bet_offer_id, event.id, limit=2)
 
             if len(history) < 2:
                 logger.info(f"Bet offer {bet_offer_id} has only {len(history)} collection(s), skipping")

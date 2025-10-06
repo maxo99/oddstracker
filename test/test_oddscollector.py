@@ -1,9 +1,9 @@
-from oddstracker.service.oddscollector import pull_kdata
+from oddstracker.service.oddscollector import fetch_sports_betting_data
 
 
-def test_odds_collector(fix_postgresclient):
-    # starting_count = len(fix_postgresclient.get_events())
+def test_odds_collector(postgres_client):
+    # starting_count = len(postgres_client.get_events())
 
-    collected  =  pull_kdata()
+    collected  =  fetch_sports_betting_data()
     assert len(collected) > 0
     # assert len(events) > starting_count
