@@ -1,9 +1,11 @@
+import logging
 from contextlib import asynccontextmanager
 
-from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi_pagination import add_pagination
+from prometheus_fastapi_instrumentator import Instrumentator
 
-from oddstracker.config import APP_PORT, ROOT_DIR
+from oddstracker.config import APP_PORT, LOG_LEVEL
 from oddstracker.service import PG_CLIENT
 from oddstracker.service.oddschanges import get_all_changes
 from oddstracker.service.oddscollector import collect_and_store_kdata
@@ -20,20 +22,35 @@ from oddstracker.service.teamprofiler import (
 )
 from oddstracker.utils import validate_betoffer_type
 
-load_dotenv(ROOT_DIR)
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan - startup and shutdown events"""
+
     # Startup
     await PG_CLIENT.initialize()
+    logging.info("PostgresClient initialized.")
+
+    logging.info("Application startup complete.")
     yield
+    logging.info("Application shutdown starting.")
+
     # Shutdown - cleanup if needed
     await PG_CLIENT.close()
+    logging.info("PostgresClient connection closed.")
+
+    logging.info("Application shutdown complete.")
 
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
+add_pagination(app)
+
+# Setup Prometheus instrumentation (must be done before app starts)
+instrumentator = Instrumentator()
+instrumentator.instrument(app).expose(app)
+logging.info("Prometheus metrics instrumentation configured.")
 
 
 @app.get("/")
@@ -89,4 +106,4 @@ async def team_event_offers(team_abbr: str):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=APP_PORT, log_level="info")
+    uvicorn.run(app, host="0.0.0.0", port=APP_PORT, log_level=LOG_LEVEL)

@@ -1,6 +1,6 @@
 import datetime
 
-from oddstracker.domain.model.sportsbetting import BET_OFFER_TYPES
+BET_OFFER_TYPES = ["match", "handicap", "overunder"]
 
 
 def get_utc_now():

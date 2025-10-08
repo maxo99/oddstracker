@@ -6,8 +6,6 @@ from sqlmodel import Field, SQLModel
 
 from oddstracker.utils import get_utc_now, sign_int
 
-BET_OFFER_TYPES = ["match", "handicap", "overunder"]
-
 
 class Outcome(BaseModel):
     name: str | None = None

@@ -3,16 +3,29 @@
 
 ###
 @EVENT_ID = 1024874548
-@BASE_URL = http://localhost:8000
+@BASE_URL = http://localhost:{{ $dotenv APP_PORT }}
 
 # Health Check
 GET {{BASE_URL}}/
+
+###
+
+# Test Prometheus Endpoint
+GET {{BASE_URL}}/metrics
 
 
 ###
 
 # Get docs
 GET {{BASE_URL}}/docs
+
+
+
+###
+
+# Get docs
+GET {{BASE_URL}}/openapi.json
+
 
 
 ###
