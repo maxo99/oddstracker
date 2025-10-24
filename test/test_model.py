@@ -1,8 +1,32 @@
+import json
 import logging
+import os
 
-from oddstracker.domain.model.sportsbetting import BetOffer, SportsBettingInfo, SportsEvent
+import pytest
+
+from oddstracker.config import DATA_DIR
+from oddstracker.domain.model.sportsbetting import (
+    BetOffer,
+    SportsBettingInfo,
+    SportsEvent,
+)
+from oddstracker.domain.model.sportsbetting2 import SportsEventInfo
+from oddstracker.service.oddscollector import convert_to_sportsbetting_info
+from oddstracker.utils import load_json
 
 logger = logging.getLogger(__name__)
+
+@pytest.mark.parametrize("provider_key", ["kambi", "theoddsapi"])
+def test_load_json(provider_key):
+    try:
+        print("Testing load_json for provider:", provider_key)
+        loaded_data = load_json(provider_key, "raw")
+        assert loaded_data
+        _bets_data = convert_to_sportsbetting_info(provider_key,loaded_data)
+        assert _bets_data
+    except Exception as e:
+        raise e
+
 
 
 def test_kambi_data_load(sample_events):
@@ -29,10 +53,11 @@ def test_kambi_data_load(sample_events):
     logger.info(f"Participants:  \n {out}")
 
 
-def test_teams_loading():
+
+async def test_teams_loading():
     from oddstracker.service.teamprofiler import get_teams
 
-    teams = get_teams()
+    teams = await get_teams()
     assert isinstance(teams, list)
     assert len(teams) > 0
     for team in teams:

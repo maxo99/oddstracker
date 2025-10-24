@@ -10,6 +10,7 @@ from testcontainers.postgres import PostgresContainer
 
 from oddstracker.adapters.postgres_client import PostgresClient
 from oddstracker.config import DATA_DIR
+from oddstracker.utils import load_json
 
 TEARDOWN = False
 
@@ -33,6 +34,11 @@ def sample_events() -> list[dict]:
     return data["events"]
 
 
+@pytest.fixture(scope="session")
+def sample_raw() -> dict:
+    return {k: load_json(k, "raw") for k in ["kambi", "theoddsapi"]}
+
+
 class PgVectorContainer(PostgresContainer):
     """Custom PostgreSQL container with pgvector extension."""
 
@@ -47,7 +53,7 @@ def postgres_container() -> Generator[PgVectorContainer]:
         dbname="rotoreader_test",
         username="test_user",
         password="test_password",
-        driver="psycopg2",
+        driver=None,  # Let asyncpg be used via the async engine
     ) as container:
         # Wait for container to be ready
         container.get_connection_url()
@@ -57,13 +63,20 @@ def postgres_container() -> Generator[PgVectorContainer]:
 @pytest.fixture(scope="session")
 def db_config(postgres_container: PgVectorContainer) -> dict[str, Any]:
     """Database configuration from testcontainer."""
+    # Get the sync URL and convert to async asyncpg URL
+    sync_url = postgres_container.get_connection_url()
+    # Replace psycopg2 driver with asyncpg for async operations
+    async_url = sync_url.replace("postgresql+psycopg2://", "postgresql+asyncpg://")
+    if not async_url.startswith("postgresql+asyncpg://"):
+        async_url = sync_url.replace("postgresql://", "postgresql+asyncpg://")
+
     return {
         "host": postgres_container.get_container_host_ip(),
         "port": postgres_container.get_exposed_port(5432),
         "database": postgres_container.dbname,
         "username": postgres_container.username,
         "password": postgres_container.password,
-        "url": postgres_container.get_connection_url(),
+        "url": async_url,
     }
 
 

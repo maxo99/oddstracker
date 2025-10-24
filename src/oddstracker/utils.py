@@ -1,10 +1,13 @@
-import datetime
+import json
+from datetime import UTC, datetime
+import os
+from oddstracker.config import DATA_DIR
 
 BET_OFFER_TYPES = ["match", "handicap", "overunder"]
 
 
 def get_utc_now():
-    return datetime.datetime.now(datetime.UTC)
+    return datetime.now(UTC)
 
 
 def sign_int(v) -> str:
@@ -15,6 +18,23 @@ def sign_int(v) -> str:
             return str(v)
     return str(v)
 
+
+def store_json(name: str, tag: str, data: dict) -> None:
+    _name = "_".join([tag, name, get_utc_now().strftime("%Y-%m-%d")])
+    path = os.path.join(DATA_DIR, _name + ".json")
+    with open(path, "w") as f:
+        json.dump(data, f, indent=2)
+
+def load_json(name: str, tag: str) -> dict:
+    files = [f for f in os.listdir(DATA_DIR) if f.startswith(f"{tag}_{name}_")]
+    if not files:
+        raise FileNotFoundError(f"No file found for {tag}_{name}_* in {DATA_DIR}")
+    files.sort(reverse=True)
+    _name = files[0]
+    path = os.path.join(DATA_DIR, _name)
+    with open(path) as f:
+        data = json.load(f)
+    return data
 
 def validate_betoffer_type(offer: str):
     if offer == "moneyline":

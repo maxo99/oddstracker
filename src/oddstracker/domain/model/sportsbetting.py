@@ -76,13 +76,16 @@ class BetOffer(SQLModel, table=True):
     )
     collected_at: datetime = Field(
         sa_column=Column(
-            DateTime, primary_key=True, nullable=False, default=get_utc_now
+            DateTime(timezone=True),
+            primary_key=True,
+            nullable=False,
+            default=get_utc_now,
         ),
         default_factory=get_utc_now,
     )
     updated_at: datetime = Field(
         sa_column=Column(
-            DateTime,
+            DateTime(timezone=True),
             nullable=False,
             default=get_utc_now,
             onupdate=get_utc_now,
@@ -136,12 +139,12 @@ class SportsEvent(SQLModel, table=True):
 
     id: int = Field(sa_column=Column(BigInteger, primary_key=True, nullable=False))
     created_at: datetime = Field(
-        sa_column=Column(DateTime, nullable=False, default=get_utc_now),
+        sa_column=Column(DateTime(timezone=True), nullable=False, default=get_utc_now),
         default_factory=get_utc_now,
     )
     updated_at: datetime = Field(
         sa_column=Column(
-            DateTime,
+            DateTime(timezone=True),
             nullable=False,
             default=get_utc_now,
             onupdate=get_utc_now,
@@ -220,3 +223,72 @@ class SportsBettingInfo:
 
     def __str__(self) -> str:
         return f"KambiData({self.eventId=}, {self.eventName=}, {self.participants=}, betOffers={len(self.betOffers)})"
+
+
+def map_kambi_market_key(input):
+    match input.lower():
+        case "match":
+            return "h2h"
+        case "handicap":
+            return "spreads"
+        case "over/under":
+            return "totals"
+
+
+def convert(data):
+    try:
+        kambi_events = data["events"]
+        print(f"Fetched {len(kambi_events)} events from Kambi")
+        print(f"Keys of first event: {list(kambi_events[0].keys())}")
+        print(f"Keys of event:{kambi_events[0]['event'].keys()}")
+        se = kambi_events[0]
+        se.update(**se.pop("event"))
+        del se["tags"]
+        del se["path"]
+        del se["nonLiveBoCount"]
+        del se["state"]
+        del se["englishName"]
+        # del se["participants"]
+        se.pop("extraInfo", None)
+        del se["name"]
+        del se["nameDelimiter"]
+        del se["groupId"]
+        se["commence_time"] = se.pop("start")
+        se["sport_key"] = se.pop("sport").strip("_").lower() + "_" + se["group"].lower()
+        se["sport_title"] = se.pop("group")
+        se["id"] = str(se.pop("id"))
+        se["home_team"] = se.pop("homeName")  # Normalize
+        se["away_team"] = se.pop("awayName")  # Normalize
+
+        markets = []
+        last_update = se["betOffers"][0]["outcomes"][0]["changedDate"]
+        for bo in se.pop("betOffers"):
+            outcomes = []
+            key = map_kambi_market_key(bo["betOfferType"]["name"])
+            for o in bo["outcomes"]:
+                outcome = {}
+                if key == "h2h":
+                    outcome["name"] = o["participant"]
+                else:
+                    outcome["name"] = o["label"]
+                    outcome["point"] = o["line"] / 1000
+                outcome["price"] = o["odds"] / 1000
+                outcome["last_update"] = o["changedDate"]
+                outcomes.append(outcome)
+            market = {
+                "key": key,
+                "last_update": bo["outcomes"][0]["changedDate"],
+                "outcomes": outcomes,
+            }
+            markets.append(market)
+
+        bm = {
+            "key": "kambi",
+            "title": "KAMBI-CDN",
+            "markets": markets,
+            "last_update": last_update,
+        }
+        se["bookmakers"] = [bm]
+        return se
+    except Exception as e:
+        raise e

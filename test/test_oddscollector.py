@@ -1,9 +1,30 @@
-from oddstracker.service.oddscollector import fetch_sports_betting_data
+import pytest
+
+from oddstracker.service.oddscollector import (
+    collect_and_store_bettingdata,
+    convert_to_sportsbetting_info,
+)
+from oddstracker.utils import load_json
 
 
-def test_odds_collector(postgres_client):
-    # starting_count = len(postgres_client.get_events())
+@pytest.mark.asyncio
+async def test_odds_collector(postgres_client):
+    # starting_count = len(await postgres_client.get_events())
 
-    collected  =  fetch_sports_betting_data()
+    collected = await collect_and_store_bettingdata(
+        provider_key="theoddsapi",
+        league="nfl",
+        db_store=False,
+    )
     assert len(collected) > 0
+
+    collected2 = await collect_and_store_bettingdata(
+        provider_key="kambi",
+        league="nfl",
+        db_store=False,
+    )
+    assert len(collected2) > 0
+
     # assert len(events) > starting_count
+
+

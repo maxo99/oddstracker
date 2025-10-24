@@ -9,6 +9,7 @@ from sqlmodel import SQLModel, select
 from oddstracker import config
 from oddstracker.domain.model.sportsbetting import BetOffer, SportsEvent
 from oddstracker.domain.teamdata import TeamData
+from oddstracker.utils import get_utc_now
 
 logger = logging.getLogger(__name__)
 
@@ -90,9 +91,10 @@ class PostgresClient:
         try:
             for bo in bet_offers:
                 logger.info(f"Upserting bet offer {bo.id} for event {bo.event_id}.")
-                existing = await session.execute(
+                result = await session.execute(
                     select(BetOffer).where(BetOffer.id == bo.id, BetOffer.active)
-                ).scalar_one_or_none()
+                )
+                existing = result.scalar_one_or_none()
                 if not existing:
                     session.add(bo)
                 else:
@@ -101,9 +103,9 @@ class PostgresClient:
                         existing.outcomes[0]["changedDate"]
                         == bo.outcomes[0]["changedDate"]
                     ):
-                        existing.updated_at = datetime.now(UTC)
+                        existing.updated_at = get_utc_now()
                     else:
-                        bo.updated_at = datetime.now(UTC)
+                        bo.updated_at = get_utc_now()
                         existing.active = False
                         session.merge(bo)
         except Exception as e:
@@ -120,13 +122,13 @@ class PostgresClient:
                 # State was updated, mark existing as deleted and insert new
                 if existing.state != event.state:
                     # Update Existing
-                    existing.updated_at = datetime.now(UTC)
+                    existing.updated_at = get_utc_now()
 
                     event.created_at = existing.created_at
-                    event.updated_at = datetime.now(UTC)
+                    event.updated_at = get_utc_now()
                     session.merge(event)
                 else:
-                    existing.updated_at = datetime.now(UTC)
+                    existing.updated_at = get_utc_now()
             logger.info(f"Upserted event {event.id} successfully.")
         except Exception as e:
             logger.error(f"Error adding event {event.id}: {e}")

@@ -8,7 +8,7 @@ from prometheus_fastapi_instrumentator import Instrumentator
 from oddstracker.config import APP_PORT, LOG_LEVEL
 from oddstracker.service import PG_CLIENT
 from oddstracker.service.oddschanges import get_all_changes
-from oddstracker.service.oddscollector import collect_and_store_kdata
+from oddstracker.service.oddscollector import collect_and_store_bettingdata
 from oddstracker.service.oddsretriever import (
     get_bet_offers,
     get_event,
@@ -60,7 +60,7 @@ def health():
 
 @app.post("/collect")
 async def collect():
-    return await collect_and_store_kdata()
+    return await collect_and_store_bettingdata()
 
 
 @app.get("/events", response_model_exclude_none=True)

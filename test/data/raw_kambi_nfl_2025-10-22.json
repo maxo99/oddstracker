@@ -1,0 +1,3059 @@
+{
+  "events": [
+    {
+      "event": {
+        "id": 1024875876,
+        "name": "MIN Vikings @ LA Chargers",
+        "nameDelimiter": "@",
+        "englishName": "Los Angeles Chargers - Minnesota Vikings",
+        "homeName": "LA Chargers",
+        "awayName": "MIN Vikings",
+        "start": "2025-10-24T00:15:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 483,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000029137,
+            "name": "MIN Vikings",
+            "englishName": "Minnesota Vikings",
+            "termKey": "minnesota_vikings",
+            "home": false,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000037375,
+            "name": "LA Chargers",
+            "englishName": "Los Angeles Chargers",
+            "termKey": "los_angeles_chargers",
+            "home": true,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2565419712,
+          "closed": "2025-10-24T00:15:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875876,
+          "outcomes": [
+            {
+              "id": 3913176704,
+              "label": "LA Chargers",
+              "englishLabel": "Los Angeles Chargers",
+              "odds": 1960,
+              "line": -3500,
+              "participant": "LA Chargers",
+              "type": "OT_ONE",
+              "betOfferId": 2565419712,
+              "changedDate": "2025-10-22T12:38:07Z",
+              "participantId": 1000037375,
+              "oddsFractional": "19/20",
+              "oddsAmerican": "-105",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913176705,
+              "label": "MIN Vikings",
+              "englishLabel": "Minnesota Vikings",
+              "odds": 1860,
+              "line": 3500,
+              "participant": "MIN Vikings",
+              "type": "OT_TWO",
+              "betOfferId": 2565419712,
+              "changedDate": "2025-10-22T12:38:07Z",
+              "participantId": 1000029137,
+              "oddsFractional": "17/20",
+              "oddsAmerican": "-117",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565433304,
+          "closed": "2025-10-24T00:15:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875876,
+          "outcomes": [
+            {
+              "id": 3913226582,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 1550,
+              "participant": "LA Chargers",
+              "type": "OT_ONE",
+              "betOfferId": 2565433304,
+              "changedDate": "2025-10-22T13:07:37Z",
+              "participantId": 1000037375,
+              "oddsFractional": "11/20",
+              "oddsAmerican": "-182",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913226583,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 2500,
+              "participant": "MIN Vikings",
+              "type": "OT_TWO",
+              "betOfferId": 2565433304,
+              "changedDate": "2025-10-22T13:07:37Z",
+              "participantId": 1000029137,
+              "oddsFractional": "6/4",
+              "oddsAmerican": "150",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567664222,
+          "closed": "2025-10-24T00:15:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875876,
+          "outcomes": [
+            {
+              "id": 3921245990,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1900,
+              "line": 45000,
+              "type": "OT_UNDER",
+              "betOfferId": 2567664222,
+              "changedDate": "2025-10-22T12:38:07Z",
+              "oddsFractional": "9/10",
+              "oddsAmerican": "-112",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3921245991,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1920,
+              "line": 45000,
+              "type": "OT_OVER",
+              "betOfferId": 2567664222,
+              "changedDate": "2025-10-22T12:38:07Z",
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-109",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875878,
+        "name": "NY Jets @ CIN Bengals",
+        "nameDelimiter": "@",
+        "englishName": "Cincinnati Bengals - New York Jets",
+        "homeName": "CIN Bengals",
+        "awayName": "NY Jets",
+        "start": "2025-10-26T17:00:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 156,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000056258,
+            "name": "CIN Bengals",
+            "englishName": "Cincinnati Bengals",
+            "termKey": "cincinnati_bengals",
+            "home": true,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000019658,
+            "name": "NY Jets",
+            "englishName": "New York Jets",
+            "termKey": "new_york_jets",
+            "home": false,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2567445241,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875878,
+          "outcomes": [
+            {
+              "id": 3920332428,
+              "label": "CIN Bengals",
+              "englishLabel": "Cincinnati Bengals",
+              "odds": 1900,
+              "line": -6500,
+              "participant": "CIN Bengals",
+              "type": "OT_ONE",
+              "betOfferId": 2567445241,
+              "changedDate": "2025-10-21T14:17:22Z",
+              "participantId": 1000056258,
+              "oddsFractional": "9/10",
+              "oddsAmerican": "-112",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3920332429,
+              "label": "NY Jets",
+              "englishLabel": "New York Jets",
+              "odds": 1920,
+              "line": 6500,
+              "participant": "NY Jets",
+              "type": "OT_TWO",
+              "betOfferId": 2567445241,
+              "changedDate": "2025-10-21T14:17:22Z",
+              "participantId": 1000019658,
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-109",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565400768,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875878,
+          "outcomes": [
+            {
+              "id": 3913162120,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 1330,
+              "participant": "CIN Bengals",
+              "type": "OT_ONE",
+              "betOfferId": 2565400768,
+              "changedDate": "2025-10-21T13:41:31Z",
+              "participantId": 1000056258,
+              "oddsFractional": "33/100",
+              "oddsAmerican": "-305",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913162121,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 3350,
+              "participant": "NY Jets",
+              "type": "OT_TWO",
+              "betOfferId": 2565400768,
+              "changedDate": "2025-10-21T13:41:31Z",
+              "participantId": 1000019658,
+              "oddsFractional": "47/20",
+              "oddsAmerican": "235",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567190455,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875878,
+          "outcomes": [
+            {
+              "id": 3919543800,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1940,
+              "line": 44000,
+              "type": "OT_OVER",
+              "betOfferId": 2567190455,
+              "changedDate": "2025-10-21T14:17:22Z",
+              "oddsFractional": "23/25",
+              "oddsAmerican": "-107",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3919543802,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1880,
+              "line": 44000,
+              "type": "OT_UNDER",
+              "betOfferId": 2567190455,
+              "changedDate": "2025-10-21T14:17:22Z",
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-114",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875879,
+        "name": "CHI Bears @ BAL Ravens",
+        "nameDelimiter": "@",
+        "englishName": "Baltimore Ravens - Chicago Bears",
+        "homeName": "BAL Ravens",
+        "awayName": "CHI Bears",
+        "start": "2025-10-26T17:00:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 154,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000000178,
+            "name": "CHI Bears",
+            "englishName": "Chicago Bears",
+            "termKey": "chicago_bears",
+            "home": false,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000049533,
+            "name": "BAL Ravens",
+            "englishName": "Baltimore Ravens",
+            "termKey": "baltimore_ravens",
+            "home": true,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2565394188,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875879,
+          "outcomes": [
+            {
+              "id": 3913182307,
+              "label": "BAL Ravens",
+              "englishLabel": "Baltimore Ravens",
+              "odds": 1910,
+              "line": -6500,
+              "participant": "BAL Ravens",
+              "type": "OT_ONE",
+              "betOfferId": 2565394188,
+              "changedDate": "2025-10-22T07:13:10Z",
+              "participantId": 1000049533,
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-110",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913182308,
+              "label": "CHI Bears",
+              "englishLabel": "Chicago Bears",
+              "odds": 1910,
+              "line": 6500,
+              "participant": "CHI Bears",
+              "type": "OT_TWO",
+              "betOfferId": 2565394188,
+              "changedDate": "2025-10-22T07:13:10Z",
+              "participantId": 1000000178,
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-110",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565394189,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875879,
+          "outcomes": [
+            {
+              "id": 3913182309,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 1320,
+              "participant": "BAL Ravens",
+              "type": "OT_ONE",
+              "betOfferId": 2565394189,
+              "changedDate": "2025-10-22T07:13:35Z",
+              "participantId": 1000049533,
+              "oddsFractional": "8/25",
+              "oddsAmerican": "-315",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913182310,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 3450,
+              "participant": "CHI Bears",
+              "type": "OT_TWO",
+              "betOfferId": 2565394189,
+              "changedDate": "2025-10-22T07:13:35Z",
+              "participantId": 1000000178,
+              "oddsFractional": "49/20",
+              "oddsAmerican": "245",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567464573,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875879,
+          "outcomes": [
+            {
+              "id": 3920432756,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1880,
+              "line": 50500,
+              "type": "OT_UNDER",
+              "betOfferId": 2567464573,
+              "changedDate": "2025-10-22T07:13:10Z",
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-114",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3920432757,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1940,
+              "line": 50500,
+              "type": "OT_OVER",
+              "betOfferId": 2567464573,
+              "changedDate": "2025-10-22T07:13:10Z",
+              "oddsFractional": "23/25",
+              "oddsAmerican": "-107",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875877,
+        "name": "MIA Dolphins @ ATL Falcons",
+        "nameDelimiter": "@",
+        "englishName": "Atlanta Falcons - Miami Dolphins",
+        "homeName": "ATL Falcons",
+        "awayName": "MIA Dolphins",
+        "start": "2025-10-26T17:00:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 409,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000074777,
+            "name": "MIA Dolphins",
+            "englishName": "Miami Dolphins",
+            "termKey": "miami_dolphins",
+            "home": false,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000068767,
+            "name": "ATL Falcons",
+            "englishName": "Atlanta Falcons",
+            "termKey": "atlanta_falcons",
+            "home": true,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2567188765,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875877,
+          "outcomes": [
+            {
+              "id": 3919570637,
+              "label": "ATL Falcons",
+              "englishLabel": "Atlanta Falcons",
+              "odds": 1870,
+              "line": -7000,
+              "participant": "ATL Falcons",
+              "type": "OT_ONE",
+              "betOfferId": 2567188765,
+              "changedDate": "2025-10-22T14:38:06Z",
+              "participantId": 1000068767,
+              "oddsFractional": "17/20",
+              "oddsAmerican": "-115",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3919570638,
+              "label": "MIA Dolphins",
+              "englishLabel": "Miami Dolphins",
+              "odds": 1950,
+              "line": 7000,
+              "participant": "MIA Dolphins",
+              "type": "OT_TWO",
+              "betOfferId": 2567188765,
+              "changedDate": "2025-10-22T14:38:06Z",
+              "participantId": 1000074777,
+              "oddsFractional": "19/20",
+              "oddsAmerican": "-106",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565387017,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875877,
+          "outcomes": [
+            {
+              "id": 3913215425,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 1260,
+              "participant": "ATL Falcons",
+              "type": "OT_ONE",
+              "betOfferId": 2565387017,
+              "changedDate": "2025-10-21T13:11:29Z",
+              "participantId": 1000068767,
+              "oddsFractional": "1/4",
+              "oddsAmerican": "-385",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913215427,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 4000,
+              "participant": "MIA Dolphins",
+              "type": "OT_TWO",
+              "betOfferId": 2565387017,
+              "changedDate": "2025-10-21T13:11:29Z",
+              "participantId": 1000074777,
+              "oddsFractional": "3/1",
+              "oddsAmerican": "300",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567524031,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875877,
+          "outcomes": [
+            {
+              "id": 3920601703,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1930,
+              "line": 44500,
+              "type": "OT_OVER",
+              "betOfferId": 2567524031,
+              "changedDate": "2025-10-22T14:38:06Z",
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-108",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3920601704,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1890,
+              "line": 44500,
+              "type": "OT_UNDER",
+              "betOfferId": 2567524031,
+              "changedDate": "2025-10-22T14:38:06Z",
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-113",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875882,
+        "name": "CLE Browns @ NE Patriots",
+        "nameDelimiter": "@",
+        "englishName": "New England Patriots - Cleveland Browns",
+        "homeName": "NE Patriots",
+        "awayName": "CLE Browns",
+        "start": "2025-10-26T17:00:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 156,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000000175,
+            "name": "NE Patriots",
+            "englishName": "New England Patriots",
+            "termKey": "new_england_patriots",
+            "home": true,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000031301,
+            "name": "CLE Browns",
+            "englishName": "Cleveland Browns",
+            "termKey": "cleveland_browns",
+            "home": false,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2565430310,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875882,
+          "outcomes": [
+            {
+              "id": 3913241786,
+              "label": "NE Patriots",
+              "englishLabel": "New England Patriots",
+              "odds": 1950,
+              "line": -7000,
+              "participant": "NE Patriots",
+              "type": "OT_ONE",
+              "betOfferId": 2565430310,
+              "changedDate": "2025-10-21T13:49:04Z",
+              "participantId": 1000000175,
+              "oddsFractional": "19/20",
+              "oddsAmerican": "-106",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913241787,
+              "label": "CLE Browns",
+              "englishLabel": "Cleveland Browns",
+              "odds": 1870,
+              "line": 7000,
+              "participant": "CLE Browns",
+              "type": "OT_TWO",
+              "betOfferId": 2565430310,
+              "changedDate": "2025-10-21T13:49:04Z",
+              "participantId": 1000031301,
+              "oddsFractional": "17/20",
+              "oddsAmerican": "-115",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565398487,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875882,
+          "outcomes": [
+            {
+              "id": 3913201209,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 1280,
+              "participant": "NE Patriots",
+              "type": "OT_ONE",
+              "betOfferId": 2565398487,
+              "changedDate": "2025-10-21T13:51:45Z",
+              "participantId": 1000000175,
+              "oddsFractional": "7/25",
+              "oddsAmerican": "-360",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913201210,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 3700,
+              "participant": "CLE Browns",
+              "type": "OT_TWO",
+              "betOfferId": 2565398487,
+              "changedDate": "2025-10-21T13:51:45Z",
+              "participantId": 1000031301,
+              "oddsFractional": "27/10",
+              "oddsAmerican": "270",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565667732,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875882,
+          "outcomes": [
+            {
+              "id": 3914113984,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1880,
+              "line": 40500,
+              "type": "OT_UNDER",
+              "betOfferId": 2565667732,
+              "changedDate": "2025-10-21T13:49:04Z",
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-114",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3914113985,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1940,
+              "line": 40500,
+              "type": "OT_OVER",
+              "betOfferId": 2565667732,
+              "changedDate": "2025-10-21T13:49:04Z",
+              "oddsFractional": "23/25",
+              "oddsAmerican": "-107",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875883,
+        "name": "NY Giants @ PHI Eagles",
+        "nameDelimiter": "@",
+        "englishName": "Philadelphia Eagles - New York Giants",
+        "homeName": "PHI Eagles",
+        "awayName": "NY Giants",
+        "start": "2025-10-26T17:00:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 152,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000070038,
+            "name": "NY Giants",
+            "englishName": "New York Giants",
+            "termKey": "new_york_giants",
+            "home": false,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000065021,
+            "name": "PHI Eagles",
+            "englishName": "Philadelphia Eagles",
+            "termKey": "philadelphia_eagles",
+            "home": true,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2565404702,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875883,
+          "outcomes": [
+            {
+              "id": 3913205431,
+              "label": "PHI Eagles",
+              "englishLabel": "Philadelphia Eagles",
+              "odds": 1960,
+              "line": -7500,
+              "participant": "PHI Eagles",
+              "type": "OT_ONE",
+              "betOfferId": 2565404702,
+              "changedDate": "2025-10-22T14:34:31Z",
+              "participantId": 1000065021,
+              "oddsFractional": "19/20",
+              "oddsAmerican": "-105",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913205432,
+              "label": "NY Giants",
+              "englishLabel": "New York Giants",
+              "odds": 1860,
+              "line": 7500,
+              "participant": "NY Giants",
+              "type": "OT_TWO",
+              "betOfferId": 2565404702,
+              "changedDate": "2025-10-22T14:34:31Z",
+              "participantId": 1000070038,
+              "oddsFractional": "17/20",
+              "oddsAmerican": "-117",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565387079,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875883,
+          "outcomes": [
+            {
+              "id": 3913215750,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 1260,
+              "participant": "PHI Eagles",
+              "type": "OT_ONE",
+              "betOfferId": 2565387079,
+              "changedDate": "2025-10-22T14:34:38Z",
+              "participantId": 1000065021,
+              "oddsFractional": "1/4",
+              "oddsAmerican": "-385",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913215752,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 3900,
+              "participant": "NY Giants",
+              "type": "OT_TWO",
+              "betOfferId": 2565387079,
+              "changedDate": "2025-10-22T14:34:38Z",
+              "participantId": 1000070038,
+              "oddsFractional": "29/10",
+              "oddsAmerican": "290",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567229029,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875883,
+          "outcomes": [
+            {
+              "id": 3919531862,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1890,
+              "line": 43500,
+              "type": "OT_OVER",
+              "betOfferId": 2567229029,
+              "changedDate": "2025-10-22T14:34:31Z",
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-113",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3919531863,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1930,
+              "line": 43500,
+              "type": "OT_UNDER",
+              "betOfferId": 2567229029,
+              "changedDate": "2025-10-22T14:34:31Z",
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-108",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875880,
+        "name": "BUF Bills @ CAR Panthers",
+        "nameDelimiter": "@",
+        "englishName": "Carolina Panthers - Buffalo Bills",
+        "homeName": "CAR Panthers",
+        "awayName": "BUF Bills",
+        "start": "2025-10-26T17:00:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 154,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000000638,
+            "name": "CAR Panthers",
+            "englishName": "Carolina Panthers",
+            "termKey": "carolina_panthers",
+            "home": true,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000017217,
+            "name": "BUF Bills",
+            "englishName": "Buffalo Bills",
+            "termKey": "buffalo_bills",
+            "home": false,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2565412539,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875880,
+          "outcomes": [
+            {
+              "id": 3913188793,
+              "label": "CAR Panthers",
+              "englishLabel": "Carolina Panthers",
+              "odds": 1860,
+              "line": 7500,
+              "participant": "CAR Panthers",
+              "type": "OT_ONE",
+              "betOfferId": 2565412539,
+              "changedDate": "2025-10-21T22:20:07Z",
+              "participantId": 1000000638,
+              "oddsFractional": "17/20",
+              "oddsAmerican": "-117",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913188795,
+              "label": "BUF Bills",
+              "englishLabel": "Buffalo Bills",
+              "odds": 1960,
+              "line": -7500,
+              "participant": "BUF Bills",
+              "type": "OT_TWO",
+              "betOfferId": 2565412539,
+              "changedDate": "2025-10-21T22:20:07Z",
+              "participantId": 1000017217,
+              "oddsFractional": "19/20",
+              "oddsAmerican": "-105",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565383756,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875880,
+          "outcomes": [
+            {
+              "id": 3913213016,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 4000,
+              "participant": "CAR Panthers",
+              "type": "OT_ONE",
+              "betOfferId": 2565383756,
+              "changedDate": "2025-10-21T22:20:54Z",
+              "participantId": 1000000638,
+              "oddsFractional": "3/1",
+              "oddsAmerican": "300",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913213017,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 1260,
+              "participant": "BUF Bills",
+              "type": "OT_TWO",
+              "betOfferId": 2565383756,
+              "changedDate": "2025-10-21T22:20:54Z",
+              "participantId": 1000017217,
+              "oddsFractional": "1/4",
+              "oddsAmerican": "-385",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567755378,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875880,
+          "outcomes": [
+            {
+              "id": 3921392635,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1900,
+              "line": 46000,
+              "type": "OT_OVER",
+              "betOfferId": 2567755378,
+              "changedDate": "2025-10-21T22:20:07Z",
+              "oddsFractional": "9/10",
+              "oddsAmerican": "-112",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3921392636,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1920,
+              "line": 46000,
+              "type": "OT_UNDER",
+              "betOfferId": 2567755378,
+              "changedDate": "2025-10-21T22:20:07Z",
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-109",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875881,
+        "name": "SF 49ers @ HOU Texans",
+        "nameDelimiter": "@",
+        "englishName": "Houston Texans - San Francisco 49ers",
+        "homeName": "HOU Texans",
+        "awayName": "SF 49ers",
+        "start": "2025-10-26T17:00:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 155,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000030413,
+            "name": "SF 49ers",
+            "englishName": "San Francisco 49ers",
+            "termKey": "san_francisco_49ers",
+            "home": false,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000080350,
+            "name": "HOU Texans",
+            "englishName": "Houston Texans",
+            "termKey": "houston_texans",
+            "home": true,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2567719671,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875881,
+          "outcomes": [
+            {
+              "id": 3921396369,
+              "label": "HOU Texans",
+              "englishLabel": "Houston Texans",
+              "odds": 1900,
+              "line": -500,
+              "participant": "HOU Texans",
+              "type": "OT_ONE",
+              "betOfferId": 2567719671,
+              "changedDate": "2025-10-21T14:50:59Z",
+              "participantId": 1000080350,
+              "oddsFractional": "9/10",
+              "oddsAmerican": "-112",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3921396370,
+              "label": "SF 49ers",
+              "englishLabel": "San Francisco 49ers",
+              "odds": 1920,
+              "line": 500,
+              "participant": "SF 49ers",
+              "type": "OT_TWO",
+              "betOfferId": 2567719671,
+              "changedDate": "2025-10-21T14:38:44Z",
+              "participantId": 1000030413,
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-109",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565412644,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875881,
+          "outcomes": [
+            {
+              "id": 3913189060,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 1880,
+              "participant": "HOU Texans",
+              "type": "OT_ONE",
+              "betOfferId": 2565412644,
+              "changedDate": "2025-10-21T14:38:44Z",
+              "participantId": 1000080350,
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-114",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913189061,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 1940,
+              "participant": "SF 49ers",
+              "type": "OT_TWO",
+              "betOfferId": 2565412644,
+              "changedDate": "2025-10-21T14:46:05Z",
+              "participantId": 1000030413,
+              "oddsFractional": "23/25",
+              "oddsAmerican": "-107",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567755716,
+          "closed": "2025-10-26T17:00:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875881,
+          "outcomes": [
+            {
+              "id": 3921393649,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1890,
+              "line": 41000,
+              "type": "OT_OVER",
+              "betOfferId": 2567755716,
+              "changedDate": "2025-10-21T14:38:44Z",
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-113",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3921393650,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1930,
+              "line": 41000,
+              "type": "OT_UNDER",
+              "betOfferId": 2567755716,
+              "changedDate": "2025-10-21T14:38:44Z",
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-108",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875885,
+        "name": "TB Buccaneers @ NO Saints",
+        "nameDelimiter": "@",
+        "englishName": "New Orleans Saints - Tampa Bay Buccaneers",
+        "homeName": "NO Saints",
+        "awayName": "TB Buccaneers",
+        "start": "2025-10-26T20:05:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 155,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000086605,
+            "name": "TB Buccaneers",
+            "englishName": "Tampa Bay Buccaneers",
+            "termKey": "tampa_bay_buccaneers",
+            "home": false,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000062103,
+            "name": "NO Saints",
+            "englishName": "New Orleans Saints",
+            "termKey": "new_orleans_saints",
+            "home": true,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2567712855,
+          "closed": "2025-10-26T20:05:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875885,
+          "outcomes": [
+            {
+              "id": 3921372221,
+              "label": "NO Saints",
+              "englishLabel": "New Orleans Saints",
+              "odds": 1910,
+              "line": 4500,
+              "participant": "NO Saints",
+              "type": "OT_ONE",
+              "betOfferId": 2567712855,
+              "changedDate": "2025-10-22T02:46:32Z",
+              "participantId": 1000062103,
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-110",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3921372222,
+              "label": "TB Buccaneers",
+              "englishLabel": "Tampa Bay Buccaneers",
+              "odds": 1910,
+              "line": -4500,
+              "participant": "TB Buccaneers",
+              "type": "OT_TWO",
+              "betOfferId": 2567712855,
+              "changedDate": "2025-10-22T02:46:32Z",
+              "participantId": 1000086605,
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-110",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565424470,
+          "closed": "2025-10-26T20:05:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875885,
+          "outcomes": [
+            {
+              "id": 3913220995,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 2900,
+              "participant": "NO Saints",
+              "type": "OT_ONE",
+              "betOfferId": 2565424470,
+              "changedDate": "2025-10-21T14:32:34Z",
+              "participantId": 1000062103,
+              "oddsFractional": "19/10",
+              "oddsAmerican": "190",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913220997,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 1420,
+              "participant": "TB Buccaneers",
+              "type": "OT_TWO",
+              "betOfferId": 2565424470,
+              "changedDate": "2025-10-21T14:29:13Z",
+              "participantId": 1000086605,
+              "oddsFractional": "21/50",
+              "oddsAmerican": "-240",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567748486,
+          "closed": "2025-10-26T20:05:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875885,
+          "outcomes": [
+            {
+              "id": 3921409682,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1940,
+              "line": 46500,
+              "type": "OT_UNDER",
+              "betOfferId": 2567748486,
+              "changedDate": "2025-10-22T02:46:31Z",
+              "oddsFractional": "23/25",
+              "oddsAmerican": "-107",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3921409683,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1880,
+              "line": 46500,
+              "type": "OT_OVER",
+              "betOfferId": 2567748486,
+              "changedDate": "2025-10-22T02:46:31Z",
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-114",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875887,
+        "name": "TEN Titans @ IND Colts",
+        "nameDelimiter": "@",
+        "englishName": "Indianapolis Colts - Tennessee Titans",
+        "homeName": "IND Colts",
+        "awayName": "TEN Titans",
+        "start": "2025-10-26T20:25:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 152,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000058218,
+            "name": "TEN Titans",
+            "englishName": "Tennessee Titans",
+            "termKey": "tennessee_titans",
+            "home": false,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000000174,
+            "name": "IND Colts",
+            "englishName": "Indianapolis Colts",
+            "termKey": "indianapolis_colts",
+            "home": true,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2567207225,
+          "closed": "2025-10-26T20:25:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875887,
+          "outcomes": [
+            {
+              "id": 3919546482,
+              "label": "IND Colts",
+              "englishLabel": "Indianapolis Colts",
+              "odds": 1860,
+              "line": -14000,
+              "participant": "IND Colts",
+              "type": "OT_ONE",
+              "betOfferId": 2567207225,
+              "changedDate": "2025-10-21T15:05:47Z",
+              "participantId": 1000000174,
+              "oddsFractional": "17/20",
+              "oddsAmerican": "-117",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3919546483,
+              "label": "TEN Titans",
+              "englishLabel": "Tennessee Titans",
+              "odds": 1960,
+              "line": 14000,
+              "participant": "TEN Titans",
+              "type": "OT_TWO",
+              "betOfferId": 2567207225,
+              "changedDate": "2025-10-21T15:05:47Z",
+              "participantId": 1000058218,
+              "oddsFractional": "19/20",
+              "oddsAmerican": "-105",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565377908,
+          "closed": "2025-10-26T20:25:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875887,
+          "outcomes": [
+            {
+              "id": 3913186607,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 1080,
+              "participant": "IND Colts",
+              "type": "OT_ONE",
+              "betOfferId": 2565377908,
+              "changedDate": "2025-10-21T14:44:46Z",
+              "participantId": 1000000174,
+              "oddsFractional": "1/14",
+              "oddsAmerican": "-1250",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913186609,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 8000,
+              "participant": "TEN Titans",
+              "type": "OT_TWO",
+              "betOfferId": 2565377908,
+              "changedDate": "2025-10-21T16:44:49Z",
+              "participantId": 1000058218,
+              "oddsFractional": "7/1",
+              "oddsAmerican": "700",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567420464,
+          "closed": "2025-10-26T20:25:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875887,
+          "outcomes": [
+            {
+              "id": 3920271614,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1890,
+              "line": 47000,
+              "type": "OT_UNDER",
+              "betOfferId": 2567420464,
+              "changedDate": "2025-10-21T15:05:47Z",
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-113",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3920271615,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1930,
+              "line": 47000,
+              "type": "OT_OVER",
+              "betOfferId": 2567420464,
+              "changedDate": "2025-10-21T15:05:47Z",
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-108",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875884,
+        "name": "DAL Cowboys @ DEN Broncos",
+        "nameDelimiter": "@",
+        "englishName": "Denver Broncos - Dallas Cowboys",
+        "homeName": "DEN Broncos",
+        "awayName": "DAL Cowboys",
+        "start": "2025-10-26T20:25:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 157,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000000177,
+            "name": "DEN Broncos",
+            "englishName": "Denver Broncos",
+            "termKey": "denver_broncos",
+            "scratched": false,
+            "nonRunner": false,
+            "home": true,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000020068,
+            "name": "DAL Cowboys",
+            "englishName": "Dallas Cowboys",
+            "termKey": "dallas_cowboys",
+            "scratched": false,
+            "nonRunner": false,
+            "home": false,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2567235223,
+          "closed": "2025-10-26T20:25:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875884,
+          "outcomes": [
+            {
+              "id": 3919554394,
+              "label": "DEN Broncos",
+              "englishLabel": "Denver Broncos",
+              "odds": 1860,
+              "line": -3000,
+              "participant": "DEN Broncos",
+              "type": "OT_ONE",
+              "betOfferId": 2567235223,
+              "changedDate": "2025-10-22T14:42:53Z",
+              "participantId": 1000000177,
+              "oddsFractional": "17/20",
+              "oddsAmerican": "-117",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3919554395,
+              "label": "DAL Cowboys",
+              "englishLabel": "Dallas Cowboys",
+              "odds": 1960,
+              "line": 3000,
+              "participant": "DAL Cowboys",
+              "type": "OT_TWO",
+              "betOfferId": 2567235223,
+              "changedDate": "2025-10-22T14:42:53Z",
+              "participantId": 1000020068,
+              "oddsFractional": "19/20",
+              "oddsAmerican": "-105",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565400807,
+          "closed": "2025-10-26T20:25:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875884,
+          "outcomes": [
+            {
+              "id": 3913162377,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 1620,
+              "participant": "DEN Broncos",
+              "type": "OT_ONE",
+              "betOfferId": 2565400807,
+              "changedDate": "2025-10-22T14:42:53Z",
+              "participantId": 1000000177,
+              "oddsFractional": "8/13",
+              "oddsAmerican": "-162",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913162379,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 2300,
+              "participant": "DAL Cowboys",
+              "type": "OT_TWO",
+              "betOfferId": 2565400807,
+              "changedDate": "2025-10-22T14:42:53Z",
+              "participantId": 1000020068,
+              "oddsFractional": "13/10",
+              "oddsAmerican": "130",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567765798,
+          "closed": "2025-10-26T20:25:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875884,
+          "outcomes": [
+            {
+              "id": 3921472724,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1890,
+              "line": 50000,
+              "type": "OT_OVER",
+              "betOfferId": 2567765798,
+              "changedDate": "2025-10-22T14:42:53Z",
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-113",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3921472725,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1930,
+              "line": 50000,
+              "type": "OT_UNDER",
+              "betOfferId": 2567765798,
+              "changedDate": "2025-10-22T14:42:53Z",
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-108",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875888,
+        "name": "GB Packers @ PIT Steelers",
+        "nameDelimiter": "@",
+        "englishName": "Pittsburgh Steelers - Green Bay Packers",
+        "homeName": "PIT Steelers",
+        "awayName": "GB Packers",
+        "start": "2025-10-27T00:20:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 277,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000000176,
+            "name": "PIT Steelers",
+            "englishName": "Pittsburgh Steelers",
+            "termKey": "pittsburgh_steelers",
+            "home": true,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000055908,
+            "name": "GB Packers",
+            "englishName": "Green Bay Packers",
+            "termKey": "green_bay_packers",
+            "home": false,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2565384069,
+          "closed": "2025-10-27T00:20:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875888,
+          "outcomes": [
+            {
+              "id": 3913214101,
+              "label": "PIT Steelers",
+              "englishLabel": "Pittsburgh Steelers",
+              "odds": 1960,
+              "line": 3000,
+              "participant": "PIT Steelers",
+              "type": "OT_ONE",
+              "betOfferId": 2565384069,
+              "changedDate": "2025-10-22T13:40:41Z",
+              "participantId": 1000000176,
+              "oddsFractional": "19/20",
+              "oddsAmerican": "-105",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913214102,
+              "label": "GB Packers",
+              "englishLabel": "Green Bay Packers",
+              "odds": 1860,
+              "line": -3000,
+              "participant": "GB Packers",
+              "type": "OT_TWO",
+              "betOfferId": 2565384069,
+              "changedDate": "2025-10-22T13:40:41Z",
+              "participantId": 1000055908,
+              "oddsFractional": "17/20",
+              "oddsAmerican": "-117",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565384070,
+          "closed": "2025-10-27T00:20:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875888,
+          "outcomes": [
+            {
+              "id": 3913214103,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 2480,
+              "participant": "PIT Steelers",
+              "type": "OT_ONE",
+              "betOfferId": 2565384070,
+              "changedDate": "2025-10-21T14:55:31Z",
+              "participantId": 1000000176,
+              "oddsFractional": "29/20",
+              "oddsAmerican": "148",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913214104,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 1560,
+              "participant": "GB Packers",
+              "type": "OT_TWO",
+              "betOfferId": 2565384070,
+              "changedDate": "2025-10-21T16:42:55Z",
+              "participantId": 1000055908,
+              "oddsFractional": "11/20",
+              "oddsAmerican": "-180",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567430861,
+          "closed": "2025-10-27T00:20:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875888,
+          "outcomes": [
+            {
+              "id": 3920393169,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1920,
+              "line": 45000,
+              "type": "OT_OVER",
+              "betOfferId": 2567430861,
+              "changedDate": "2025-10-22T13:40:42Z",
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-109",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3920393170,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1900,
+              "line": 45000,
+              "type": "OT_UNDER",
+              "betOfferId": 2567430861,
+              "changedDate": "2025-10-22T13:40:42Z",
+              "oddsFractional": "9/10",
+              "oddsAmerican": "-112",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    },
+    {
+      "event": {
+        "id": 1024875886,
+        "name": "WAS Commanders @ KC Chiefs",
+        "nameDelimiter": "@",
+        "englishName": "Kansas City Chiefs - Washington Commanders",
+        "homeName": "KC Chiefs",
+        "awayName": "WAS Commanders",
+        "start": "2025-10-28T00:15:00Z",
+        "group": "NFL",
+        "groupId": 1000093656,
+        "path": [
+          {
+            "id": 1000093199,
+            "name": "Football",
+            "englishName": "American Football",
+            "termKey": "american_football"
+          },
+          {
+            "id": 1000093656,
+            "name": "NFL",
+            "englishName": "NFL",
+            "termKey": "nfl"
+          }
+        ],
+        "nonLiveBoCount": 155,
+        "sport": "AMERICAN_FOOTBALL",
+        "tags": [
+          "AMERICAN_DISPLAY_FORMAT",
+          "AWAY_HOME",
+          "OFFERED_LIVE",
+          "BET_BUILDER",
+          "MATCH"
+        ],
+        "state": "NOT_STARTED",
+        "participants": [
+          {
+            "participantId": 1000000334,
+            "name": "WAS Commanders",
+            "englishName": "Washington Commanders",
+            "termKey": "washington_commanders",
+            "home": false,
+            "participantType": "TEAM"
+          },
+          {
+            "participantId": 1000091850,
+            "name": "KC Chiefs",
+            "englishName": "Kansas City Chiefs",
+            "termKey": "kansas_city_chiefs",
+            "home": true,
+            "participantType": "TEAM"
+          }
+        ]
+      },
+      "betOffers": [
+        {
+          "id": 2567481661,
+          "closed": "2025-10-28T00:15:00Z",
+          "criterion": {
+            "id": 1001159928,
+            "label": "Point Spread",
+            "englishLabel": "Point Spread - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 1,
+            "name": "Handicap",
+            "englishName": "Handicap"
+          },
+          "eventId": 1024875886,
+          "outcomes": [
+            {
+              "id": 3920518064,
+              "label": "KC Chiefs",
+              "englishLabel": "Kansas City Chiefs",
+              "odds": 1930,
+              "line": -10500,
+              "participant": "KC Chiefs",
+              "type": "OT_ONE",
+              "betOfferId": 2567481661,
+              "changedDate": "2025-10-21T16:13:17Z",
+              "participantId": 1000091850,
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-108",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3920518065,
+              "label": "WAS Commanders",
+              "englishLabel": "Washington Commanders",
+              "odds": 1890,
+              "line": 10500,
+              "participant": "WAS Commanders",
+              "type": "OT_TWO",
+              "betOfferId": 2567481661,
+              "changedDate": "2025-10-21T16:13:17Z",
+              "participantId": 1000000334,
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-113",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 1,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2565391446,
+          "closed": "2025-10-28T00:15:00Z",
+          "criterion": {
+            "id": 1004709447,
+            "label": "Moneyline",
+            "englishLabel": "Moneyline - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 2,
+            "name": "Match",
+            "englishName": "Match"
+          },
+          "eventId": 1024875886,
+          "outcomes": [
+            {
+              "id": 3913193831,
+              "label": "1",
+              "englishLabel": "1",
+              "odds": 1160,
+              "participant": "KC Chiefs",
+              "type": "OT_ONE",
+              "betOfferId": 2565391446,
+              "changedDate": "2025-10-21T16:34:41Z",
+              "participantId": 1000091850,
+              "oddsFractional": "2/13",
+              "oddsAmerican": "-625",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3913193833,
+              "label": "2",
+              "englishLabel": "2",
+              "odds": 5500,
+              "participant": "WAS Commanders",
+              "type": "OT_TWO",
+              "betOfferId": 2565391446,
+              "changedDate": "2025-10-21T16:34:41Z",
+              "participantId": 1000000334,
+              "oddsFractional": "9/2",
+              "oddsAmerican": "450",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "BET_BUILDER",
+            "MAIN"
+          ],
+          "sortOrder": 2,
+          "cashOutStatus": "ENABLED"
+        },
+        {
+          "id": 2567788810,
+          "closed": "2025-10-28T00:15:00Z",
+          "criterion": {
+            "id": 1001159490,
+            "label": "Total Points",
+            "englishLabel": "Total Points - Including Overtime",
+            "order": [],
+            "occurrenceType": "POINTS",
+            "lifetime": "FULL_TIME_OVERTIME"
+          },
+          "betOfferType": {
+            "id": 6,
+            "name": "Over/Under",
+            "englishName": "Over/Under"
+          },
+          "eventId": 1024875886,
+          "outcomes": [
+            {
+              "id": 3921526730,
+              "label": "Under",
+              "englishLabel": "Under",
+              "odds": 1930,
+              "line": 47500,
+              "type": "OT_UNDER",
+              "betOfferId": 2567788810,
+              "changedDate": "2025-10-21T16:13:17Z",
+              "oddsFractional": "10/11",
+              "oddsAmerican": "-108",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            },
+            {
+              "id": 3921526731,
+              "label": "Over",
+              "englishLabel": "Over",
+              "odds": 1890,
+              "line": 47500,
+              "type": "OT_OVER",
+              "betOfferId": 2567788810,
+              "changedDate": "2025-10-21T16:13:17Z",
+              "oddsFractional": "22/25",
+              "oddsAmerican": "-113",
+              "status": "OPEN",
+              "cashOutStatus": "ENABLED"
+            }
+          ],
+          "tags": [
+            "OFFERED_PREMATCH",
+            "MAIN_LINE",
+            "BET_BUILDER"
+          ],
+          "sortOrder": 3,
+          "cashOutStatus": "ENABLED"
+        }
+      ]
+    }
+  ],
+  "terms": [
+    {
+      "type": "SPORT",
+      "id": "/american_football",
+      "termKey": "american_football",
+      "localizedName": "Football",
+      "parentId": "/",
+      "englishName": "American Football"
+    },
+    {
+      "type": "REGION",
+      "id": "/american_football/nfl",
+      "termKey": "nfl",
+      "localizedName": "NFL",
+      "parentId": "/american_football",
+      "englishName": "NFL"
+    },
+    {
+      "type": "ATTRIBUTE",
+      "id": "/matches",
+      "termKey": "matches",
+      "localizedName": "matches",
+      "parentId": "",
+      "englishName": "matches"
+    }
+  ],
+  "activeTermIds": [
+    "/american_football/nfl",
+    "/matches"
+  ],
+  "soonMode": "DAILY",
+  "categoryGroups": [
+    {
+      "categoryGroupName": "list_view",
+      "categories": [
+        {
+          "id": 17419,
+          "englishName": "Spread - 1st Half",
+          "localizedName": "Spread - 1st Half"
+        },
+        {
+          "id": 17420,
+          "englishName": "Total Points - 1st Half",
+          "localizedName": "Total Points - 1st Half"
+        },
+        {
+          "id": 17421,
+          "englishName": "Moneyline - 1st Half",
+          "localizedName": "Moneyline - 1st Half"
+        }
+      ]
+    },
+    {
+      "categoryGroupName": "combined_layout",
+      "categories": [
+        {
+          "id": 17459,
+          "englishName": "Spread",
+          "localizedName": "Spread"
+        },
+        {
+          "id": 17461,
+          "englishName": "Moneyline",
+          "localizedName": "Moneyline"
+        },
+        {
+          "id": 17460,
+          "englishName": "Total Points",
+          "localizedName": "Total Points"
+        }
+      ],
+      "localizedName": "Spread, Total & Moneyline"
+    }
+  ],
+  "activeCategories": [
+    "17460",
+    "17461",
+    "17459"
+  ],
+  "activeEventTypes": [
+    "matches"
+  ],
+  "eventTypes": [
+    "competitions",
+    "matches"
+  ],
+  "defaultEventType": "matches"
+}
