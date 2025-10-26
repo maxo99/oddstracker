@@ -2,7 +2,6 @@ import logging
 
 import pytest
 
-from oddstracker.domain.model.sportsbetting import SportsBettingInfo
 
 logger = logging.getLogger(__name__)
 

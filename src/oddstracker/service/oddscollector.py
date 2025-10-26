@@ -2,8 +2,10 @@ import logging
 
 import requests
 
-from oddstracker.domain.model.sportsbetting import SportsBettingInfo, convert
-from oddstracker.domain.model.sportsbetting2 import SportsEventInfo
+from oddstracker.domain.model.converter import convert_to_sportsbetting_info
+from oddstracker.domain.model.sportsbetting import (
+    SportsBettingInfo,
+)
 from oddstracker.domain.providers import (
     KAMBI_PROVIDERS,
     KambiProvider,
@@ -53,19 +55,6 @@ def fetch_sports_betting_data(provider: Provider, league: str) -> dict:
         logger.error(f"Failed to fetch events from {provider} {ex}")
         raise ex
     return data
-
-
-def convert_to_sportsbetting_info(provider_key: str, data: dict | list[dict]) -> list[SportsBettingInfo]:
-    out = []
-    try:
-        if provider_key == "theoddsapi":
-            out.extend(SportsEventInfo(**e) for e in data)
-        elif provider_key == "kambi":
-            out.append(SportsEventInfo(**convert(data)))
-    except Exception as ex:
-        logger.error(f"Failed to parse KambiData: {ex}")
-        raise ex
-    return out
 
 
 async def store_sports_betting_info(data: list[SportsBettingInfo]) -> None:

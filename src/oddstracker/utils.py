@@ -1,9 +1,21 @@
 import json
-from datetime import UTC, datetime
 import os
+from datetime import UTC, datetime
+
+import pydantic
+
 from oddstracker.config import DATA_DIR
 
 BET_OFFER_TYPES = ["match", "handicap", "overunder"]
+
+
+class JsonEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, datetime):
+            return o.isoformat()
+        if isinstance(o, pydantic.BaseModel):
+            return o.model_dump(mode="json", exclude_none=True)
+        return super().default(o)
 
 
 def get_utc_now():
@@ -23,7 +35,8 @@ def store_json(name: str, tag: str, data: dict) -> None:
     _name = "_".join([tag, name, get_utc_now().strftime("%Y-%m-%d")])
     path = os.path.join(DATA_DIR, _name + ".json")
     with open(path, "w") as f:
-        json.dump(data, f, indent=2)
+        json.dump(data, f, indent=2, cls=JsonEncoder)
+
 
 def load_json(name: str, tag: str) -> dict:
     files = [f for f in os.listdir(DATA_DIR) if f.startswith(f"{tag}_{name}_")]
@@ -35,6 +48,7 @@ def load_json(name: str, tag: str) -> dict:
     with open(path) as f:
         data = json.load(f)
     return data
+
 
 def validate_betoffer_type(offer: str):
     if offer == "moneyline":

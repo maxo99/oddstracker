@@ -7,7 +7,7 @@ from sqlalchemy.pool import NullPool
 from sqlmodel import SQLModel, select
 
 from oddstracker import config
-from oddstracker.domain.model.sportsbetting import BetOffer, SportsEvent
+from oddstracker.domain.model.sportsbetting import BetOffer, SportsEventOld
 from oddstracker.domain.teamdata import TeamData
 from oddstracker.utils import get_utc_now
 
@@ -72,7 +72,7 @@ class PostgresClient:
             raise e
 
     async def add_event_and_betoffers(
-        self, event: SportsEvent, bet_offers: list[BetOffer]
+        self, event: SportsEventOld, bet_offers: list[BetOffer]
     ):
         logger.info(f"Upserting event {event.id} and {len(bet_offers)} betoffers.")
         async with self.session_maker() as session:
@@ -115,7 +115,7 @@ class PostgresClient:
 
     async def _upsert_event(self, event, session):
         try:
-            existing = await session.get(SportsEvent, event.id)
+            existing = await session.get(SportsEventOld, event.id)
             if not existing:
                 session.add(event)
             else:
@@ -134,11 +134,11 @@ class PostgresClient:
             logger.error(f"Error adding event {event.id}: {e}")
             raise e
 
-    async def get_events(self, **filters) -> list[SportsEvent]:
+    async def get_events(self, **filters) -> list[SportsEventOld]:
         try:
             logger.info(f"Fetching events from with {filters}")
             async with self.session_maker() as session:
-                query = select(SportsEvent)
+                query = select(SportsEventOld)
 
                 # if not include_deleted:
                 #     query = query.where(KambiEvent.deleted_at is None)
@@ -148,21 +148,21 @@ class PostgresClient:
                         if key.startswith("not_"):
                             actual_key = key[4:]
                             query = query.where(
-                                getattr(SportsEvent, actual_key) != value
+                                getattr(SportsEventOld, actual_key) != value
                             )
                         else:
-                            query = query.where(getattr(SportsEvent, key) == value)
+                            query = query.where(getattr(SportsEventOld, key) == value)
                 result = await session.execute(query)
                 return list(result.scalars().all())
         except Exception as e:
             logger.error(f"Error getting events: {e}")
             raise e
 
-    async def get_event(self, event_id: int) -> SportsEvent | None:
+    async def get_event(self, event_id: int) -> SportsEventOld | None:
         try:
             logger.info(f"Fetching event with ID {event_id}")
             async with self.session_maker() as session:
-                event = await session.get(SportsEvent, event_id)
+                event = await session.get(SportsEventOld, event_id)
                 return event
         except Exception as e:
             logger.error(f"Error getting events: {e}")
@@ -279,14 +279,14 @@ class PostgresClient:
 
     async def get_events_by_participant(
         self, participant_name: str
-    ) -> list[SportsEvent]:
+    ) -> list[SportsEventOld]:
         try:
             logger.info(f"Fetching events for participant {participant_name}")
             async with self.session_maker() as session:
                 query = (
-                    select(SportsEvent).where(
-                        (SportsEvent.homeName == participant_name)
-                        | (SportsEvent.awayName == participant_name)
+                    select(SportsEventOld).where(
+                        (SportsEventOld.homeName == participant_name)
+                        | (SportsEventOld.awayName == participant_name)
                     )
                     # .where(KambiEvent.deleted_at is None)
                 )

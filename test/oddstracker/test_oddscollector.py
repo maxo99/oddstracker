@@ -1,10 +1,6 @@
 import pytest
 
-from oddstracker.service.oddscollector import (
-    collect_and_store_bettingdata,
-    convert_to_sportsbetting_info,
-)
-from oddstracker.utils import load_json
+from oddstracker.service.oddscollector import collect_and_store_bettingdata
 
 
 @pytest.mark.asyncio
@@ -26,5 +22,3 @@ async def test_odds_collector(postgres_client):
     assert len(collected2) > 0
 
     # assert len(events) > starting_count
-
-

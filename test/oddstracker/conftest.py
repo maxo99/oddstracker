@@ -1,6 +1,7 @@
 import json
 import os
 from collections.abc import AsyncGenerator, Generator
+from functools import lru_cache
 from typing import Any
 
 import pytest
@@ -24,6 +25,11 @@ TEARDOWN = False
 #             conn.execute(text("TRUNCATE TABLE betoffer, event CASCADE"))
 #             conn.commit()
 #     _client.close()
+
+
+@lru_cache
+def get_sample_events(provider_key: str) -> list[dict] | dict:
+    return load_json(provider_key, "raw")
 
 
 @pytest.fixture(scope="session")
