@@ -1,5 +1,4 @@
 import logging
-from datetime import UTC, datetime
 
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
@@ -7,7 +6,11 @@ from sqlalchemy.pool import NullPool
 from sqlmodel import SQLModel, select
 
 from oddstracker import config
-from oddstracker.domain.model.sportsbetting import BetOffer, SportsEvent
+from oddstracker.domain.model.sportevent import (
+    EventOffer,
+    SportEvent,
+    SportEventData,
+)
 from oddstracker.domain.teamdata import TeamData
 
 logger = logging.getLogger(__name__)
@@ -70,74 +73,55 @@ class PostgresClient:
             logger.error(f"Error closing Postgres client connection: {e}")
             raise e
 
-    async def add_event_and_betoffers(
-        self, event: SportsEvent, bet_offers: list[BetOffer]
-    ):
-        logger.info(f"Upserting event {event.id} and {len(bet_offers)} betoffers.")
+    async def add_sporteventdata(self, sportevent: SportEventData):
+        logger.info(f"Upserting event {sportevent}")
         async with self.session_maker() as session:
             try:
-                # with session.begin_nested():
-                await self._upsert_event(event, session)
-                # with session.begin_nested():
-                await self._upsert_betoffers(bet_offers, session)
+                await self._upsert_sportevent(sportevent.event, session)
+                await self._upsert_eventoffers(sportevent.offers, session)
                 await session.commit()
             except Exception as e:
                 logger.error(f"Error upserting events and betoffers: {e}")
                 await session.rollback()
                 raise e
 
-    async def _upsert_betoffers(self, bet_offers, session):
+    async def _upsert_eventoffers(self, offers: list[EventOffer], session):
         try:
-            for bo in bet_offers:
-                logger.info(f"Upserting bet offer {bo.id} for event {bo.event_id}.")
-                existing = await session.execute(
-                    select(BetOffer).where(BetOffer.id == bo.id, BetOffer.active)
-                ).scalar_one_or_none()
-                if not existing:
-                    session.add(bo)
-                else:
-                    # outcomes is stored as JSON (list of dicts), so access as dict
-                    if (
-                        existing.outcomes[0]["changedDate"]
-                        == bo.outcomes[0]["changedDate"]
-                    ):
-                        existing.updated_at = datetime.now(UTC)
-                    else:
-                        bo.updated_at = datetime.now(UTC)
-                        existing.active = False
-                        session.merge(bo)
+            for bo in offers:
+                logger.info(f"Upserting {bo}")
+                session.add(bo)
+            logger.info(f"Upserted {len(offers)} eventoffers successfully.")
         except Exception as e:
             logger.exception(e)
-            logger.error(f"Error adding bet offers: {e.__cause__}")
+            logger.error(f"Error adding eventoffers: {e.__cause__}")
             raise e
 
-    async def _upsert_event(self, event, session):
+    async def _upsert_sportevent(self, sportevent: SportEvent, session):
         try:
-            existing = await session.get(SportsEvent, event.id)
-            if not existing:
-                session.add(event)
-            else:
-                # State was updated, mark existing as deleted and insert new
-                if existing.state != event.state:
-                    # Update Existing
-                    existing.updated_at = datetime.now(UTC)
+            # existing = await session.get(SportEvent, sportevent.id)
+            # if not existing:
+            session.add(sportevent)
+            # else:
+            #     # State was updated, mark existing as deleted and insert new
+            #     if existing.state != sportevent.state:
+            #         # Update Existing
+            #         existing.updated_at = get_utc_now()
 
-                    event.created_at = existing.created_at
-                    event.updated_at = datetime.now(UTC)
-                    session.merge(event)
-                else:
-                    existing.updated_at = datetime.now(UTC)
-            logger.info(f"Upserted event {event.id} successfully.")
+            #         sportevent.created_at = existing.created_at
+            #         sportevent.updated_at = get_utc_now()
+            #         session.merge(sportevent)
+            #     else:
+            #         existing.updated_at = get_utc_now()
+            logger.info(f"Upserted event {sportevent.id} successfully.")
         except Exception as e:
-            logger.error(f"Error adding event {event.id}: {e}")
+            logger.error(f"Error adding event {sportevent.id}: {e}")
             raise e
 
-    async def get_events(self, **filters) -> list[SportsEvent]:
+    async def get_events(self, **filters) -> list[SportEvent]:
         try:
             logger.info(f"Fetching events from with {filters}")
             async with self.session_maker() as session:
-                query = select(SportsEvent)
-
+                query = select(SportEvent)
                 # if not include_deleted:
                 #     query = query.where(KambiEvent.deleted_at is None)
 
@@ -146,104 +130,128 @@ class PostgresClient:
                         if key.startswith("not_"):
                             actual_key = key[4:]
                             query = query.where(
-                                getattr(SportsEvent, actual_key) != value
+                                getattr(SportEvent, actual_key) != value
                             )
                         else:
-                            query = query.where(getattr(SportsEvent, key) == value)
+                            query = query.where(getattr(SportEvent, key) == value)
                 result = await session.execute(query)
                 return list(result.scalars().all())
         except Exception as e:
             logger.error(f"Error getting events: {e}")
             raise e
 
-    async def get_event(self, event_id: int) -> SportsEvent | None:
+    async def get_sporteventdata(self, event_id: str) -> SportEventData | None:
         try:
             logger.info(f"Fetching event with ID {event_id}")
             async with self.session_maker() as session:
-                event = await session.get(SportsEvent, event_id)
-                return event
+                event = await session.get(SportEvent, event_id)
+                if event is None:
+                    return None
+
+                offers = await self._fetch_eventoffers_for_sportevent(session, event_id)
+                return SportEventData(event=event, offers=offers)
+
         except Exception as e:
             logger.error(f"Error getting events: {e}")
             raise e
 
-    async def get_bet_offers_for_event(
-        self, event_id: int, offer: str | None = None, range_query: bool = False
-    ) -> list[BetOffer]:
+    async def get_eventoffers_for_sportevent(
+        self, event_id: int, offer_type: str | None = None, range_query: bool = False
+    ) -> list[EventOffer]:
         try:
             logger.info(
-                f"Fetching bet offers for event ID {event_id} (range={range_query})"
+                f"Fetching eventoffers for event ID {event_id} (range={range_query})"
             )
             async with self.session_maker() as session:
-                if range_query:
-                    result = await session.execute(
-                        text(
-                            "SELECT DISTINCT ON (id) * FROM betoffer "
-                            'WHERE "event_id" = :event_id '
-                            "ORDER BY id, collected_at ASC"
-                        ),
-                        {"event_id": event_id},
-                    )
-                    first_offers = {
-                        row.id: BetOffer(**dict(row._mapping))
-                        for row in result.fetchall()
-                    }
-
-                    result = await session.execute(
-                        text(
-                            "SELECT DISTINCT ON (id) * FROM betoffer "
-                            'WHERE "event_id" = :event_id '
-                            "ORDER BY id, collected_at DESC"
-                        ),
-                        {"event_id": event_id},
-                    )
-                    last_offers = {
-                        row.id: BetOffer(**dict(row._mapping))
-                        for row in result.fetchall()
-                    }
-
-                    bet_offers = []
-                    for bet_offer_id, first_offer in first_offers.items():
-                        last_offer = last_offers.get(bet_offer_id)
-                        if last_offer:
-                            bet_offers.append(first_offer)
-                            bet_offers.append(last_offer)
-                    return bet_offers
-                else:
-                    query = select(BetOffer).where(BetOffer.event_id == event_id)
-                    if offer:
-                        query = query.where(BetOffer.type == offer)
-                    result = await session.execute(query)
-                    bet_offers = list(result.scalars().all())
-                    return bet_offers
+                return await self._fetch_eventoffers_for_sportevent(
+                    session,
+                    event_id,
+                    offer_type=offer_type,
+                    range_query=range_query,
+                )
         except Exception as e:
-            logger.error(f"Error getting bet offers for event {event_id}: {e}")
+            logger.error(f"Error getting eventoffers for event {event_id}: {e}")
             raise e
 
-    async def get_bet_offer_history(
-        self, bet_offer_id: int, event_id: int, limit: int = 2
-    ) -> list[BetOffer]:
+    async def _fetch_eventoffers_for_sportevent(
+        self,
+        session: AsyncSession,
+        event_id: int,
+        offer_type: str | None = None,
+        range_query: bool = False,
+    ) -> list[EventOffer]:
         try:
-            logger.debug(f"Fetching history for bet offer {bet_offer_id}")
+            if range_query:
+                result = await session.execute(
+                    text(
+                        "SELECT DISTINCT ON (id) * FROM betoffer "
+                        'WHERE "event_id" = :event_id '
+                        "ORDER BY id, collected_at ASC"
+                    ),
+                    {"event_id": event_id},
+                )
+                first_offers = {
+                    row.id: EventOffer(**dict(row._mapping))
+                    for row in result.fetchall()
+                }
+
+                result = await session.execute(
+                    text(
+                        "SELECT DISTINCT ON (id) * FROM betoffer "
+                        'WHERE "event_id" = :event_id '
+                        "ORDER BY id, collected_at DESC"
+                    ),
+                    {"event_id": event_id},
+                )
+                last_offers = {
+                    row.id: EventOffer(**dict(row._mapping))
+                    for row in result.fetchall()
+                }
+
+                event_offers = []
+                for event_offer_id, first_offer in first_offers.items():
+                    last_offer = last_offers.get(event_offer_id)
+                    if last_offer:
+                        event_offers.append(first_offer)
+                        event_offers.append(last_offer)
+                return event_offers
+
+            query = select(EventOffer).where(EventOffer.event_id == event_id)
+            if offer_type:
+                query = query.where(EventOffer.offer_type == offer_type)
+            result = await session.execute(query)
+            return list(result.scalars().all())
+        except Exception as e:
+            logger.error(
+                f"Error fetching eventoffers for event {event_id} within active session: {e}"
+            )
+            raise e
+
+    async def get_eventoffer_history(
+        self, offer_type: str, event_id: int, limit: int = 2
+    ) -> list[EventOffer]:
+        try:
+            logger.debug(f"Fetching history for event:{event_id} offer {offer_type}")
             async with self.session_maker() as session:
                 result = await session.execute(
                     text(
-                        'SELECT * FROM betoffer WHERE id = :bet_offer_id AND "event_id" = :event_id '
+                        'SELECT * FROM betoffer WHERE offer_type = :offer_type AND "event_id" = :event_id '
                         "ORDER BY collected_at DESC LIMIT :limit"
                     ),
                     {
-                        "bet_offer_id": bet_offer_id,
+                        "offer_type": offer_type,
                         "event_id": event_id,
                         "limit": limit,
                     },
                 )
                 rows = result.fetchall()
-                bet_offers = []
+                event_offers = []
                 for row in rows:
-                    bet_offer = BetOffer(**dict(row._mapping))
-                    bet_offers.append(bet_offer)
-                return bet_offers
+                    event_offer = EventOffer(**dict(row._mapping))
+                    event_offers.append(event_offer)
+                return event_offers
         except Exception as e:
-            logger.error(f"Error getting bet offer history: {e}")
+            logger.error(f"Error getting eventoffer history: {e}")
             raise e
 
     async def add_teamdata(self, teamdata: list[TeamData]):
@@ -277,14 +285,14 @@ class PostgresClient:
 
     async def get_events_by_participant(
         self, participant_name: str
-    ) -> list[SportsEvent]:
+    ) -> list[SportEvent]:
         try:
             logger.info(f"Fetching events for participant {participant_name}")
             async with self.session_maker() as session:
                 query = (
-                    select(SportsEvent).where(
-                        (SportsEvent.homeName == participant_name)
-                        | (SportsEvent.awayName == participant_name)
+                    select(SportEvent).where(
+                        (SportEvent.home_team == participant_name)
+                        | (SportEvent.away_team == participant_name)
                     )
                     # .where(KambiEvent.deleted_at is None)
                 )

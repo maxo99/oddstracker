@@ -5,16 +5,15 @@ import nfl_data_py as nfl
 from oddstracker.domain.teamdata import NFL_DATA_PI_ABBR_TO_KAMBIDATA, TeamData
 from oddstracker.service import PG_CLIENT
 
-TEAMS_PRELOADED = False
+TEAMS_CACHE = None
 
 
-@lru_cache(maxsize=1)
 async def get_teams() -> list[TeamData]:
-    global TEAMS_PRELOADED
-    if not TEAMS_PRELOADED:
+    global TEAMS_CACHE
+    if not TEAMS_CACHE:
         await load_and_store_team_data()
-        TEAMS_PRELOADED = True
-    return await PG_CLIENT.get_teams()
+        TEAMS_CACHE = await PG_CLIENT.get_teams()
+    return TEAMS_CACHE
 
 
 def load_team_data():
@@ -32,7 +31,8 @@ async def load_and_store_team_data():
 
 
 async def get_team_by_abbr(team_abbr: str) -> TeamData:
-    return list(filter(lambda t: t.team_abbr == team_abbr, await get_teams()))[0]
+    _teams = await get_teams()
+    return list(filter(lambda t: t.team_abbr == team_abbr, _teams))[0]
 
 
 async def get_team_events(team_abbr: str):

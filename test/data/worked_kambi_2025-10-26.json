@@ -1,0 +1,1604 @@
+{
+  "out": [
+    {
+      "id": "1024875878",
+      "created_at": "2025-10-26T18:48:05.127726Z",
+      "updated_at": "2025-10-26T18:48:05.127737Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-26T17:00:00Z",
+      "home_team": "CIN Bengals",
+      "away_team": "NY Jets",
+      "offers": [
+        {
+          "event_id": "1024875878",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T18:12:53Z",
+          "bookmaker": "kambi",
+          "choice": "CIN Bengals",
+          "price": 1.94,
+          "point": -6.5
+        },
+        {
+          "event_id": "1024875878",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T18:12:53Z",
+          "bookmaker": "kambi",
+          "choice": "NY Jets",
+          "price": 1.88,
+          "point": 6.5
+        },
+        {
+          "event_id": "1024875878",
+          "offer_type": "h2h",
+          "last_update": "2025-10-21T13:41:31Z",
+          "bookmaker": "kambi",
+          "choice": "CIN Bengals",
+          "price": 1.33
+        },
+        {
+          "event_id": "1024875878",
+          "offer_type": "h2h",
+          "last_update": "2025-10-21T13:41:31Z",
+          "bookmaker": "kambi",
+          "choice": "NY Jets",
+          "price": 3.35
+        },
+        {
+          "event_id": "1024875878",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T18:12:53Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.92,
+          "point": 44.5
+        },
+        {
+          "event_id": "1024875878",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T18:12:53Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.9,
+          "point": 44.5
+        }
+      ]
+    },
+    {
+      "id": "1024875879",
+      "created_at": "2025-10-26T18:48:05.128111Z",
+      "updated_at": "2025-10-26T18:48:05.128120Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-26T17:00:00Z",
+      "home_team": "BAL Ravens",
+      "away_team": "CHI Bears",
+      "offers": [
+        {
+          "event_id": "1024875879",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T17:52:33Z",
+          "bookmaker": "kambi",
+          "choice": "BAL Ravens",
+          "price": 1.89,
+          "point": -1.5
+        },
+        {
+          "event_id": "1024875879",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T17:52:33Z",
+          "bookmaker": "kambi",
+          "choice": "CHI Bears",
+          "price": 1.93,
+          "point": 1.5
+        },
+        {
+          "event_id": "1024875879",
+          "offer_type": "h2h",
+          "last_update": "2025-10-25T17:20:30Z",
+          "bookmaker": "kambi",
+          "choice": "BAL Ravens",
+          "price": 1.72
+        },
+        {
+          "event_id": "1024875879",
+          "offer_type": "h2h",
+          "last_update": "2025-10-25T17:20:30Z",
+          "bookmaker": "kambi",
+          "choice": "CHI Bears",
+          "price": 2.16
+        },
+        {
+          "event_id": "1024875879",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T17:52:33Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.92,
+          "point": 44.5
+        },
+        {
+          "event_id": "1024875879",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T17:52:33Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.9,
+          "point": 44.5
+        }
+      ]
+    },
+    {
+      "id": "1024875877",
+      "created_at": "2025-10-26T18:48:05.128278Z",
+      "updated_at": "2025-10-26T18:48:05.128281Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-26T17:00:00Z",
+      "home_team": "ATL Falcons",
+      "away_team": "MIA Dolphins",
+      "offers": [
+        {
+          "event_id": "1024875877",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T18:54:00Z",
+          "bookmaker": "kambi",
+          "choice": "ATL Falcons",
+          "price": 1.94,
+          "point": -7.5
+        },
+        {
+          "event_id": "1024875877",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T18:54:00Z",
+          "bookmaker": "kambi",
+          "choice": "MIA Dolphins",
+          "price": 1.88,
+          "point": 7.5
+        },
+        {
+          "event_id": "1024875877",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T17:15:02Z",
+          "bookmaker": "kambi",
+          "choice": "ATL Falcons",
+          "price": 1.24
+        },
+        {
+          "event_id": "1024875877",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T17:15:02Z",
+          "bookmaker": "kambi",
+          "choice": "MIA Dolphins",
+          "price": 4.2
+        },
+        {
+          "event_id": "1024875877",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T18:54:00Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.9,
+          "point": 44.5
+        },
+        {
+          "event_id": "1024875877",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T18:54:00Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.92,
+          "point": 44.5
+        }
+      ]
+    },
+    {
+      "id": "1024875882",
+      "created_at": "2025-10-26T18:48:05.128378Z",
+      "updated_at": "2025-10-26T18:48:05.128381Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-26T17:00:00Z",
+      "home_team": "NE Patriots",
+      "away_team": "CLE Browns",
+      "offers": [
+        {
+          "event_id": "1024875882",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T14:06:02Z",
+          "bookmaker": "kambi",
+          "choice": "NE Patriots",
+          "price": 1.96,
+          "point": -7.0
+        },
+        {
+          "event_id": "1024875882",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T14:06:02Z",
+          "bookmaker": "kambi",
+          "choice": "CLE Browns",
+          "price": 1.86,
+          "point": 7.0
+        },
+        {
+          "event_id": "1024875882",
+          "offer_type": "h2h",
+          "last_update": "2025-10-23T12:55:54Z",
+          "bookmaker": "kambi",
+          "choice": "NE Patriots",
+          "price": 1.27
+        },
+        {
+          "event_id": "1024875882",
+          "offer_type": "h2h",
+          "last_update": "2025-10-23T12:55:54Z",
+          "bookmaker": "kambi",
+          "choice": "CLE Browns",
+          "price": 3.75
+        },
+        {
+          "event_id": "1024875882",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T14:06:02Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.9,
+          "point": 40.5
+        },
+        {
+          "event_id": "1024875882",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T14:06:02Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.92,
+          "point": 40.5
+        }
+      ]
+    },
+    {
+      "id": "1024875883",
+      "created_at": "2025-10-26T18:48:05.128494Z",
+      "updated_at": "2025-10-26T18:48:05.128497Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-26T17:00:00Z",
+      "home_team": "PHI Eagles",
+      "away_team": "NY Giants",
+      "offers": [
+        {
+          "event_id": "1024875883",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T16:00:01Z",
+          "bookmaker": "kambi",
+          "choice": "PHI Eagles",
+          "price": 1.97,
+          "point": -7.5
+        },
+        {
+          "event_id": "1024875883",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T16:00:01Z",
+          "bookmaker": "kambi",
+          "choice": "NY Giants",
+          "price": 1.85,
+          "point": 7.5
+        },
+        {
+          "event_id": "1024875883",
+          "offer_type": "h2h",
+          "last_update": "2025-10-24T13:01:14Z",
+          "bookmaker": "kambi",
+          "choice": "PHI Eagles",
+          "price": 1.27
+        },
+        {
+          "event_id": "1024875883",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T14:34:38Z",
+          "bookmaker": "kambi",
+          "choice": "NY Giants",
+          "price": 3.9
+        },
+        {
+          "event_id": "1024875883",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T16:00:01Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.88,
+          "point": 43.5
+        },
+        {
+          "event_id": "1024875883",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T16:00:01Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.94,
+          "point": 43.5
+        }
+      ]
+    },
+    {
+      "id": "1024875880",
+      "created_at": "2025-10-26T18:48:05.128591Z",
+      "updated_at": "2025-10-26T18:48:05.128594Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-26T17:00:00Z",
+      "home_team": "CAR Panthers",
+      "away_team": "BUF Bills",
+      "offers": [
+        {
+          "event_id": "1024875880",
+          "offer_type": "spreads",
+          "last_update": "2025-10-24T17:42:17Z",
+          "bookmaker": "kambi",
+          "choice": "CAR Panthers",
+          "price": 1.96,
+          "point": 7.0
+        },
+        {
+          "event_id": "1024875880",
+          "offer_type": "spreads",
+          "last_update": "2025-10-24T17:42:17Z",
+          "bookmaker": "kambi",
+          "choice": "BUF Bills",
+          "price": 1.86,
+          "point": -7.0
+        },
+        {
+          "event_id": "1024875880",
+          "offer_type": "h2h",
+          "last_update": "2025-10-21T22:20:54Z",
+          "bookmaker": "kambi",
+          "choice": "CAR Panthers",
+          "price": 4.0
+        },
+        {
+          "event_id": "1024875880",
+          "offer_type": "h2h",
+          "last_update": "2025-10-21T22:20:54Z",
+          "bookmaker": "kambi",
+          "choice": "BUF Bills",
+          "price": 1.26
+        },
+        {
+          "event_id": "1024875880",
+          "offer_type": "totals",
+          "last_update": "2025-10-24T17:42:17Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.91,
+          "point": 46.5
+        },
+        {
+          "event_id": "1024875880",
+          "offer_type": "totals",
+          "last_update": "2025-10-24T17:42:17Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.91,
+          "point": 46.5
+        }
+      ]
+    },
+    {
+      "id": "1024875881",
+      "created_at": "2025-10-26T18:48:05.128700Z",
+      "updated_at": "2025-10-26T18:48:05.128702Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-26T17:00:00Z",
+      "home_team": "HOU Texans",
+      "away_team": "SF 49ers",
+      "offers": [
+        {
+          "event_id": "1024875881",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T15:16:14Z",
+          "bookmaker": "kambi",
+          "choice": "HOU Texans",
+          "price": 1.91,
+          "point": -2.0
+        },
+        {
+          "event_id": "1024875881",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T15:16:14Z",
+          "bookmaker": "kambi",
+          "choice": "SF 49ers",
+          "price": 1.91,
+          "point": 2.0
+        },
+        {
+          "event_id": "1024875881",
+          "offer_type": "h2h",
+          "last_update": "2025-10-25T16:52:45Z",
+          "bookmaker": "kambi",
+          "choice": "HOU Texans",
+          "price": 1.74
+        },
+        {
+          "event_id": "1024875881",
+          "offer_type": "h2h",
+          "last_update": "2025-10-25T16:52:45Z",
+          "bookmaker": "kambi",
+          "choice": "SF 49ers",
+          "price": 2.12
+        },
+        {
+          "event_id": "1024875881",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T15:16:14Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.91,
+          "point": 42.0
+        },
+        {
+          "event_id": "1024875881",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T15:16:14Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.91,
+          "point": 42.0
+        }
+      ]
+    },
+    {
+      "id": "1024875885",
+      "created_at": "2025-10-26T18:48:05.128770Z",
+      "updated_at": "2025-10-26T18:48:05.128771Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-26T20:05:00Z",
+      "home_team": "NO Saints",
+      "away_team": "TB Buccaneers",
+      "offers": [
+        {
+          "event_id": "1024875885",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T05:54:42Z",
+          "bookmaker": "kambi",
+          "choice": "NO Saints",
+          "price": 1.92,
+          "point": 4.0
+        },
+        {
+          "event_id": "1024875885",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T05:54:42Z",
+          "bookmaker": "kambi",
+          "choice": "TB Buccaneers",
+          "price": 1.9,
+          "point": -4.0
+        },
+        {
+          "event_id": "1024875885",
+          "offer_type": "h2h",
+          "last_update": "2025-10-23T01:37:16Z",
+          "bookmaker": "kambi",
+          "choice": "NO Saints",
+          "price": 2.85
+        },
+        {
+          "event_id": "1024875885",
+          "offer_type": "h2h",
+          "last_update": "2025-10-24T13:25:02Z",
+          "bookmaker": "kambi",
+          "choice": "TB Buccaneers",
+          "price": 1.44
+        },
+        {
+          "event_id": "1024875885",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T05:54:42Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.9,
+          "point": 46.5
+        },
+        {
+          "event_id": "1024875885",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T05:54:42Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.92,
+          "point": 46.5
+        }
+      ]
+    },
+    {
+      "id": "1024875887",
+      "created_at": "2025-10-26T18:48:05.128800Z",
+      "updated_at": "2025-10-26T18:48:05.128801Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-26T20:25:00Z",
+      "home_team": "IND Colts",
+      "away_team": "TEN Titans",
+      "offers": [
+        {
+          "event_id": "1024875887",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T20:00:28Z",
+          "bookmaker": "kambi",
+          "choice": "IND Colts",
+          "price": 1.91,
+          "point": -15.0
+        },
+        {
+          "event_id": "1024875887",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T20:00:28Z",
+          "bookmaker": "kambi",
+          "choice": "TEN Titans",
+          "price": 1.91,
+          "point": 15.0
+        },
+        {
+          "event_id": "1024875887",
+          "offer_type": "h2h",
+          "last_update": "2025-10-25T20:00:53Z",
+          "bookmaker": "kambi",
+          "choice": "IND Colts",
+          "price": 1.07
+        },
+        {
+          "event_id": "1024875887",
+          "offer_type": "h2h",
+          "last_update": "2025-10-25T20:00:53Z",
+          "bookmaker": "kambi",
+          "choice": "TEN Titans",
+          "price": 9.0
+        },
+        {
+          "event_id": "1024875887",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T20:00:28Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.93,
+          "point": 47.5
+        },
+        {
+          "event_id": "1024875887",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T20:00:28Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.89,
+          "point": 47.5
+        }
+      ]
+    },
+    {
+      "id": "1024875884",
+      "created_at": "2025-10-26T18:48:05.128835Z",
+      "updated_at": "2025-10-26T18:48:05.128836Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-26T20:25:00Z",
+      "home_team": "DEN Broncos",
+      "away_team": "DAL Cowboys",
+      "offers": [
+        {
+          "event_id": "1024875884",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T22:23:24Z",
+          "bookmaker": "kambi",
+          "choice": "DEN Broncos",
+          "price": 1.83,
+          "point": -3.0
+        },
+        {
+          "event_id": "1024875884",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T22:23:24Z",
+          "bookmaker": "kambi",
+          "choice": "DAL Cowboys",
+          "price": 2.0,
+          "point": 3.0
+        },
+        {
+          "event_id": "1024875884",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T17:11:18Z",
+          "bookmaker": "kambi",
+          "choice": "DEN Broncos",
+          "price": 1.57
+        },
+        {
+          "event_id": "1024875884",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T17:11:18Z",
+          "bookmaker": "kambi",
+          "choice": "DAL Cowboys",
+          "price": 2.45
+        },
+        {
+          "event_id": "1024875884",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T22:23:24Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.9,
+          "point": 50.5
+        },
+        {
+          "event_id": "1024875884",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T22:23:24Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.92,
+          "point": 50.5
+        }
+      ]
+    },
+    {
+      "id": "1024875888",
+      "created_at": "2025-10-26T18:48:05.128869Z",
+      "updated_at": "2025-10-26T18:48:05.128870Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-27T00:20:00Z",
+      "home_team": "PIT Steelers",
+      "away_team": "GB Packers",
+      "offers": [
+        {
+          "event_id": "1024875888",
+          "offer_type": "spreads",
+          "last_update": "2025-10-24T18:43:00Z",
+          "bookmaker": "kambi",
+          "choice": "PIT Steelers",
+          "price": 1.87,
+          "point": 3.0
+        },
+        {
+          "event_id": "1024875888",
+          "offer_type": "spreads",
+          "last_update": "2025-10-24T18:43:00Z",
+          "bookmaker": "kambi",
+          "choice": "GB Packers",
+          "price": 1.95,
+          "point": -3.0
+        },
+        {
+          "event_id": "1024875888",
+          "offer_type": "h2h",
+          "last_update": "2025-10-24T16:16:14Z",
+          "bookmaker": "kambi",
+          "choice": "PIT Steelers",
+          "price": 2.35
+        },
+        {
+          "event_id": "1024875888",
+          "offer_type": "h2h",
+          "last_update": "2025-10-24T16:16:14Z",
+          "bookmaker": "kambi",
+          "choice": "GB Packers",
+          "price": 1.6
+        },
+        {
+          "event_id": "1024875888",
+          "offer_type": "totals",
+          "last_update": "2025-10-24T18:43:00Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.93,
+          "point": 45.5
+        },
+        {
+          "event_id": "1024875888",
+          "offer_type": "totals",
+          "last_update": "2025-10-24T18:43:00Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.89,
+          "point": 45.5
+        }
+      ]
+    },
+    {
+      "id": "1024875886",
+      "created_at": "2025-10-26T18:48:05.128903Z",
+      "updated_at": "2025-10-26T18:48:05.128904Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-10-28T00:15:00Z",
+      "home_team": "KC Chiefs",
+      "away_team": "WAS Commanders",
+      "offers": [
+        {
+          "event_id": "1024875886",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T08:17:46Z",
+          "bookmaker": "kambi",
+          "choice": "KC Chiefs",
+          "price": 1.9,
+          "point": -12.0
+        },
+        {
+          "event_id": "1024875886",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T08:17:46Z",
+          "bookmaker": "kambi",
+          "choice": "WAS Commanders",
+          "price": 1.92,
+          "point": 12.0
+        },
+        {
+          "event_id": "1024875886",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T16:47:47Z",
+          "bookmaker": "kambi",
+          "choice": "KC Chiefs",
+          "price": 1.13
+        },
+        {
+          "event_id": "1024875886",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T16:51:24Z",
+          "bookmaker": "kambi",
+          "choice": "WAS Commanders",
+          "price": 6.25
+        },
+        {
+          "event_id": "1024875886",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T08:17:46Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.9,
+          "point": 47.5
+        },
+        {
+          "event_id": "1024875886",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T08:17:46Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.92,
+          "point": 47.5
+        }
+      ]
+    },
+    {
+      "id": "1024875958",
+      "created_at": "2025-10-26T18:48:05.128936Z",
+      "updated_at": "2025-10-26T18:48:05.128937Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-02T18:00:00Z",
+      "home_team": "PIT Steelers",
+      "away_team": "IND Colts",
+      "offers": [
+        {
+          "event_id": "1024875958",
+          "offer_type": "spreads",
+          "last_update": "2025-10-23T18:53:05Z",
+          "bookmaker": "kambi",
+          "choice": "PIT Steelers",
+          "price": 1.95,
+          "point": 2.5
+        },
+        {
+          "event_id": "1024875958",
+          "offer_type": "spreads",
+          "last_update": "2025-10-23T18:53:05Z",
+          "bookmaker": "kambi",
+          "choice": "IND Colts",
+          "price": 1.87,
+          "point": -2.5
+        },
+        {
+          "event_id": "1024875958",
+          "offer_type": "h2h",
+          "last_update": "2025-10-23T18:53:05Z",
+          "bookmaker": "kambi",
+          "choice": "PIT Steelers",
+          "price": 2.16
+        },
+        {
+          "event_id": "1024875958",
+          "offer_type": "h2h",
+          "last_update": "2025-10-23T18:53:05Z",
+          "bookmaker": "kambi",
+          "choice": "IND Colts",
+          "price": 1.68
+        },
+        {
+          "event_id": "1024875958",
+          "offer_type": "totals",
+          "last_update": "2025-10-23T18:53:05Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.9,
+          "point": 47.5
+        },
+        {
+          "event_id": "1024875958",
+          "offer_type": "totals",
+          "last_update": "2025-10-23T18:53:05Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.92,
+          "point": 47.5
+        }
+      ]
+    },
+    {
+      "id": "1024875959",
+      "created_at": "2025-10-26T18:48:05.128968Z",
+      "updated_at": "2025-10-26T18:48:05.128969Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-02T18:00:00Z",
+      "home_team": "CIN Bengals",
+      "away_team": "CHI Bears",
+      "offers": [
+        {
+          "event_id": "1024875959",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:05:43Z",
+          "bookmaker": "kambi",
+          "choice": "CIN Bengals",
+          "price": 1.9,
+          "point": 1.5
+        },
+        {
+          "event_id": "1024875959",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:05:43Z",
+          "bookmaker": "kambi",
+          "choice": "CHI Bears",
+          "price": 1.92,
+          "point": -1.5
+        },
+        {
+          "event_id": "1024875959",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:05:43Z",
+          "bookmaker": "kambi",
+          "choice": "CIN Bengals",
+          "price": 2.02
+        },
+        {
+          "event_id": "1024875959",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:05:43Z",
+          "bookmaker": "kambi",
+          "choice": "CHI Bears",
+          "price": 1.81
+        },
+        {
+          "event_id": "1024875959",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:05:43Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.92,
+          "point": 47.5
+        },
+        {
+          "event_id": "1024875959",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:05:43Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.9,
+          "point": 47.5
+        }
+      ]
+    },
+    {
+      "id": "1024875954",
+      "created_at": "2025-10-26T18:48:05.129001Z",
+      "updated_at": "2025-10-26T18:48:05.129002Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-02T18:00:00Z",
+      "home_team": "GB Packers",
+      "away_team": "CAR Panthers",
+      "offers": [
+        {
+          "event_id": "1024875954",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:13:13Z",
+          "bookmaker": "kambi",
+          "choice": "GB Packers",
+          "price": 1.9,
+          "point": -10.5
+        },
+        {
+          "event_id": "1024875954",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:13:13Z",
+          "bookmaker": "kambi",
+          "choice": "CAR Panthers",
+          "price": 1.92,
+          "point": 10.5
+        },
+        {
+          "event_id": "1024875954",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:14:29Z",
+          "bookmaker": "kambi",
+          "choice": "GB Packers",
+          "price": 1.15
+        },
+        {
+          "event_id": "1024875954",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:14:29Z",
+          "bookmaker": "kambi",
+          "choice": "CAR Panthers",
+          "price": 5.75
+        },
+        {
+          "event_id": "1024875954",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:13:13Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.91,
+          "point": 44.0
+        },
+        {
+          "event_id": "1024875954",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:13:13Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.91,
+          "point": 44.0
+        }
+      ]
+    },
+    {
+      "id": "1024875952",
+      "created_at": "2025-10-26T18:48:05.129034Z",
+      "updated_at": "2025-10-26T18:48:05.129035Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-02T18:00:00Z",
+      "home_team": "TEN Titans",
+      "away_team": "LA Chargers",
+      "offers": [
+        {
+          "event_id": "1024875952",
+          "offer_type": "spreads",
+          "last_update": "2025-10-24T13:20:32Z",
+          "bookmaker": "kambi",
+          "choice": "TEN Titans",
+          "price": 1.91,
+          "point": 8.5
+        },
+        {
+          "event_id": "1024875952",
+          "offer_type": "spreads",
+          "last_update": "2025-10-24T13:20:32Z",
+          "bookmaker": "kambi",
+          "choice": "LA Chargers",
+          "price": 1.91,
+          "point": -8.5
+        },
+        {
+          "event_id": "1024875952",
+          "offer_type": "h2h",
+          "last_update": "2025-10-24T13:20:46Z",
+          "bookmaker": "kambi",
+          "choice": "TEN Titans",
+          "price": 4.65
+        },
+        {
+          "event_id": "1024875952",
+          "offer_type": "h2h",
+          "last_update": "2025-10-24T13:20:46Z",
+          "bookmaker": "kambi",
+          "choice": "LA Chargers",
+          "price": 1.2
+        },
+        {
+          "event_id": "1024875952",
+          "offer_type": "totals",
+          "last_update": "2025-10-24T13:20:32Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.9,
+          "point": 43.5
+        },
+        {
+          "event_id": "1024875952",
+          "offer_type": "totals",
+          "last_update": "2025-10-24T13:20:32Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.92,
+          "point": 43.5
+        }
+      ]
+    },
+    {
+      "id": "1024875953",
+      "created_at": "2025-10-26T18:48:05.129065Z",
+      "updated_at": "2025-10-26T18:48:05.129066Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-02T18:00:00Z",
+      "home_team": "NY Giants",
+      "away_team": "SF 49ers",
+      "offers": [
+        {
+          "event_id": "1024875953",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:23:19Z",
+          "bookmaker": "kambi",
+          "choice": "NY Giants",
+          "price": 1.92,
+          "point": 3.0
+        },
+        {
+          "event_id": "1024875953",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:23:19Z",
+          "bookmaker": "kambi",
+          "choice": "SF 49ers",
+          "price": 1.9,
+          "point": -3.0
+        },
+        {
+          "event_id": "1024875953",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:51:18Z",
+          "bookmaker": "kambi",
+          "choice": "NY Giants",
+          "price": 2.32
+        },
+        {
+          "event_id": "1024875953",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:51:24Z",
+          "bookmaker": "kambi",
+          "choice": "SF 49ers",
+          "price": 1.62
+        },
+        {
+          "event_id": "1024875953",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:23:19Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.91,
+          "point": 45.5
+        },
+        {
+          "event_id": "1024875953",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:23:19Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.91,
+          "point": 45.5
+        }
+      ]
+    },
+    {
+      "id": "1024875950",
+      "created_at": "2025-10-26T18:48:05.129114Z",
+      "updated_at": "2025-10-26T18:48:05.129115Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-02T18:00:00Z",
+      "home_team": "HOU Texans",
+      "away_team": "DEN Broncos",
+      "offers": [
+        {
+          "event_id": "1024875950",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T16:37:12Z",
+          "bookmaker": "kambi",
+          "choice": "HOU Texans",
+          "price": 1.93,
+          "point": 1.0
+        },
+        {
+          "event_id": "1024875950",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T16:37:12Z",
+          "bookmaker": "kambi",
+          "choice": "DEN Broncos",
+          "price": 1.89,
+          "point": -1.0
+        },
+        {
+          "event_id": "1024875950",
+          "offer_type": "h2h",
+          "last_update": "2025-10-25T16:37:12Z",
+          "bookmaker": "kambi",
+          "choice": "HOU Texans",
+          "price": 2.0
+        },
+        {
+          "event_id": "1024875950",
+          "offer_type": "h2h",
+          "last_update": "2025-10-25T16:37:12Z",
+          "bookmaker": "kambi",
+          "choice": "DEN Broncos",
+          "price": 1.83
+        },
+        {
+          "event_id": "1024875950",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T16:37:12Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.91,
+          "point": 39.0
+        },
+        {
+          "event_id": "1024875950",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T16:37:12Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.91,
+          "point": 39.0
+        }
+      ]
+    },
+    {
+      "id": "1024875949",
+      "created_at": "2025-10-26T18:48:05.129148Z",
+      "updated_at": "2025-10-26T18:48:05.129149Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-02T18:00:00Z",
+      "home_team": "NE Patriots",
+      "away_team": "ATL Falcons",
+      "offers": [
+        {
+          "event_id": "1024875949",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:20:01Z",
+          "bookmaker": "kambi",
+          "choice": "NE Patriots",
+          "price": 1.95,
+          "point": -3.0
+        },
+        {
+          "event_id": "1024875949",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:20:01Z",
+          "bookmaker": "kambi",
+          "choice": "ATL Falcons",
+          "price": 1.87,
+          "point": 3.0
+        },
+        {
+          "event_id": "1024875949",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:50:51Z",
+          "bookmaker": "kambi",
+          "choice": "NE Patriots",
+          "price": 1.65
+        },
+        {
+          "event_id": "1024875949",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:50:47Z",
+          "bookmaker": "kambi",
+          "choice": "ATL Falcons",
+          "price": 2.28
+        },
+        {
+          "event_id": "1024875949",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:20:01Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.91,
+          "point": 45.0
+        },
+        {
+          "event_id": "1024875949",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:20:01Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.91,
+          "point": 45.0
+        }
+      ]
+    },
+    {
+      "id": "1024875947",
+      "created_at": "2025-10-26T18:48:05.129181Z",
+      "updated_at": "2025-10-26T18:48:05.129181Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-02T18:00:00Z",
+      "home_team": "DET Lions",
+      "away_team": "MIN Vikings",
+      "offers": [
+        {
+          "event_id": "1024875947",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T22:22:28Z",
+          "bookmaker": "kambi",
+          "choice": "DET Lions",
+          "price": 1.92,
+          "point": -9.0
+        },
+        {
+          "event_id": "1024875947",
+          "offer_type": "spreads",
+          "last_update": "2025-10-25T22:22:28Z",
+          "bookmaker": "kambi",
+          "choice": "MIN Vikings",
+          "price": 1.9,
+          "point": 9.0
+        },
+        {
+          "event_id": "1024875947",
+          "offer_type": "h2h",
+          "last_update": "2025-10-24T13:20:14Z",
+          "bookmaker": "kambi",
+          "choice": "DET Lions",
+          "price": 1.21
+        },
+        {
+          "event_id": "1024875947",
+          "offer_type": "h2h",
+          "last_update": "2025-10-24T13:20:14Z",
+          "bookmaker": "kambi",
+          "choice": "MIN Vikings",
+          "price": 4.5
+        },
+        {
+          "event_id": "1024875947",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T22:22:28Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.92,
+          "point": 47.5
+        },
+        {
+          "event_id": "1024875947",
+          "offer_type": "totals",
+          "last_update": "2025-10-25T22:22:28Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.9,
+          "point": 47.5
+        }
+      ]
+    },
+    {
+      "id": "1024875957",
+      "created_at": "2025-10-26T18:48:05.129218Z",
+      "updated_at": "2025-10-26T18:48:05.129218Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-02T21:05:00Z",
+      "home_team": "LV Raiders",
+      "away_team": "JAX Jaguars",
+      "offers": [
+        {
+          "event_id": "1024875957",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:32:37Z",
+          "bookmaker": "kambi",
+          "choice": "LV Raiders",
+          "price": 1.95,
+          "point": 3.0
+        },
+        {
+          "event_id": "1024875957",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:32:37Z",
+          "bookmaker": "kambi",
+          "choice": "JAX Jaguars",
+          "price": 1.87,
+          "point": -3.0
+        },
+        {
+          "event_id": "1024875957",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:33:09Z",
+          "bookmaker": "kambi",
+          "choice": "LV Raiders",
+          "price": 2.38
+        },
+        {
+          "event_id": "1024875957",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:33:09Z",
+          "bookmaker": "kambi",
+          "choice": "JAX Jaguars",
+          "price": 1.6
+        },
+        {
+          "event_id": "1024875957",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:32:37Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.9,
+          "point": 43.5
+        },
+        {
+          "event_id": "1024875957",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:32:37Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.92,
+          "point": 43.5
+        }
+      ]
+    },
+    {
+      "id": "1024875951",
+      "created_at": "2025-10-26T18:48:05.129251Z",
+      "updated_at": "2025-10-26T18:48:05.129251Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-02T21:05:00Z",
+      "home_team": "LA Rams",
+      "away_team": "NO Saints",
+      "offers": [
+        {
+          "event_id": "1024875951",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:37:55Z",
+          "bookmaker": "kambi",
+          "choice": "LA Rams",
+          "price": 1.9,
+          "point": -11.5
+        },
+        {
+          "event_id": "1024875951",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:37:55Z",
+          "bookmaker": "kambi",
+          "choice": "NO Saints",
+          "price": 1.92,
+          "point": 11.5
+        },
+        {
+          "event_id": "1024875951",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:38:07Z",
+          "bookmaker": "kambi",
+          "choice": "LA Rams",
+          "price": 1.13
+        },
+        {
+          "event_id": "1024875951",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:38:07Z",
+          "bookmaker": "kambi",
+          "choice": "NO Saints",
+          "price": 6.25
+        },
+        {
+          "event_id": "1024875951",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:37:55Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.92,
+          "point": 45.5
+        },
+        {
+          "event_id": "1024875951",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:37:55Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.9,
+          "point": 45.5
+        }
+      ]
+    },
+    {
+      "id": "1024875955",
+      "created_at": "2025-10-26T18:48:05.129284Z",
+      "updated_at": "2025-10-26T18:48:05.129285Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-02T21:25:00Z",
+      "home_team": "BUF Bills",
+      "away_team": "KC Chiefs",
+      "offers": [
+        {
+          "event_id": "1024875955",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:55:52Z",
+          "bookmaker": "kambi",
+          "choice": "BUF Bills",
+          "price": 1.91,
+          "point": 1.5
+        },
+        {
+          "event_id": "1024875955",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:55:52Z",
+          "bookmaker": "kambi",
+          "choice": "KC Chiefs",
+          "price": 1.91,
+          "point": -1.5
+        },
+        {
+          "event_id": "1024875955",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:55:52Z",
+          "bookmaker": "kambi",
+          "choice": "BUF Bills",
+          "price": 2.02
+        },
+        {
+          "event_id": "1024875955",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:55:52Z",
+          "bookmaker": "kambi",
+          "choice": "KC Chiefs",
+          "price": 1.81
+        },
+        {
+          "event_id": "1024875955",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:55:52Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.9,
+          "point": 50.5
+        },
+        {
+          "event_id": "1024875955",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:55:52Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.92,
+          "point": 50.5
+        }
+      ]
+    },
+    {
+      "id": "1024875956",
+      "created_at": "2025-10-26T18:48:05.129337Z",
+      "updated_at": "2025-10-26T18:48:05.129339Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-03T01:20:00Z",
+      "home_team": "WAS Commanders",
+      "away_team": "SEA Seahawks",
+      "offers": [
+        {
+          "event_id": "1024875956",
+          "offer_type": "spreads",
+          "last_update": "2025-10-23T18:32:37Z",
+          "bookmaker": "kambi",
+          "choice": "WAS Commanders",
+          "price": 1.86,
+          "point": 3.0
+        },
+        {
+          "event_id": "1024875956",
+          "offer_type": "spreads",
+          "last_update": "2025-10-23T18:32:37Z",
+          "bookmaker": "kambi",
+          "choice": "SEA Seahawks",
+          "price": 1.96,
+          "point": -3.0
+        },
+        {
+          "event_id": "1024875956",
+          "offer_type": "h2h",
+          "last_update": "2025-10-23T18:33:06Z",
+          "bookmaker": "kambi",
+          "choice": "WAS Commanders",
+          "price": 2.3
+        },
+        {
+          "event_id": "1024875956",
+          "offer_type": "h2h",
+          "last_update": "2025-10-23T18:33:06Z",
+          "bookmaker": "kambi",
+          "choice": "SEA Seahawks",
+          "price": 1.63
+        },
+        {
+          "event_id": "1024875956",
+          "offer_type": "totals",
+          "last_update": "2025-10-23T18:32:37Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.92,
+          "point": 46.5
+        },
+        {
+          "event_id": "1024875956",
+          "offer_type": "totals",
+          "last_update": "2025-10-23T18:32:37Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.9,
+          "point": 46.5
+        }
+      ]
+    },
+    {
+      "id": "1024875960",
+      "created_at": "2025-10-26T18:48:05.129436Z",
+      "updated_at": "2025-10-26T18:48:05.129439Z",
+      "sport_key": "american_football_nfl",
+      "sport_title": "NFL",
+      "commence_time": "2025-11-04T01:15:00Z",
+      "home_team": "DAL Cowboys",
+      "away_team": "ARI Cardinals",
+      "offers": [
+        {
+          "event_id": "1024875960",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:45:28Z",
+          "bookmaker": "kambi",
+          "choice": "DAL Cowboys",
+          "price": 1.86,
+          "point": -3.0
+        },
+        {
+          "event_id": "1024875960",
+          "offer_type": "spreads",
+          "last_update": "2025-10-22T19:45:28Z",
+          "bookmaker": "kambi",
+          "choice": "ARI Cardinals",
+          "price": 1.96,
+          "point": 3.0
+        },
+        {
+          "event_id": "1024875960",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:45:36Z",
+          "bookmaker": "kambi",
+          "choice": "DAL Cowboys",
+          "price": 1.58
+        },
+        {
+          "event_id": "1024875960",
+          "offer_type": "h2h",
+          "last_update": "2025-10-22T19:45:36Z",
+          "bookmaker": "kambi",
+          "choice": "ARI Cardinals",
+          "price": 2.4
+        },
+        {
+          "event_id": "1024875960",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:45:28Z",
+          "bookmaker": "kambi",
+          "choice": "Over",
+          "price": 1.9,
+          "point": 51.0
+        },
+        {
+          "event_id": "1024875960",
+          "offer_type": "totals",
+          "last_update": "2025-10-22T19:45:28Z",
+          "bookmaker": "kambi",
+          "choice": "Under",
+          "price": 1.92,
+          "point": 51.0
+        }
+      ]
+    }
+  ]
+}

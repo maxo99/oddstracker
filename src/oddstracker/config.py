@@ -14,7 +14,7 @@ else:
 
 load_dotenv(ROOT_DIR)
 
-DATA_DIR = os.path.join(ROOT_DIR, "data")
+DATA_DIR = os.getenv("DATA_DIR", os.path.join(ROOT_DIR, "data"))
 APP_PORT = int(os.getenv("APP_PORT", 8080))
 
 ## Logging settings
@@ -29,8 +29,10 @@ logging.basicConfig(level=LOG_LEVEL)
 POSTGRES_USER = os.getenv("POSTGRES_USER", "postgres")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "postgres")
 POSTGRES_HOST = os.getenv("POSTGRES_HOST", "localhost")
-POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5444")
+POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
 POSTGRES_DB = os.getenv("POSTGRES_DB", "oddstracker")
+
+TOA_API_KEY = os.environ.get("THEODDSAPI_KEY")
 
 
 def get_pg_url(db: str | None = None) -> str:

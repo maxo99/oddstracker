@@ -1,46 +1,74 @@
+from abc import ABC, abstractmethod
+
 from pydantic import BaseModel
 
-PROVIDERS = [
+from oddstracker.config import TOA_API_KEY
+
+KAMBI_PROVIDERS = [
     {
+        "provider_key": "kambi",
         "sportsbook": "ilani Casino",
         "site_code": "ilaniuswarl",
         "site_specials_name": "ilani",
+        "base_url": "https://eu-offering-api.kambicdn.com/offering/v2018/ilaniuswarl",
     },
     # {
+    # 'provider_key': 'kambi-barstool',
     #     "sportsbook": "Barstool",
     #     "site_code": "pivuspa",
     #     "site_specials_name": "barstool",
     # },
     # {
+    # 'provider_key': 'kambi-draftkings',
     #     "sportsbook": "DraftKings",
     #     "site_code": "rsiuspa",
     #     "site_specials_name": "draftkings",
     # },
 ]
 
+TOA_PROVIDERS = [
+    {
 
-class KambiProvider(BaseModel):
+    }
+]
+
+
+
+class Provider(BaseModel, ABC):
+    provider_key: str
+
+
+    @abstractmethod
+    def get_url(self, *args, **kwargs) -> str:
+        raise NotImplementedError
+
+    @abstractmethod
+    def qparams(self, *args, **kwargs) -> dict:
+        raise NotImplementedError
+
+    def __str__(self) -> str:
+        return f"Provider({self.provider_key})"
+
+
+class KambiProvider(Provider):
+    provider_key: str = "kambi"
     sportsbook: str
     site_code: str
     site_specials_name: str
-    base_url: str | None = None
-    ncaa_url: str = ""
-    nfl_url: str = ""
-    sport: str = "american_football"
+    base_url: str
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-        self.base_url = (
-            f"https://eu-offering-api.kambicdn.com/offering/v2018/{self.site_code}"
-        )
-        self.ncaa_url = (
-            f"{self.base_url}/listView/{self.sport}/ncaaf/all/all/matches.json"
-        )
-
-        self.nfl_url = f"{self.base_url}/listView/{self.sport}/nfl/all/all/matches.json"
-
-        # return self
+    def get_url(self, league: str, event_id: str | None = None) -> str:
+        if event_id:
+            return f"{self.base_url}/betoffer/event/{event_id}.json"
+        if league == "nfl":
+            return (
+                f"{self.base_url}/listView/american_football/nfl/all/all/matches.json"
+            )
+        if league == "ncaaf":
+            return (
+                f"{self.base_url}/listView/american_football/ncaaf/all/all/matches.json"
+            )
+        raise ValueError(f"Unsupported league: {league}")
 
     def qparams(self, props: bool = False) -> dict:
         if props:
@@ -59,8 +87,27 @@ class KambiProvider(BaseModel):
             # range_size = list("0")
         }
 
-    def get_player_props_url(self, event_id: str) -> str:
-        return f"{self.base_url}/betoffer/event/{event_id}.json"
 
+class TheOddsAPIProvider(Provider):
+    ## https://github.com/the-odds-api/samples-python/blob/master/odds.py
+    ## https://the-odds-api.com/liveapi/guides/v4/
+    provider_key: str = "theoddsapi"
+    sportsbook: str = "TheOddsAPI"
+    site_code: str = "theoddsapi"
 
-PROVIDER = KambiProvider(**PROVIDERS[0])
+    def get_url(self, league: str) -> str:
+        if league == 'nfl':
+            return "https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds"
+        raise ValueError
+
+    def qparams(self):
+        ODDS_FORMAT = "decimal"
+        REGIONS = "us2"
+        MARKETS = "h2h,spreads,totals"
+        return {
+            "api_key": TOA_API_KEY,
+            "regions": REGIONS,
+            "markets": MARKETS,
+            "oddsFormat": ODDS_FORMAT,
+            "dateFormat": "iso",
+        }

@@ -36,7 +36,7 @@ async def get_all_changes():
     changes_by_event = []
 
     for event in events:
-        logger.info(f"Processing changes for event {event.id}: {event.name}")
+        logger.info(f"Processing changes for event {event}")
         bet_offers = await PG_CLIENT.get_bet_offers_for_event(event.id)
 
         unique_bet_offer_ids = list({bo.id for bo in bet_offers})
