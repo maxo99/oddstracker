@@ -29,7 +29,54 @@ TEARDOWN = False
 
 @lru_cache
 def get_sample_events(provider_key: str) -> list[dict] | dict:
-    return load_json(provider_key, "raw")
+    return load_json(provider_key, "sample-raw")
+
+
+class _MockResponse:
+
+    def __init__(self, payload: Any, *, status_code: int = 200, headers: dict[str, str] | None = None) -> None:
+        self._payload = payload
+        self.status_code = status_code
+        self.headers = headers or {}
+        self.text = json.dumps(payload)
+
+    def json(self) -> Any:
+        return self._payload
+
+
+@pytest.fixture
+def mock_betting_data_requests(mocker) -> Any:
+    sample_payloads = {
+        "kambi": get_sample_events("kambi"),
+        "theoddsapi": get_sample_events("theoddsapi"),
+    }
+
+    def _get_response(provider_key: str, params: dict[str, Any]) -> Any:
+        return sample_payloads[provider_key]
+
+    def resolve_provider_key(url: str) -> str:
+        if "kambicdn" in url:
+            return "kambi"
+        if "the-odds-api" in url or "theoddsapi" in url:
+            return "theoddsapi"
+        raise ValueError(f"Unsupported provider URL: {url}")
+
+    def fake_requests_get(url: str, params: dict[str, Any] | None = None, **_: Any) -> _MockResponse:
+        provider_key = resolve_provider_key(url)
+        response_payload = _get_response(provider_key, params or {})
+        headers: dict[str, str] = {}
+        if provider_key == "theoddsapi":
+            headers = {
+                "x-requests-last": "0",
+                "x-requests-remaining": "100",
+                "x-requests-used": "0",
+            }
+        return _MockResponse(response_payload, headers=headers)
+
+    return mocker.patch(
+        "oddstracker.service.oddscollector.requests.get",
+        side_effect=fake_requests_get,
+    )
 
 
 @pytest.fixture(scope="session")

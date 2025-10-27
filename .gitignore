@@ -10,4 +10,5 @@ wheels/
 .venv
 /data/
 .env
+!test/data/sample*.json
 test/data/worked_*.json
