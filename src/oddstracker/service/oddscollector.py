@@ -2,10 +2,8 @@ import logging
 
 import requests
 
-from oddstracker.domain.model.converter import convert_to_sportsbetting_info
-from oddstracker.domain.model.sportsbetting import (
-    SportsBettingInfo,
-)
+from oddstracker.domain.model.converter import convert_to_sportevents
+from oddstracker.domain.model.sportevent import SportEventData
 from oddstracker.domain.providers import (
     KAMBI_PROVIDERS,
     KambiProvider,
@@ -29,9 +27,9 @@ async def collect_and_store_bettingdata(
 
     count = 0
     if db_store:
-        _bets_data = convert_to_sportsbetting_info(provider_key, _raw_data)
-        await store_sports_betting_info(_bets_data)
-        count = len(_bets_data)
+        _sportevents = convert_to_sportevents(provider_key, _raw_data)
+        await store_sports_betting_info(_sportevents)
+        count = len(_sportevents)
 
     return {"status": "collected", "events": count}
 
@@ -57,16 +55,16 @@ def fetch_sports_betting_data(provider: Provider, league: str) -> dict:
     return data
 
 
-async def store_sports_betting_info(data: list[SportsBettingInfo]) -> None:
-    logger.info(f"Storing {len(data)} events to DB")
-    for kdata in data:
+async def store_sports_betting_info(sportevents: list[SportEventData]) -> None:
+    logger.info(f"Storing {len(sportevents)} events to DB")
+    for _event in sportevents:
         try:
-            logger.info(f"Processing event: {kdata}")
-            await PG_CLIENT.add_event_and_betoffers(kdata.event, kdata.betOffers)
-            logger.info(f"Stored: {kdata}")
+            logger.info(f"Processing event: {_event}")
+            await PG_CLIENT.add_sporteventdata(_event)
+            logger.info(f"Stored: {_event}")
         except Exception as ex:
             logger.error(ex)
-    logger.info(f"Processed {len(data)} events to DB")
+    logger.info(f"Processed {len(sportevents)} events to DB")
 
 
 def get_provider(provider_key: str) -> Provider:

@@ -82,7 +82,7 @@ class TeamData(SQLModel, table=True):
     participant_name: str | None = Field(
         default=None, description="Kambi participant name mapping"
     )
-    participant_id: str | None = Field(
+    participant_id: int | None = Field(
         default=None, description="Kambi participant ID mapping"
     )
 

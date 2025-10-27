@@ -6,7 +6,7 @@ import pydantic
 
 from oddstracker.config import DATA_DIR
 
-BET_OFFER_TYPES = ["match", "handicap", "overunder"]
+BET_OFFER_TYPES = ["h2h", "totals", "spreads"]
 
 
 class JsonEncoder(json.JSONEncoder):

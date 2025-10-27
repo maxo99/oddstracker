@@ -4,6 +4,7 @@ from oddstracker.service.oddscollector import collect_and_store_bettingdata
 
 
 @pytest.mark.asyncio
+@pytest.mark.skip(reason="Integration test that requires external API access")
 async def test_odds_collector(postgres_client):
     # starting_count = len(await postgres_client.get_events())
 

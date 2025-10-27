@@ -2,6 +2,8 @@ import logging
 
 import pytest
 
+from oddstracker.domain.model.converter import convert_to_sportevents
+from test.oddstracker.conftest import get_sample_events
 
 logger = logging.getLogger(__name__)
 
@@ -17,44 +19,37 @@ async def test_connection(postgres_client):
 
 
 @pytest.mark.asyncio
-async def test_event_store_retrieve(sample_events, postgres_client):
-    TEST_LIMIT = 5
-    sample_events = sample_events[:TEST_LIMIT]
-    for i, e in enumerate(sample_events):
-        logger.info(f"Adding event:{i} {e['event']['englishName']}")
-        try:
-            kdata = SportsBettingInfo(**e)
-            await postgres_client.add_event_and_betoffers(kdata.event, kdata.betOffers)
-        except Exception as ex:
-            logger.error(f"Failed to parse event: {e['event']['englishName']}")
-            raise ex
-    for i, e in enumerate(sample_events):
-        logger.info(f"Retrieving event:{i} {e['event']['englishName']}")
-        retrieved = await postgres_client.get_event(e["event"]["id"])
+async def test_teams_loading(postgres_client):
+    from oddstracker.service.teamprofiler import get_teams
+
+    teams = await get_teams()
+    assert isinstance(teams, list)
+    assert len(teams) > 0
+    for team in teams:
+        assert team.participant_id is not None
+        assert team.participant_name is not None
+        assert team.team_abbr is not None
+        assert team.team_name is not None
+        assert team.team_division is not None
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("provider_key", ["kambi", "theoddsapi"])
+async def test_db_store_retrieve(provider_key, postgres_client):
+    try:
+        print(f"Testing load_json for provider: {provider_key}")
+        loaded_data = get_sample_events(provider_key)
+        assert loaded_data
+        _sporteventdata = convert_to_sportevents(provider_key, loaded_data)[0]
+        await postgres_client.add_sporteventdata(_sporteventdata)
+        assert _sporteventdata
+
+        retrieved = await postgres_client.get_sportevent(_sporteventdata.event.id)
         assert retrieved is not None
-        betoffers = await postgres_client.get_bet_offers_for_event(e["event"]["id"])
-        assert len(betoffers) >= len(e.get("betOffers", []))
-    assert True
+        event_offers = await postgres_client.get_eventoffers_for_sportevent(
+            _sporteventdata.event.id
+        )
+        assert len(event_offers) >= len(_sporteventdata.offers)
 
-
-
-
-# def test_get_bet_offers_for_event(sample_events, postgres_client):
-#     e = sample_events[0]
-#     event = KambiEvent(**e["event"])
-#     bet_offers = e.get("betOffers", [])
-#     postgres_client.add_event(event, bet_offers)
-#     assert isinstance(event, KambiEvent)
-#     assert event.be
-#     for i, e in enumerate(sample_events):
-#         logger.info(f"Parsing event:{i} {e['event']['englishName']}")
-#         try:
-#         except Exception as ex:
-#             logger.error(f"Failed to parse event: {e['event']['englishName']}")
-#             raise ex
-#     assert True
-#     logger.info(f"Parsed {len(sample_events)} events")
-#     events = postgres_client.get_events()
-#     assert len(events) == len(sample_events)
-
-
+    except Exception as e:
+        raise e

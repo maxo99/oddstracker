@@ -2,50 +2,41 @@
 
 
 ###
-@EVENT_ID = 1024874548
+#
+#
+#
 @BASE_URL = http://localhost:{{ $dotenv APP_PORT }}
-
 # Health Check
 GET {{BASE_URL}}/
-
 ###
-
 # Test Prometheus Endpoint
 GET {{BASE_URL}}/metrics
-
-
 ###
-
 # Get docs
 GET {{BASE_URL}}/docs
-
-
-
 ###
-
 # Get docs
 GET {{BASE_URL}}/openapi.json
-
-
-
+#
+#
+#
+#
+#
+#
+@EVENT_ID = 1024875948
 ###
-
+#
 # Collect Odds Data
 POST {{BASE_URL}}/collect
-
-
 
 ###
 
 # Get all Events
 GET {{BASE_URL}}/events/
 
-
 ###
 # Get a specific Event by ID
 GET {{BASE_URL}}/event/{{EVENT_ID}}
-
-
 
 ###
 # Get teams
@@ -57,11 +48,13 @@ GET {{BASE_URL}}/teams
 # Get team events
 GET {{BASE_URL}}/team/KC/events
 
-
+###
+# Get a specific Event by ID
+GET {{BASE_URL}}/event/{{EVENT_ID}}
 
 ###
 # Get a specific Event by ID
-GET {{BASE_URL}}/event/{{EVENT_ID}}/offers
+GET {{BASE_URL}}/event/{{EVENT_ID}}/offer/h2h
 
 
 ###

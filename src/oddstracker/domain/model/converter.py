@@ -1,6 +1,6 @@
 import logging
 
-from oddstracker.domain.model.sportsbetting2 import SportsEvent
+from oddstracker.domain.model.sportevent import SportEvent, SportEventData
 
 _names = ["h2h", "spreads", "totals"]
 
@@ -22,7 +22,7 @@ def _map_team_name(input):
     return input
 
 
-def transform_kambi_event(_input: dict):
+def transform_kambi_event(_input: dict) -> SportEventData:
     try:
         _input.update(**_input.pop("event"))
         _input["id"] = str(_input["id"])
@@ -62,13 +62,12 @@ def transform_kambi_event(_input: dict):
                     _offer["point"] = o["line"] / 1000
                 offers.append(_offer)
 
-        _input["offers"] = offers
-        return SportsEvent(**_input)
+        return SportEventData(event=SportEvent(**_input), offers=offers)
     except Exception as e:
         raise e
 
 
-def transform_theoddsapi_event(_input: dict):
+def transform_theoddsapi_event(_input: dict) -> SportEventData:
     try:
         offers = []
         for bm in _input.pop("bookmakers", []):
@@ -83,16 +82,15 @@ def transform_theoddsapi_event(_input: dict):
                         'price': outcome["price"],
                     }
                     offers.append(outcome)
-        _input["offers"] = offers
-        return SportsEvent(**_input)
+        return SportEventData(event=SportEvent(**_input), offers=offers)
     except Exception as e:
         raise e
 
 
-def convert_to_sportsbetting_info(
+def convert_to_sportevents(
     provider_key: str,
     data: dict | list[dict],
-) -> list[SportsEvent]:
+) -> list[SportEventData]:
     out = []
     try:
         if provider_key == "theoddsapi":
@@ -101,6 +99,6 @@ def convert_to_sportsbetting_info(
             out.extend(transform_kambi_event(data) for data in data["events"])
         return out
     except Exception as ex:
-        logger.error("Failed to parse sportsbettinginfo")
+        logger.error("Failed to parse sporteventdatas")
         raise ex
     return out

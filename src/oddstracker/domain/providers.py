@@ -13,13 +13,13 @@ KAMBI_PROVIDERS = [
         "base_url": "https://eu-offering-api.kambicdn.com/offering/v2018/ilaniuswarl",
     },
     # {
-    # 'provider_key': 'kambi-cdn',
+    # 'provider_key': 'kambi-barstool',
     #     "sportsbook": "Barstool",
     #     "site_code": "pivuspa",
     #     "site_specials_name": "barstool",
     # },
     # {
-    # 'provider_key': 'kambi-cdn',
+    # 'provider_key': 'kambi-draftkings',
     #     "sportsbook": "DraftKings",
     #     "site_code": "rsiuspa",
     #     "site_specials_name": "draftkings",
@@ -51,7 +51,7 @@ class Provider(BaseModel, ABC):
 
 
 class KambiProvider(Provider):
-    provider_key: str = "kambi-cdn"
+    provider_key: str = "kambi"
     sportsbook: str
     site_code: str
     site_specials_name: str

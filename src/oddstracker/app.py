@@ -59,28 +59,28 @@ def health():
 
 
 @app.post("/collect")
-async def collect():
-    return await collect_and_store_bettingdata()
+async def collect(provider_key='kambi',league='nfl'):
+    return await collect_and_store_bettingdata(provider_key=provider_key,league=league)
 
 
 @app.get("/events", response_model_exclude_none=True)
-async def events():
+async def sportevents():
     return await get_events()
 
 
 @app.get("/event/{event_id}", response_model_exclude_none=True)
-async def event(event_id: int):
+async def sportevent(event_id: str):
     return await get_event(event_id)
 
 
-@app.get("/event/{event_id}/offers/{offer}", response_model_exclude_none=True)
-async def event_offer(event_id: int, offer: str):
-    return await get_event_offer(event_id, offer=validate_betoffer_type(offer))
+@app.get("/event/{event_id}/offer/{offer_type}", response_model_exclude_none=True)
+async def eventoffer(event_id: str, offer_type: str, range: bool = False):
+    return await get_bet_offers(event_id, offer_type=validate_betoffer_type(offer_type), range_query=range)
 
 
-@app.get("/event/{event_id}/offers", response_model_exclude_none=True)
-async def bet_offers(event_id: int, range: bool = False):
-    return await get_bet_offers(event_id, range_query=range)
+# @app.get("/event/{event_id}/offers", response_model_exclude_none=True)
+# async def bet_offers(event_id: int:
+#     return await get_bet_offers(event_id, range_query=range)
 
 
 @app.get("/changes", response_model_exclude_none=True)
