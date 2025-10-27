@@ -140,7 +140,12 @@ class PostgresClient:
             logger.error(f"Error getting events: {e}")
             raise e
 
-    async def get_sporteventdata(self, event_id: str) -> SportEventData | None:
+    async def get_sporteventdata(
+        self,
+        event_id: str,
+        offer_type: str = "all",
+        first_last: bool = False,
+    ) -> SportEventData | None:
         try:
             logger.info(f"Fetching event with ID {event_id}")
             async with self.session_maker() as session:
@@ -148,7 +153,21 @@ class PostgresClient:
                 if event is None:
                     return None
 
-                offers = await self._fetch_eventoffers_for_sportevent(session, event_id)
+                if offer_type == "all":
+                    offers = await self._fetch_eventoffers_for_sportevent(
+                        session,
+                        event_id,
+                        first_last=first_last,
+                    )
+                elif offer_type:
+                    offers = await self._fetch_eventoffers_for_sportevent(
+                        session,
+                        event_id,
+                        offer_type=offer_type,
+                        first_last=first_last,
+                    )
+                else:
+                    offers = []
                 return SportEventData(event=event, offers=offers)
 
         except Exception as e:
@@ -156,18 +175,18 @@ class PostgresClient:
             raise e
 
     async def get_eventoffers_for_sportevent(
-        self, event_id: int, offer_type: str | None = None, range_query: bool = False
+        self, event_id: int, offer_type: str | None = None, first_last: bool = False
     ) -> list[EventOffer]:
         try:
             logger.info(
-                f"Fetching eventoffers for event ID {event_id} (range={range_query})"
+                f"Fetching eventoffers for event ID {event_id} (range={first_last})"
             )
             async with self.session_maker() as session:
                 return await self._fetch_eventoffers_for_sportevent(
                     session,
                     event_id,
                     offer_type=offer_type,
-                    range_query=range_query,
+                    first_last=first_last,
                 )
         except Exception as e:
             logger.error(f"Error getting eventoffers for event {event_id}: {e}")
@@ -178,10 +197,10 @@ class PostgresClient:
         session: AsyncSession,
         event_id: int,
         offer_type: str | None = None,
-        range_query: bool = False,
+        first_last: bool = False,
     ) -> list[EventOffer]:
         try:
-            if range_query:
+            if first_last:
                 result = await session.execute(
                     text(
                         "SELECT DISTINCT ON (id) * FROM betoffer "

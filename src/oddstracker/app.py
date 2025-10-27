@@ -12,7 +12,6 @@ from oddstracker.service.oddscollector import collect_and_store_bettingdata
 from oddstracker.service.oddsretriever import (
     get_bet_offers,
     get_event,
-    get_event_offer,
     get_events,
 )
 from oddstracker.service.teamprofiler import (
@@ -63,7 +62,7 @@ async def collect(provider_key='kambi',league='nfl'):
     return await collect_and_store_bettingdata(provider_key=provider_key,league=league)
 
 
-@app.get("/events", response_model_exclude_none=True)
+@app.get("/event", response_model_exclude_none=True)
 async def sportevents():
     return await get_events()
 
@@ -78,17 +77,7 @@ async def eventoffer(event_id: str, offer_type: str, range: bool = False):
     return await get_bet_offers(event_id, offer_type=validate_betoffer_type(offer_type), range_query=range)
 
 
-# @app.get("/event/{event_id}/offers", response_model_exclude_none=True)
-# async def bet_offers(event_id: int:
-#     return await get_bet_offers(event_id, range_query=range)
-
-
-@app.get("/changes", response_model_exclude_none=True)
-async def changes():
-    return await get_all_changes()
-
-
-@app.get("/teams", response_model_exclude_none=True)
+@app.get("/team", response_model_exclude_none=True)
 async def teams():
     return await get_teams()
 
@@ -101,6 +90,13 @@ async def team_events(team_abbr: str):
 @app.get("/team/{team_abbr}/offers", response_model_exclude_none=True)
 async def team_event_offers(team_abbr: str):
     return await get_team_event_offers(team_abbr)
+
+
+
+
+@app.get("/changes", response_model_exclude_none=True)
+async def changes():
+    return await get_all_changes()
 
 
 if __name__ == "__main__":

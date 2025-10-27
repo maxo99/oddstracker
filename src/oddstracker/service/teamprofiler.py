@@ -1,4 +1,3 @@
-from functools import lru_cache
 
 import nfl_data_py as nfl
 
