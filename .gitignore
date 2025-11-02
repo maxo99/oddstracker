@@ -11,4 +11,4 @@ wheels/
 /data/
 .env
 !test/data/sample*.json
-test/data/worked_*.json
+test/data/*.json

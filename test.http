@@ -30,6 +30,12 @@ GET {{BASE_URL}}/openapi.json
 POST {{BASE_URL}}/collect
 
 ###
+#
+# Collect Odds Data
+POST {{BASE_URL}}/collect/?provider_key=theoddsapi
+
+
+###
 
 # Get all Events
 GET {{BASE_URL}}/events/
