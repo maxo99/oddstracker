@@ -175,7 +175,7 @@ class PostgresClient:
             raise e
 
     async def get_eventoffers_for_sportevent(
-        self, event_id: int, offer_type: str | None = None, first_last: bool = False
+        self, event_id: str, offer_type: str | None = None, first_last: bool = False
     ) -> list[EventOffer]:
         try:
             logger.info(
@@ -195,7 +195,7 @@ class PostgresClient:
     async def _fetch_eventoffers_for_sportevent(
         self,
         session: AsyncSession,
-        event_id: int,
+        event_id: str,
         offer_type: str | None = None,
         first_last: bool = False,
     ) -> list[EventOffer]:

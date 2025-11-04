@@ -10,12 +10,12 @@ async def get_event(event_id: str, offer_type: str = 'all') -> SportEventData | 
     return await PG_CLIENT.get_sporteventdata(event_id, offer_type=offer_type)
 
 
-async def get_event_offer(event_id: int, offer: str):
+async def get_event_offer(event_id: str, offer: str):
     return await PG_CLIENT.get_eventoffers_for_sportevent(event_id, offer)
 
 
 async def get_bet_offers(
-    event_id: int,
+    event_id: str,
     offer_type: str,
     range_query: bool = False,
 ):
