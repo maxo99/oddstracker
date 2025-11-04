@@ -1,10 +1,14 @@
 import json
+import logging
 import os
 from datetime import UTC, datetime
 
 import pydantic
 
 from oddstracker.config import DATA_DIR
+
+logger = logging.getLogger(__name__)
+
 
 BET_OFFER_TYPES = ["h2h", "totals", "spreads"]
 
@@ -32,10 +36,13 @@ def sign_int(v) -> str:
 
 
 def store_json(name: str, tag: str, data: dict) -> None:
-    _name = "_".join([tag, name, get_utc_now().strftime("%Y-%m-%d")])
-    path = os.path.join(DATA_DIR, _name + ".json")
-    with open(path, "w") as f:
-        json.dump(data, f, indent=2, cls=JsonEncoder)
+    try:
+        _name = "_".join([tag, name, get_utc_now().strftime("%Y-%m-%d")])
+        path = os.path.join(DATA_DIR, _name + ".json")
+        with open(path, "w") as f:
+            json.dump(data, f, indent=2, cls=JsonEncoder)
+    except Exception as e:
+        logger.warning(f"Unable to store JSON data for {name} with tag {tag}: {e}")
 
 
 def load_json(name: str, tag: str) -> dict:

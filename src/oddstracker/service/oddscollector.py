@@ -2,6 +2,7 @@ import logging
 
 import requests
 
+from oddstracker.config import RAW_STORE
 from oddstracker.domain.model.converter import convert_to_sportevents
 from oddstracker.domain.model.sportevent import SportEventData
 from oddstracker.domain.providers import (
@@ -23,7 +24,8 @@ async def collect_and_store_bettingdata(
 ) -> dict:
     provider = get_provider(provider_key)
     _raw_data = fetch_sports_betting_data(provider, league)
-    store_json(f"{provider_key}_{league}", "raw", _raw_data)
+    if RAW_STORE:
+        store_json(f"{provider_key}_{league}", "raw", _raw_data)
 
     count = 0
     if db_store:

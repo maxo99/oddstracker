@@ -22,6 +22,7 @@ APP_PORT = int(os.getenv("APP_PORT", 8080))
 LOG_LEVEL = getattr(logging, os.getenv("LOG_LEVEL", "INFO").upper())
 logging.basicConfig(level=LOG_LEVEL)
 
+RAW_STORE = os.getenv("RAW_STORE", "true").lower() == "true"
 
 # PostgreSQL settings
 
