@@ -18,8 +18,7 @@ def _map_kambi_market_key(input):
 
 
 def _map_team_name(input):
-    # TODO: Update implementation
-    return input
+    return input.split(" ")[-1]
 
 
 def transform_kambi_event(_input: dict) -> SportEventData:
@@ -95,10 +94,9 @@ def convert_to_sportevents(
     try:
         if provider_key == "theoddsapi":
             out.extend(transform_theoddsapi_event(e) for e in data)
-        elif provider_key == "kambi":
+        elif provider_key == "kambi" and isinstance(data, dict):
             out.extend(transform_kambi_event(data) for data in data["events"])
         return out
     except Exception as ex:
         logger.error("Failed to parse sporteventdatas")
         raise ex
-    return out

@@ -49,8 +49,8 @@ def fetch_sports_betting_data(provider: Provider, league: str) -> dict:
             print("Remaining requests", resp.headers["x-requests-remaining"])
             print("Used requests", resp.headers["x-requests-used"])
 
-        data = resp.json()
         logger.info(f"Fetched data from {provider}")
+        data = resp.json()
     except Exception as ex:
         logger.error(f"Failed to fetch events from {provider} {ex}")
         raise ex

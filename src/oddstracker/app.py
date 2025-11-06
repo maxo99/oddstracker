@@ -15,8 +15,9 @@ from oddstracker.service.oddsretriever import (
     get_events,
 )
 from oddstracker.service.teamprofiler import (
+    get_events_by_teamabbr,
+    get_team_by_abbr,
     get_team_event_offers,
-    get_team_events,
     get_teams,
 )
 from oddstracker.utils import validate_betoffer_type
@@ -58,8 +59,8 @@ def health():
 
 
 @app.post("/collect")
-async def collect(provider_key='kambi',league='nfl'):
-    return await collect_and_store_bettingdata(provider_key=provider_key,league=league)
+async def collect(provider_key="kambi", league="nfl"):
+    return await collect_and_store_bettingdata(provider_key=provider_key, league=league)
 
 
 @app.get("/event", response_model_exclude_none=True)
@@ -74,7 +75,11 @@ async def sportevent(event_id: str):
 
 @app.get("/event/{event_id}/offer/{offer_type}", response_model_exclude_none=True)
 async def eventoffer(event_id: str, offer_type: str, range: bool = False):
-    return await get_bet_offers(event_id, offer_type=validate_betoffer_type(offer_type), range_query=range)
+    return await get_bet_offers(
+        event_id,
+        offer_type=validate_betoffer_type(offer_type),
+        range_query=range,
+    )
 
 
 @app.get("/team", response_model_exclude_none=True)
@@ -84,14 +89,15 @@ async def teams():
 
 @app.get("/team/{team_abbr}/events", response_model_exclude_none=True)
 async def team_events(team_abbr: str):
-    return await get_team_events(team_abbr)
+    return await get_events_by_teamabbr(team_abbr)
 
 
 @app.get("/team/{team_abbr}/offers", response_model_exclude_none=True)
 async def team_event_offers(team_abbr: str):
+    team = await get_team_by_abbr(team_abbr)
+    if not team or not team.team_nick:
+        raise ValueError(f"Team with abbreviation '{team_abbr}' not found.")
     return await get_team_event_offers(team_abbr)
-
-
 
 
 @app.get("/changes", response_model_exclude_none=True)

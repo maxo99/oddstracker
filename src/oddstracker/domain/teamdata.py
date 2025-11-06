@@ -66,24 +66,38 @@ class TeamData(SQLModel, table=True):
 
     # Logo and image URLs
     team_logo_wikipedia: str | None = Field(
-        default=None, description="Wikipedia logo URL"
+        default=None,
+        description="Wikipedia logo URL",
     )
-    team_logo_espn: str | None = Field(default=None, description="ESPN logo URL")
-    team_wordmark: str | None = Field(default=None, description="Team wordmark URL")
+    team_logo_espn: str | None = Field(
+        default=None,
+        description="ESPN logo URL",
+    )
+    team_wordmark: str | None = Field(
+        default=None,
+        description="Team wordmark URL",
+    )
     team_conference_logo: str | None = Field(
-        default=None, description="Conference logo URL"
+        default=None,
+        description="Conference logo URL",
     )
     team_league_logo: str | None = Field(
-        default=None, description="NFL league logo URL"
+        default=None,
+        description="NFL league logo URL",
     )
     team_logo_squared: str | None = Field(
-        default=None, description="Squared team logo URL"
+        default=None,
+        description="Squared team logo URL",
     )
+
+    # TODO: remove Kambi specific fields later
     participant_name: str | None = Field(
-        default=None, description="Kambi participant name mapping"
+        default=None,
+        description="Kambi participant name mapping",
     )
     participant_id: int | None = Field(
-        default=None, description="Kambi participant ID mapping"
+        default=None,
+        description="Kambi participant ID mapping",
     )
 
     def populate_kambi_fields(self) -> "TeamData":
@@ -97,10 +111,9 @@ class TeamData(SQLModel, table=True):
     @staticmethod
     def _clean_value(value) -> str | None:
         """Convert pandas NaN to None, otherwise return the value as string"""
-        if value is None or (isinstance(value, float) and str(value) == 'nan'):
+        if value is None or (isinstance(value, float) and str(value) == "nan"):
             return None
         return str(value) if value is not None else None
-
 
     @classmethod
     def from_nfl_data(cls, df_row) -> "TeamData":
