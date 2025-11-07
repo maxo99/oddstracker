@@ -1,4 +1,5 @@
 import logging
+from datetime import datetime
 
 from oddstracker.domain.model.sportevent import SportEvent, SportEventData
 
@@ -51,7 +52,7 @@ def transform_kambi_event(_input: dict) -> SportEventData:
                     "event_id": str(_input["id"]),
                     "offer_type": _map_kambi_market_key(bo["betOfferType"]["name"]),
                     "bookmaker": "kambi",
-                    "last_update": o["changedDate"],
+                    "timestamp": datetime.fromisoformat(o["changedDate"].replace("Z", "+00:00")),
                     "price": o["odds"] / 1000,
                 }
                 if _offer["offer_type"] == "h2h":
@@ -75,7 +76,7 @@ def transform_theoddsapi_event(_input: dict) -> SportEventData:
                     outcome = {
                         'event_id': _input["id"],
                         'offer_type': mk["key"],
-                        'last_update': bm["last_update"],
+                        'timestamp': datetime.fromisoformat(bm["last_update"].replace("Z", "+00:00")),
                         'bookmaker': bm["key"],
                         'choice': outcome["name"],
                         'price': outcome["price"],

@@ -2,7 +2,8 @@ import logging
 from datetime import datetime
 
 from sqlalchemy import Column, DateTime
-from sqlmodel import Field, Integer, SQLModel, String
+from sqlalchemy import String as SAString
+from sqlmodel import Field, SQLModel, String
 
 from oddstracker.utils import get_utc_now
 
@@ -12,27 +13,21 @@ logger = logging.getLogger(__name__)
 
 
 class EventOffer(SQLModel, table=True):
-    id: int = Field(
-        sa_column=Column(Integer, primary_key=True, autoincrement=True, nullable=False)
-    )
-    event_id: str
-    bookmaker: str
-    offer_type: str
-    choice: str
-    last_update: str
-    price: float
-    point: float | None = None
-    # active: bool = Field(
-    #     default=True, sa_column=Column(Boolean, nullable=False, default=True)
-    # )
-    created_at: datetime = Field(
+    __tablename__ = "eventoffer"  # type: ignore
+
+    event_id: str = Field(sa_column=Column(SAString, primary_key=True, nullable=False))
+    bookmaker: str = Field(sa_column=Column(SAString, primary_key=True, nullable=False))
+    offer_type: str = Field(sa_column=Column(SAString, primary_key=True, nullable=False))
+    choice: str = Field(sa_column=Column(SAString, primary_key=True, nullable=False))
+    timestamp: datetime = Field(
         sa_column=Column(
             DateTime(timezone=True),
+            primary_key=True,
             nullable=False,
-            default=get_utc_now,
-        ),
-        default_factory=get_utc_now,
+        )
     )
+    price: float
+    point: float | None = None
     updated_at: datetime = Field(
         sa_column=Column(
             DateTime(timezone=True),

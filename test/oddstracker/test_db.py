@@ -44,7 +44,7 @@ async def test_db_store_retrieve(provider_key, postgres_client):
         await postgres_client.add_sporteventdata(_sporteventdata)
         assert _sporteventdata
 
-        retrieved = await postgres_client.get_sportevent(_sporteventdata.event.id)
+        retrieved = await postgres_client.get_sporteventdata(_sporteventdata.event.id)
         assert retrieved is not None
         event_offers = await postgres_client.get_eventoffers_for_sportevent(
             _sporteventdata.event.id

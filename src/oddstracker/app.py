@@ -47,7 +47,6 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 add_pagination(app)
 
-# Setup Prometheus instrumentation (must be done before app starts)
 instrumentator = Instrumentator()
 instrumentator.instrument(app).expose(app)
 logging.info("Prometheus metrics instrumentation configured.")

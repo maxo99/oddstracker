@@ -12,6 +12,7 @@ from oddstracker.domain.model.sportevent import (
     SportEventData,
 )
 from oddstracker.domain.teamdata import TeamData
+from oddstracker.utils import get_utc_now
 
 logger = logging.getLogger(__name__)
 
@@ -45,11 +46,16 @@ class PostgresClient:
         await self._create_tables()
 
     async def _create_tables(self):
-        """Create tables if they don't exist"""
         try:
             async with self.engine.begin() as conn:
-                # await conn.run_sync(lambda sync_conn: sync_conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector")))
+                await conn.execute(text("CREATE EXTENSION IF NOT EXISTS timescaledb"))
                 await conn.run_sync(SQLModel.metadata.create_all)
+                await conn.execute(
+                    text(
+                        "SELECT create_hypertable('eventoffer', 'timestamp', "
+                        "if_not_exists => TRUE, migrate_data => TRUE)"
+                    )
+                )
             logger.info("Postgres tables created/checked successfully")
         except Exception as e:
             logger.error(f"Error creating tables: {e}")
@@ -88,9 +94,9 @@ class PostgresClient:
     async def _upsert_eventoffers(self, offers: list[EventOffer], session):
         try:
             for bo in offers:
-                logger.info(f"Upserting {bo}")
+                logger.info(f"Inserting {bo}")
                 session.add(bo)
-            logger.info(f"Upserted {len(offers)} eventoffers successfully.")
+            logger.info(f"Inserted {len(offers)} eventoffers successfully.")
         except Exception as e:
             logger.exception(e)
             logger.error(f"Error adding eventoffers: {e.__cause__}")
@@ -98,20 +104,12 @@ class PostgresClient:
 
     async def _upsert_sportevent(self, sportevent: SportEvent, session):
         try:
-            # existing = await session.get(SportEvent, sportevent.id)
-            # if not existing:
-            session.add(sportevent)
-            # else:
-            #     # State was updated, mark existing as deleted and insert new
-            #     if existing.state != sportevent.state:
-            #         # Update Existing
-            #         existing.updated_at = get_utc_now()
-
-            #         sportevent.created_at = existing.created_at
-            #         sportevent.updated_at = get_utc_now()
-            #         session.merge(sportevent)
-            #     else:
-            #         existing.updated_at = get_utc_now()
+            existing = await session.get(SportEvent, sportevent.id)
+            if not existing:
+                session.add(sportevent)
+            else:
+                existing.updated_at = get_utc_now()
+                session.add(existing)
             logger.info(f"Upserted event {sportevent.id} successfully.")
         except Exception as e:
             logger.error(f"Error adding event {sportevent.id}: {e}")
@@ -203,33 +201,33 @@ class PostgresClient:
             if first_last:
                 result = await session.execute(
                     text(
-                        "SELECT DISTINCT ON (id) * FROM betoffer "
+                        "SELECT DISTINCT ON (event_id, bookmaker, offer_type, choice) * FROM eventoffer "
                         'WHERE "event_id" = :event_id '
-                        "ORDER BY id, collected_at ASC"
+                        "ORDER BY event_id, bookmaker, offer_type, choice, timestamp ASC"
                     ),
                     {"event_id": event_id},
                 )
                 first_offers = {
-                    row.id: EventOffer(**dict(row._mapping))
+                    (row.event_id, row.bookmaker, row.offer_type, row.choice): EventOffer(**dict(row._mapping))
                     for row in result.fetchall()
                 }
 
                 result = await session.execute(
                     text(
-                        "SELECT DISTINCT ON (id) * FROM betoffer "
+                        "SELECT DISTINCT ON (event_id, bookmaker, offer_type, choice) * FROM eventoffer "
                         'WHERE "event_id" = :event_id '
-                        "ORDER BY id, collected_at DESC"
+                        "ORDER BY event_id, bookmaker, offer_type, choice, timestamp DESC"
                     ),
                     {"event_id": event_id},
                 )
                 last_offers = {
-                    row.id: EventOffer(**dict(row._mapping))
+                    (row.event_id, row.bookmaker, row.offer_type, row.choice): EventOffer(**dict(row._mapping))
                     for row in result.fetchall()
                 }
 
                 event_offers = []
-                for event_offer_id, first_offer in first_offers.items():
-                    last_offer = last_offers.get(event_offer_id)
+                for offer_key, first_offer in first_offers.items():
+                    last_offer = last_offers.get(offer_key)
                     if last_offer:
                         event_offers.append(first_offer)
                         event_offers.append(last_offer)
@@ -247,15 +245,15 @@ class PostgresClient:
             raise e
 
     async def get_eventoffer_history(
-        self, offer_type: str, event_id: int, limit: int = 2
+        self, offer_type: str, event_id: str, limit: int = 2
     ) -> list[EventOffer]:
         try:
             logger.debug(f"Fetching history for event:{event_id} offer {offer_type}")
             async with self.session_maker() as session:
                 result = await session.execute(
                     text(
-                        'SELECT * FROM betoffer WHERE offer_type = :offer_type AND "event_id" = :event_id '
-                        "ORDER BY collected_at DESC LIMIT :limit"
+                        'SELECT * FROM eventoffer WHERE offer_type = :offer_type AND "event_id" = :event_id '
+                        "ORDER BY timestamp DESC LIMIT :limit"
                     ),
                     {
                         "offer_type": offer_type,
