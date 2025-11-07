@@ -1,0 +1,351 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_POSTGRES",
+      "label": "PostgreSQL",
+      "description": "TimescaleDB datasource",
+      "type": "datasource",
+      "pluginId": "postgres",
+      "pluginName": "PostgreSQL"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "11.0.0"
+    },
+    {
+      "type": "datasource",
+      "id": "postgres",
+      "name": "PostgreSQL",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "${DS_POSTGRES}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": ["sum"],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "${DS_POSTGRES}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    se.id,\n    se.home_team,\n    se.away_team,\n    se.sport_title,\n    se.commence_time,\n    COUNT(DISTINCT eo.offer_type) AS market_types,\n    COUNT(DISTINCT eo.bookmaker) AS bookmaker_count,\n    MAX(eo.timestamp) AS last_odds_update\nFROM sportevent se\nLEFT JOIN eventoffer eo ON se.id = eo.event_id\nGROUP BY se.id, se.home_team, se.away_team, se.sport_title, se.commence_time\nORDER BY se.commence_time DESC\nLIMIT 20;",
+          "refId": "A"
+        }
+      ],
+      "title": "Events Overview",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "${DS_POSTGRES}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "tooltip": false,
+              "viz": false,
+              "legend": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "${DS_POSTGRES}"
+          },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT \n    timestamp AS time,\n    bookmaker || ' - ' || choice AS metric,\n    price AS value\nFROM eventoffer\nWHERE event_id = '$event_id'\n  AND offer_type = '$offer_type'\n  AND timestamp >= $__timeFrom()::timestamptz\n  AND timestamp <= $__timeTo()::timestamptz\nORDER BY timestamp ASC;",
+          "refId": "A"
+        }
+      ],
+      "title": "Odds Movement Over Time - $event_id ($offer_type)",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 39,
+  "tags": ["odds", "sports"],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "datasource": {
+          "type": "datasource",
+          "uid": "${DS_POSTGRES}"
+        },
+        "definition": "SELECT id AS __value, home_team || ' vs ' || away_team AS __text FROM sportevent ORDER BY commence_time DESC LIMIT 50",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Event",
+        "multi": false,
+        "name": "event_id",
+        "options": [],
+        "query": "SELECT id AS __value, home_team || ' vs ' || away_team AS __text FROM sportevent ORDER BY commence_time DESC LIMIT 50",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "h2h",
+          "value": "h2h"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Market Type",
+        "multi": false,
+        "name": "offer_type",
+        "options": [
+          {
+            "selected": true,
+            "text": "h2h",
+            "value": "h2h"
+          },
+          {
+            "selected": false,
+            "text": "spreads",
+            "value": "spreads"
+          },
+          {
+            "selected": false,
+            "text": "totals",
+            "value": "totals"
+          }
+        ],
+        "query": "h2h,spreads,totals",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "datasource",
+          "uid": "${DS_POSTGRES}"
+        },
+        "definition": "SELECT DISTINCT bookmaker FROM eventoffer ORDER BY bookmaker",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Bookmaker",
+        "multi": true,
+        "name": "bookmaker",
+        "options": [],
+        "query": "SELECT DISTINCT bookmaker FROM eventoffer ORDER BY bookmaker",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "1 hour",
+          "value": "1 hour"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Time Bucket",
+        "multi": false,
+        "name": "interval",
+        "options": [
+          {
+            "selected": false,
+            "text": "15 minutes",
+            "value": "15 minutes"
+          },
+          {
+            "selected": true,
+            "text": "1 hour",
+            "value": "1 hour"
+          },
+          {
+            "selected": false,
+            "text": "6 hours",
+            "value": "6 hours"
+          },
+          {
+            "selected": false,
+            "text": "1 day",
+            "value": "1 day"
+          }
+        ],
+        "query": "15 minutes,1 hour,6 hours,1 day",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Odds Tracker - Overview",
+  "uid": "odds-tracker-overview",
+  "version": 1,
+  "weekStart": ""
+}

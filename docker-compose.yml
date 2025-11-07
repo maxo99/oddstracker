@@ -37,5 +37,22 @@ services:
       oddstracker-postgres:
         condition: service_healthy
 
+  grafana:
+    image: grafana/grafana:latest
+    container_name: oddstracker-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+      GF_INSTALL_PLUGINS: grafana-clock-panel
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - oddstracker-postgres
+
 volumes:
   postgres_data:
+  grafana_data:
