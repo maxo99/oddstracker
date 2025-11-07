@@ -92,33 +92,29 @@ def sample_raw() -> dict:
     return {k: load_json(k, "raw") for k in ["kambi", "theoddsapi"]}
 
 
-class PgVectorContainer(PostgresContainer):
-    """Custom PostgreSQL container with pgvector extension."""
+class TimescaleContainer(PostgresContainer):
 
-    def __init__(self, image: str = "pgvector/pgvector:pg18", **kwargs):
+    def __init__(self, image: str = "timescale/timescaledb:latest-pg15", **kwargs):
         super().__init__(image=image, **kwargs)
 
 
 @pytest.fixture(scope="session")
-def postgres_container() -> Generator[PgVectorContainer]:
-    with PgVectorContainer(
-        image="pgvector/pgvector:pg18",
+def postgres_container() -> Generator[TimescaleContainer]:
+    with TimescaleContainer(
+        image="timescale/timescaledb:latest-pg15",
         dbname="rotoreader_test",
         username="test_user",
         password="test_password",
-        driver=None,  # Let asyncpg be used via the async engine
+        driver=None,
     ) as container:
-        # Wait for container to be ready
         container.get_connection_url()
         yield container
 
 
 @pytest.fixture(scope="session")
-def db_config(postgres_container: PgVectorContainer) -> dict[str, Any]:
+def db_config(postgres_container: TimescaleContainer) -> dict[str, Any]:
     """Database configuration from testcontainer."""
-    # Get the sync URL and convert to async asyncpg URL
     sync_url = postgres_container.get_connection_url()
-    # Replace psycopg2 driver with asyncpg for async operations
     async_url = sync_url.replace("postgresql+psycopg2://", "postgresql+asyncpg://")
     if not async_url.startswith("postgresql+asyncpg://"):
         async_url = sync_url.replace("postgresql://", "postgresql+asyncpg://")
@@ -144,16 +140,12 @@ async def postgres_client(
 
     client = None
     try:
-        # Create a new client for each test with the current event loop
-        # Use NullPool to avoid connection pool issues across event loops in tests
         client = PostgresClient(db_url=db_config["url"], use_null_pool=True)
 
-        # Setup: Create pgvector extension and initialize tables
         async with client.engine.begin() as conn:
-            await conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
+            await conn.execute(text("CREATE EXTENSION IF NOT EXISTS timescaledb"))
             await conn.run_sync(lambda sync_conn: sync_conn.execute(text("SELECT 1")))
 
-        # Initialize tables
         await client.initialize()
 
         # Monkey patch the global PG_CLIENT

@@ -1,6 +1,6 @@
 services:
   oddstracker-postgres:
-    image: pgvector/pgvector:pg18
+    image: timescale/timescaledb:latest-pg15
     container_name: oddstracker-postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
