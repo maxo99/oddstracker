@@ -76,6 +76,16 @@ class SportEventData(SQLModel):
     def __str__(self):
         return f"Event {self.event.id}: {self.event.home_team} vs {self.event.away_team} with {len(self.offers)} offers"
 
+    # @classmethod
+    # def from_dict(cls, data: dict) -> "SportEventData":
+    #     try:
+    #         _event = SportEvent.model_validate(data.get("event", {}))
+    #         _offers = []
+    #         for o in data.get("offers", []):
+    #             _offers.append(EventOffer.model_validate(o))
+    #         return cls(event=_event, offers=_offers)
+    #     except Exception as e:
+    #         raise e
 
 # from datetime import datetime
 
