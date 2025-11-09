@@ -300,14 +300,14 @@ class PostgresClient:
             logger.error(f"Error getting teams: {e}")
             raise e
 
-    async def get_events_by_teamnick(self, team_nick: str) -> list[SportEvent]:
+    async def get_events_by_teamabbr(self, team_abbr: str) -> list[SportEvent]:
         try:
-            logger.info(f"Fetching events for team:{team_nick}")
+            logger.info(f"Fetching events for team:{team_abbr}")
             async with self.session_maker() as session:
                 query = (
                     select(SportEvent).where(
-                        (SportEvent.home_team == team_nick)
-                        | (SportEvent.away_team == team_nick)
+                        (SportEvent.home_team == team_abbr)
+                        | (SportEvent.away_team == team_abbr)
                     )
                     # .where(KambiEvent.deleted_at is None)
                 )
@@ -315,5 +315,5 @@ class PostgresClient:
                 events = list(result.scalars().all())
                 return events
         except Exception as e:
-            logger.error(f"Error getting events for team {team_nick}: {e}")
+            logger.error(f"Error getting events for team {team_abbr}: {e}")
             raise e

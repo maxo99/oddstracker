@@ -76,24 +76,26 @@ class SportEventData(SQLModel):
     def __str__(self):
         return f"Event {self.event.id}: {self.event.home_team} vs {self.event.away_team} with {len(self.offers)} offers"
 
-    # @classmethod
-    # def from_dict(cls, data: dict) -> "SportEventData":
-    #     try:
-    #         _event = SportEvent.model_validate(data.get("event", {}))
-    #         _offers = []
-    #         for o in data.get("offers", []):
-    #             _offers.append(EventOffer.model_validate(o))
-    #         return cls(event=_event, offers=_offers)
-    #     except Exception as e:
-    #         raise e
 
-# from datetime import datetime
+    def byOfferType(self, offer_type: str) -> "SportEventData":
+        return self.__class__(
+            event=self.event, offers=[offer for offer in self.offers if offer.offer_type == offer_type]
+        )
 
-# from pydantic import BaseModel, model_validator
-# from sqlalchemy import JSON, BigInteger, Boolean, Column, DateTime, ForeignKey
-# from sqlmodel import Field, SQLModel
+    def byBookmaker(self, bookmaker: str) -> "SportEventData":
+        return self.__class__(
+            event=self.event, offers=[offer for offer in self.offers if offer.bookmaker == bookmaker]
+        )
 
-# from oddstracker.utils import get_utc_now, sign_int
+    def sort_uniqueoffers(self) -> dict[str, list[EventOffer]]:
+        unique_offers = {}
+        for offer in self.offers:
+            key = (offer.bookmaker, offer.offer_type, offer.choice)
+            if key not in unique_offers:
+                unique_offers[key] = [offer]
+            else:
+                unique_offers[key].append(offer)
+        return unique_offers
 
 
 # class Outcome(BaseModel):

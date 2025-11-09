@@ -3,25 +3,27 @@ import logging
 import requests
 
 from oddstracker.config import RAW_STORE
+from oddstracker.domain.model.collection_response import CollectionResponse
 from oddstracker.domain.model.converter import convert_to_sportevents
 from oddstracker.domain.model.sportevent import SportEventData
 from oddstracker.domain.providers import (
     KAMBI_PROVIDERS,
+    PROVIDER_KEYS_SUPPORTED,
     KambiProvider,
     Provider,
     TheOddsAPIProvider,
 )
-from oddstracker.service import PG_CLIENT
+from oddstracker.service import get_client
 from oddstracker.utils import store_json
 
 logger = logging.getLogger(__name__)
 
 
 async def collect_and_store_bettingdata(
-    provider_key: str,
+    provider_key: PROVIDER_KEYS_SUPPORTED,
     league: str,
     db_store: bool = True,
-) -> dict:
+) -> CollectionResponse:
     provider = get_provider(provider_key)
     _raw_data = fetch_sports_betting_data(provider, league)
     if RAW_STORE:
@@ -33,7 +35,11 @@ async def collect_and_store_bettingdata(
         await store_sports_betting_info(_sportevents)
         count = len(_sportevents)
 
-    return {"status": "collected", "events": count}
+    return CollectionResponse(
+        status="success",
+        collected=count,
+        provider_key=provider_key,
+    )
 
 
 def fetch_sports_betting_data(provider: Provider, league: str) -> dict:
@@ -62,7 +68,7 @@ async def store_sports_betting_info(sportevents: list[SportEventData]) -> None:
     for _event in sportevents:
         try:
             logger.info(f"Processing event: {_event}")
-            await PG_CLIENT.add_sporteventdata(_event)
+            await get_client().add_sporteventdata(_event)
             logger.info(f"Stored: {_event}")
         except Exception as ex:
             logger.error(ex)

@@ -1,8 +1,13 @@
 from abc import ABC, abstractmethod
+from typing import Literal
 
 from pydantic import BaseModel
 
 from oddstracker.config import TOA_API_KEY
+
+PROVIDER_KEYS_SUPPORTED = Literal["kambi", "theoddsapi"]
+LEAGUES_SUPPORTED = Literal["nfl"]
+
 
 KAMBI_PROVIDERS = [
     {
@@ -26,17 +31,11 @@ KAMBI_PROVIDERS = [
     # },
 ]
 
-TOA_PROVIDERS = [
-    {
-
-    }
-]
-
+TOA_PROVIDERS = [{}]
 
 
 class Provider(BaseModel, ABC):
     provider_key: str
-
 
     @abstractmethod
     def get_url(self, *args, **kwargs) -> str:
@@ -61,13 +60,9 @@ class KambiProvider(Provider):
         if event_id:
             return f"{self.base_url}/betoffer/event/{event_id}.json"
         if league == "nfl":
-            return (
-                f"{self.base_url}/listView/american_football/nfl/all/all/matches.json"
-            )
+            return f"{self.base_url}/listView/american_football/nfl/all/all/matches.json"
         if league == "ncaaf":
-            return (
-                f"{self.base_url}/listView/american_football/ncaaf/all/all/matches.json"
-            )
+            return f"{self.base_url}/listView/american_football/ncaaf/all/all/matches.json"
         raise ValueError(f"Unsupported league: {league}")
 
     def qparams(self, props: bool = False) -> dict:
@@ -96,7 +91,7 @@ class TheOddsAPIProvider(Provider):
     site_code: str = "theoddsapi"
 
     def get_url(self, league: str) -> str:
-        if league == 'nfl':
+        if league == "nfl":
             return "https://api.the-odds-api.com/v4/sports/americanfootball_nfl/odds"
         raise ValueError
 

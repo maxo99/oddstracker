@@ -41,4 +41,4 @@ async def test_get_team_events(
     assert len(events) >= 1
     _teamdata = await get_team_by_abbr(team_abbr)
     for event in events:
-        assert _teamdata.team_nick in (event.home_team, event.away_team)
+        assert _teamdata.team_abbr in (event.home_team, event.away_team)

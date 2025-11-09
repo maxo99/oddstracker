@@ -133,10 +133,7 @@ def db_config(postgres_container: TimescaleContainer) -> dict[str, Any]:
 async def postgres_client(
     db_config: dict[str, Any],
 ) -> AsyncGenerator[PostgresClient]:
-    # Import and store original client
     import oddstracker.service
-
-    original_client = oddstracker.service.PG_CLIENT
 
     client = None
     try:
@@ -148,13 +145,10 @@ async def postgres_client(
 
         await client.initialize()
 
-        # Monkey patch the global PG_CLIENT
         oddstracker.service.PG_CLIENT = client
 
         yield client
 
     finally:
-        # Restore original client
-        oddstracker.service.PG_CLIENT = original_client
         if client:
             await client.close()

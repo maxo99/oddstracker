@@ -1,99 +1,117 @@
 import logging
 
-from oddstracker.service import PG_CLIENT
+from pydantic import BaseModel
+
+from oddstracker.domain.model.sportevent import EventOffer
+from oddstracker.service import get_client
 
 logger = logging.getLogger(__name__)
 
 
-def _has_changed(current_outcomes: list[dict], previous_outcomes: list[dict]) -> bool:
-    if len(current_outcomes) != len(previous_outcomes):
-        return True
-
-    for curr_outcome in current_outcomes:
-        curr_changed_date = curr_outcome.get("changedDate")
-        outcome_label = curr_outcome.get("label")
-
-        prev_outcome = next(
-            (o for o in previous_outcomes if o.get("label") == outcome_label),
-            None
-        )
-
-        if prev_outcome is None:
-            return True
-
-        prev_changed_date = prev_outcome.get("changedDate")
-
-        if curr_changed_date != prev_changed_date:
-            return True
-
-    return False
+class OfferChange(BaseModel):
+    bookmaker: str
+    choice: str
+    offer_type: str
+    old_price: float
+    new_price: float
+    old_point: float | None
+    new_point: float | None
+    old_timestamp: str
+    new_timestamp: str
+    price_changed: bool
+    point_changed: bool
 
 
-async def get_all_changes():
+class EventLineMovesResponse(BaseModel):
+    event_id: str
+    home_team: str
+    away_team: str
+    sport_title: str
+    commence_time: str
+    changes: list[OfferChange]
+
+
+def _has_changed(current: EventOffer, previous: EventOffer) -> tuple[bool, bool]:
+    """Returns (price_changed, point_changed)"""
+    price_changed = abs(current.price - previous.price) > 0.001
+    point_changed = False
+
+    if current.point is not None and previous.point is not None:
+        point_changed = abs(current.point - previous.point) > 0.001
+    elif current.point != previous.point:
+        point_changed = True
+
+    return price_changed, point_changed
+
+
+async def get_linemoves() -> list[EventLineMovesResponse]:
     logger.info("Fetching all bet offer changes across events")
-    events = await PG_CLIENT.get_events()
+    events = await get_client().get_events()
 
     changes_by_event = []
 
     for event in events:
-        logger.info(f"Processing changes for event {event}")
-        bet_offers = await PG_CLIENT.get_bet_offers_for_event(event.id)
+        logger.info(f"Processing changes for event {event.id}")
+        sporteventdata = await get_client().get_sporteventdata(
+            event_id=event.id,
+            offer_type="all",
+            first_last=True,
+        )
+        if not sporteventdata:
+            logger.info(f"No sport event data found for event {event.id}, skipping")
+            continue
 
-        unique_bet_offer_ids = list({bo.id for bo in bet_offers})
+        unique_offers = sporteventdata.sort_uniqueoffers()
+        event_changes = []
 
-        event_changes = {
-            "eventId": event.id,
-            "eventName": event.name,
-            "changeTimestamps": [],
-            "betOffers": []
-        }
-
-        for bet_offer_id in unique_bet_offer_ids:
-            history = await PG_CLIENT.get_bet_offer_history(bet_offer_id, event.id, limit=2)
-
-            if len(history) < 2:
-                logger.info(f"Bet offer {bet_offer_id} has only {len(history)} collection(s), skipping")
+        for offer_key, offers in unique_offers.items():
+            if len(offers) < 2:
+                logger.debug(f"Offer {offer_key} has only {len(offers)} entry, skipping")
                 continue
 
-            current = history[0]
-            previous = history[1]
+            offers_sorted = sorted(offers, key=lambda x: x.timestamp)
+            current = offers_sorted[-1]
+            previous = offers_sorted[-2]
 
-            if not _has_changed(current.outcomes, previous.outcomes):
-                logger.info(f"Bet offer {bet_offer_id} has not changed")
+            price_changed, point_changed = _has_changed(current, previous)
+
+            if not price_changed and not point_changed:
+                logger.debug(f"Offer {offer_key} has not changed")
                 continue
 
-            logger.info(f"Bet offer {bet_offer_id} has changed")
+            logger.info(
+                f"Offer {offer_key} changed - price: {price_changed}, point: {point_changed}"
+            )
 
-            bet_offer_data = {
-                "betOfferType": current.type,
-                "criterion": current.criterion,
-                "collectedAt": current.collected_at.isoformat(),
-                "outcomes": []
-            }
+            change = OfferChange(
+                bookmaker=current.bookmaker,
+                choice=current.choice,
+                offer_type=current.offer_type,
+                old_price=previous.price,
+                new_price=current.price,
+                old_point=previous.point,
+                new_point=current.point,
+                old_timestamp=previous.timestamp.isoformat(),
+                new_timestamp=current.timestamp.isoformat(),
+                price_changed=price_changed,
+                point_changed=point_changed,
+            )
 
-            for outcome in current.outcomes:
-                changed_date = outcome.get("changedDate")
-                outcome_data = {
-                    "name": outcome.get("name"),
-                    "changedDate": changed_date,
-                    "odds": outcome.get("odds"),
-                    "line": outcome.get("line"),
-                    "status": outcome.get("status")
-                }
+            event_changes.append(change)
 
-                bet_offer_data["outcomes"].append(outcome_data)
-
-                if changed_date and changed_date not in event_changes["changeTimestamps"]:
-                    event_changes["changeTimestamps"].append(changed_date)
-
-            event_changes["betOffers"].append(bet_offer_data)
-
-        if event_changes["betOffers"]:
-            event_changes["changeTimestamps"].sort()
-            changes_by_event.append(event_changes)
+        if event_changes:
+            response = EventLineMovesResponse(
+                event_id=event.id,
+                home_team=event.home_team,
+                away_team=event.away_team,
+                sport_title=event.sport_title,
+                commence_time=event.commence_time,
+                changes=event_changes,
+            )
+            changes_by_event.append(response)
+            logger.info(f"Found {len(event_changes)} changes for event {event.id}")
         else:
             logger.debug(f"No changes found for event {event.id}")
 
-    logger.info(f"Processed changes for {len(events)} events, found changes in {len(changes_by_event)} events")
+    logger.info(f"Processed {len(events)} events, found changes in {len(changes_by_event)} events")
     return changes_by_event
-

@@ -1,25 +1,25 @@
-from oddstracker.domain.model.sportevent import SportEventData
-from oddstracker.service import PG_CLIENT
+from oddstracker.domain.model.sportevent import EventOffer, SportEvent
+from oddstracker.service import get_client
+
+
+async def get_sportevents() -> list[SportEvent]:
+    return await get_client().get_events()
 
 
 async def get_events():
-    return await PG_CLIENT.get_events()
+    return await get_client().get_events()
 
 
-async def get_event(event_id: str, offer_type: str = 'all') -> SportEventData | None:
-    return await PG_CLIENT.get_sporteventdata(event_id, offer_type=offer_type)
+async def get_sporteventdata(event_id: str, offer_type: str = "all"):
+    return await get_client().get_sporteventdata(event_id, offer_type=offer_type)
 
 
-async def get_event_offer(event_id: str, offer: str):
-    return await PG_CLIENT.get_eventoffers_for_sportevent(event_id, offer)
-
-
-async def get_bet_offers(
+async def get_sportevent_eventoffers(
     event_id: str,
     offer_type: str,
     range_query: bool = False,
-):
-    return await PG_CLIENT.get_eventoffers_for_sportevent(
+) -> list[EventOffer]:
+    return await get_client().get_eventoffers_for_sportevent(
         event_id,
         offer_type=offer_type,
         first_last=range_query,

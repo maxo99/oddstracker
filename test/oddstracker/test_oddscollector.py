@@ -19,6 +19,6 @@ async def test_odds_collector(
         db_store=True,
     )
 
-    assert toa_result["events"] >= 1
-    assert kambi_result["events"] >= 1
+    assert toa_result.collected >= 1
+    assert kambi_result.collected >= 1
     assert mock_betting_data_requests.call_count == 2
