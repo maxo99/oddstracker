@@ -60,12 +60,18 @@ instrumentator.instrument(app).expose(app)
 logging.info("Prometheus metrics instrumentation configured.")
 
 
-@app.get("/")
+@app.get("/", operation_id="health_check", tags=["Health"])
 def health():
     return HealthStatusResponse(startup_time=STARTUP)
 
 
-@app.post("/collect")
+@app.post(
+    "/collect",
+    summary="Collect SportEvents and BettingData",
+    response_model_exclude_none=True,
+    tags=["DataCollection", "SportEvents"],
+    operation_id="collect_sportevents",
+)
 async def collect_sportevents(
     provider_key: PROVIDER_KEYS_SUPPORTED = "kambi",
     league: LEAGUES_SUPPORTED = "nfl",
@@ -76,20 +82,35 @@ async def collect_sportevents(
     )
 
 
-@app.get("/event", response_model_exclude_none=True)
+@app.get(
+    "/event",
+    response_model_exclude_none=True,
+    tags=["SportEvents"],
+    operation_id="get_sportevents",
+)
 async def sportevents() -> list[SportEvent]:
     return await get_sportevents()
 
 
-@app.get("/event/{event_id}", response_model_exclude_none=True)
-async def sportevent(event_id: str) -> SportEventData:
+@app.get(
+    "/event/{event_id}",
+    response_model_exclude_none=True,
+    tags=["SportEvents"],
+    operation_id="get_sportevent_by_event_id",
+)
+async def sporteventdata_by_event_id(event_id: str) -> SportEventData:
     result = await get_sporteventdata(event_id=event_id)
     if not result:
         raise ValueError(f"SportEvent with id '{event_id}' not found.")
     return result
 
 
-@app.get("/event/{event_id}/offer/{offer_type}", response_model_exclude_none=True)
+@app.get(
+    "/event/{event_id}/offer/{offer_type}",
+    response_model_exclude_none=True,
+    tags=["SportEvents"],
+    operation_id="get_sportevent_offers",
+)
 async def sportevent_get_eventoffers(
     event_id: str,
     offer_type: str,
@@ -102,17 +123,35 @@ async def sportevent_get_eventoffers(
     )
 
 
-@app.get("/team", response_model_exclude_none=True)
+@app.get(
+    "/team",
+    response_model_exclude_none=True,
+    tags=["Teams"],
+    summary="Get teams",
+    operation_id="get_teams",
+)
 async def teams():
     return await get_teams()
 
 
-@app.get("/team/{team_abbr}/events", response_model_exclude_none=True)
+@app.get(
+    "/team/{team_abbr}/events",
+    response_model_exclude_none=True,
+    tags=["SportEvents", "Teams"],
+    summary="Get sport events for a team",
+    operation_id="get_team_events",
+)
 async def team_events(team_abbr: str):
     return await get_events_by_teamabbr(team_abbr)
 
 
-@app.get("/team/{team_abbr}/offers", response_model_exclude_none=True)
+@app.get(
+    "/team/{team_abbr}/offers",
+    response_model_exclude_none=True,
+    tags=["SportEvents", "Teams"],
+    summary="Get event offers for a team",
+    operation_id="get_team_event_offers",
+)
 async def team_event_offers(team_abbr: str) -> list[EventOffer]:
     team = await get_team_by_abbr(team_abbr)
     if not team or not team.team_nick:
@@ -120,7 +159,13 @@ async def team_event_offers(team_abbr: str) -> list[EventOffer]:
     return await get_team_event_offers(team_abbr)
 
 
-@app.get("/linemoves", response_model_exclude_none=True)
+@app.get(
+    "/linemoves",
+    response_model_exclude_none=True,
+    tags=["OddsChanges"],
+    summary="Get line moves for sport events",
+    operation_id="get_linemoves",
+)
 async def linemoves() -> list[EventLineMovesResponse]:
     return await get_linemoves()
 
