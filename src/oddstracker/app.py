@@ -7,6 +7,7 @@ from prometheus_fastapi_instrumentator import Instrumentator
 from pydantic import __version__
 
 from oddstracker import utils
+from oddstracker.app_initializer import instrument_prometheus, instrument_tracing, setup_tracing
 from oddstracker.config import APP_PORT, LOG_LEVEL
 from oddstracker.domain.model.collection_response import CollectionResponse
 from oddstracker.domain.model.healthstatus import HealthStatusResponse
@@ -33,27 +34,32 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Application lifespan - startup and shutdown events"""
-    logging.info("FastApi lifespan starting.")
-    # Startup
+    logging.info(f"Application startup starting with app:{app.version}.")
+
+
     await get_client().initialize()
     logging.info("PostgresClient initialized.")
-
     logging.info("Application startup complete.")
     yield
+
     logging.info("Application shutdown starting.")
-
-    # Shutdown - cleanup if needed
     await get_client().close()
-    logging.info("PostgresClient connection closed.")
-
     logging.info("Application shutdown complete.")
 
 
-STARTUP = utils.get_utc_now()
-logging.info(f"Application version:{__version__} startup time (UTC): {STARTUP}")
-app = FastAPI(lifespan=lifespan)
+START_UP = utils.get_utc_now()
+logger.info(f"Application version:{__version__} startup time (UTC): {START_UP}")
+
+setup_tracing()
+app = FastAPI(
+    lifespan=lifespan,
+    version=__version__,
+)
 add_pagination(app)
+instrument_tracing(app)
+instrument_prometheus(app)
+
+
 
 instrumentator = Instrumentator()
 instrumentator.instrument(app).expose(app)
@@ -62,7 +68,7 @@ logging.info("Prometheus metrics instrumentation configured.")
 
 @app.get("/", operation_id="health_check", tags=["Health"])
 def health():
-    return HealthStatusResponse(startup_time=STARTUP)
+    return HealthStatusResponse(startup_time=START_UP)
 
 
 @app.post(
