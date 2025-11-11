@@ -27,12 +27,12 @@ GET {{BASE_URL}}/openapi.json
 ###
 #
 # Collect Odds Data
-POST {{BASE_URL}}/collect
+PUT {{BASE_URL}}/collect
 
 ###
 #
 # Collect Odds Data
-POST {{BASE_URL}}/collect/?provider_key=theoddsapi
+PUT {{BASE_URL}}/collect/?provider_key=theoddsapi
 
 
 ###

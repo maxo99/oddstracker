@@ -71,7 +71,7 @@ def health():
     return HealthStatusResponse(startup_time=START_UP)
 
 
-@app.post(
+@app.put(
     "/collect",
     summary="Collect SportEvents and BettingData",
     response_model_exclude_none=True,
