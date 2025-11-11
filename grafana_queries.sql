@@ -1,6 +1,22 @@
 -- TimescaleDB Grafana Query Examples for Odds Tracker
 -- All queries assume $__timeFilter macro for time range filtering in Grafana
 
+
+#Query 1-2:  Table panel
+#Query 3-4:  Time series (line graph)
+#Query 5:    Table with colors/thresholds
+#Query 6:    Stat panel or bar gauge
+#Query 7:    Table panel
+#Query 8-9:  Time series with dual axis
+#Query 10:   Bar chart
+#Query 11:   Time series with annotations
+#Query 12:   Gauge or stat panel
+#Query 13:   Table with alert thresholds
+#Query 14-15: Stat panels
+#
+
+
+
 -- ====================
 -- 1. LATEST ODDS BY BOOKMAKER
 -- Shows the most recent odds for each event/bookmaker/market combination
@@ -346,3 +362,4 @@ FROM timescaledb_information.chunks
 WHERE hypertable_name = 'eventoffer'
 ORDER BY range_start DESC
 LIMIT 20;
+
