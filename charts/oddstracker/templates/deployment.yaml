@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oddstracker
+  namespace: sportsstack
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: oddstracker
+  template:
+    metadata:
+      labels:
+        app: oddstracker
+    spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: oddstracker-db-config
+          command: ["sh", "-c"]
+          args:
+            - >
+              until pg_isready -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -t 2; do
+                echo "waiting for postgres at $POSTGRES_HOST:$POSTGRES_PORT";
+                sleep 2;
+              done
+      containers:
+        - name: api
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: LOG_LEVEL
+              value: {{ .Values.env.logLevel | quote }}
+            - name: ROOT_DIR
+              value: {{ .Values.env.rootDir | quote }}
+            - name: APP_PORT
+              value: {{ .Values.env.appPort | quote }}
+            - name: RAW_STORE
+              value: {{ .Values.env.rawStore | quote }}
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: THEODDSAPI_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: THEODDSAPI_KEY
+          envFrom:
+            - configMapRef:
+                name: oddstracker-db-config
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 20

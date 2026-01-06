@@ -1,0 +1,45 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: oddstracker-collect-hourly
+  namespace: sportsstack
+spec:
+  schedule: {{ .Values.cronjob.schedule | quote }}
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: curl
+              image: curlimages/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - sh
+                - -c
+                - curl -X PUT http://api-gateway:8088/api/oddstracker/collect || exit 1
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: oddstracker-collect-twicedaily
+  namespace: sportsstack
+spec:
+  schedule: "* */12 * * *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: curl
+              image: curlimages/curl:8.5.0
+              imagePullPolicy: IfNotPresent
+              command:
+                - sh
+                - -c
+                - curl -X PUT http://api-gateway:8088/api/oddstracker/collect?provider_key=theoddsapi || exit 1

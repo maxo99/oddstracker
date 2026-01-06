@@ -1,0 +1,6 @@
+apiVersion: v2
+name: oddstracker
+version: 0.1.0
+description: Helm chart for oddstracker service
+kubeVersion: ">=1.23.0"
+type: application

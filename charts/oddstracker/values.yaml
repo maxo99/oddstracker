@@ -1,0 +1,20 @@
+image:
+  repository: maxo5499/sportsstack-oddstracker
+  tag: latest
+
+replicas: 1
+
+env:
+  logLevel: INFO
+  rootDir: /app
+  appPort: 8080
+  rawStore: "false"
+
+hpa:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 75
+
+cronjob:
+  schedule: "0 * * * *"

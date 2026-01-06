@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oddstracker-db-config
+  namespace: sportsstack
+data:
+  POSTGRES_HOST: oddstracker-postgres
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: oddstracker
+  POSTGRES_USER: postgres
