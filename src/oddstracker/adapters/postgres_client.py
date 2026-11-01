@@ -115,7 +115,7 @@ class PostgresClient:
             logger.error(f"Error adding event {sportevent.id}: {e}")
             raise e
 
-    async def get_events(self, **filters) -> list[SportEvent]:
+    async def get_sportevents(self, **filters) -> list[SportEvent]:
         try:
             logger.info(f"Fetching events from with {filters}")
             async with self.session_maker() as session:

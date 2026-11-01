@@ -3,11 +3,11 @@ from oddstracker.service import get_client
 
 
 async def get_sportevents() -> list[SportEvent]:
-    return await get_client().get_events()
+    return await get_client().get_sportevents()
 
 
 async def get_events():
-    return await get_client().get_events()
+    return await get_client().get_sportevents()
 
 
 async def get_sporteventdata(event_id: str, offer_type: str = "all"):

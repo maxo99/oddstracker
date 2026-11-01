@@ -13,8 +13,13 @@ from oddstracker.domain.model.collection_response import CollectionResponse
 from oddstracker.domain.model.healthstatus import HealthStatusResponse
 from oddstracker.domain.model.sportevent import EventOffer, SportEvent, SportEventData
 from oddstracker.domain.providers import LEAGUES_SUPPORTED, PROVIDER_KEYS_SUPPORTED
+from oddstracker.domain.teamdata import TEAM_ABBRS
 from oddstracker.service import get_client
-from oddstracker.service.oddschanges import EventLineMovesResponse, get_linemoves
+from oddstracker.service.oddschanges import (
+    EventLineMovesResponse,
+    get_linemoves,
+    get_team_linemoves,
+)
 from oddstracker.service.oddscollector import collect_and_store_bettingdata
 from oddstracker.service.oddsretriever import (
     get_sportevent_eventoffers,
@@ -27,7 +32,7 @@ from oddstracker.service.teamprofiler import (
     get_team_event_offers,
     get_teams,
 )
-from oddstracker.utils import validate_betoffer_type
+from oddstracker.utils import BET_OFFER_TYPES, validate_betoffer_type
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +40,6 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logging.info(f"Application startup starting with app:{app.version}.")
-
 
     await get_client().initialize()
     logging.info("PostgresClient initialized.")
@@ -58,7 +62,6 @@ app = FastAPI(
 add_pagination(app)
 instrument_tracing(app)
 instrument_prometheus(app)
-
 
 
 instrumentator = Instrumentator()
@@ -119,12 +122,12 @@ async def sporteventdata_by_event_id(event_id: str) -> SportEventData:
 )
 async def sportevent_get_eventoffers(
     event_id: str,
-    offer_type: str,
+    offer_type: BET_OFFER_TYPES,
     range: bool = False,
 ):
     return await get_sportevent_eventoffers(
         event_id,
-        offer_type=validate_betoffer_type(offer_type),
+        offer_type=offer_type,
         range_query=range,
     )
 
@@ -147,7 +150,7 @@ async def teams():
     summary="Get sport events for a team",
     operation_id="get_team_events",
 )
-async def team_events(team_abbr: str):
+async def team_events(team_abbr: TEAM_ABBRS):
     return await get_events_by_teamabbr(team_abbr)
 
 
@@ -158,7 +161,7 @@ async def team_events(team_abbr: str):
     summary="Get event offers for a team",
     operation_id="get_team_event_offers",
 )
-async def team_event_offers(team_abbr: str) -> list[EventOffer]:
+async def team_event_offers(team_abbr: TEAM_ABBRS) -> list[EventOffer]:
     team = await get_team_by_abbr(team_abbr)
     if not team or not team.team_nick:
         raise ValueError(f"Team with abbreviation '{team_abbr}' not found.")
@@ -174,6 +177,17 @@ async def team_event_offers(team_abbr: str) -> list[EventOffer]:
 )
 async def linemoves() -> list[EventLineMovesResponse]:
     return await get_linemoves()
+
+
+@app.get(
+    "/linemoves/{team_abbr}",
+    response_model_exclude_none=True,
+    tags=["OddsChanges"],
+    summary="Get line moves for the sport events of a specific team",
+    operation_id="get_team_linemoves",
+)
+async def team_linemoves(team_abbr: TEAM_ABBRS) -> list[EventLineMovesResponse]:
+    return await get_team_linemoves(team_abbr=team_abbr)
 
 
 if __name__ == "__main__":

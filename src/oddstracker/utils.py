@@ -2,6 +2,7 @@ import json
 import logging
 import os
 from datetime import UTC, datetime
+from typing import Literal
 
 import pydantic
 
@@ -10,7 +11,7 @@ from oddstracker.config import DATA_DIR
 logger = logging.getLogger(__name__)
 
 
-BET_OFFER_TYPES = ["h2h", "totals", "spreads"]
+BET_OFFER_TYPES = Literal["h2h", "totals", "spreads"]
 
 
 class JsonEncoder(json.JSONEncoder):

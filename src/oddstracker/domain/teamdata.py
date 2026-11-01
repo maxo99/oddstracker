@@ -1,5 +1,41 @@
+from typing import Literal
 from sqlalchemy import Column, String
 from sqlmodel import Field, SQLModel
+
+TEAM_ABBRS = Literal[
+    "ARI",
+    "ATL",
+    "BAL",
+    "BUF",
+    "CAR",
+    "CHI",
+    "CIN",
+    "CLE",
+    "DAL",
+    "DEN",
+    "DET",
+    "GB",
+    "HOU",
+    "IND",
+    "JAX",
+    "KC",
+    "LAC",
+    "LAR",
+    "LV",
+    "MIA",
+    "MIN",
+    "NE",
+    "NO",
+    "NYG",
+    "NYJ",
+    "PHI",
+    "PIT",
+    "SEA",
+    "SF",
+    "TB",
+    "TEN",
+    "WAS",
+]
 
 NFL_DATA_PI_ABBR_TO_KAMBIDATA = {
     "ARI": {"participant": "ARI Cardinals", "id": 1000043092},
@@ -54,15 +90,9 @@ class TeamData(SQLModel, table=True):
 
     # Team colors
     team_color: str = Field(description="Primary team color (hex code)")
-    team_color2: str | None = Field(
-        default=None, description="Secondary team color (hex code)"
-    )
-    team_color3: str | None = Field(
-        default=None, description="Tertiary team color (hex code)"
-    )
-    team_color4: str | None = Field(
-        default=None, description="Quaternary team color (hex code)"
-    )
+    team_color2: str | None = Field(default=None, description="Secondary team color (hex code)")
+    team_color3: str | None = Field(default=None, description="Tertiary team color (hex code)")
+    team_color4: str | None = Field(default=None, description="Quaternary team color (hex code)")
 
     # Logo and image URLs
     team_logo_wikipedia: str | None = Field(
@@ -102,9 +132,7 @@ class TeamData(SQLModel, table=True):
 
     def populate_kambi_fields(self) -> "TeamData":
         if not self.participant_name or not self.participant_id:
-            self.participant_name = NFL_DATA_PI_ABBR_TO_KAMBIDATA[self.team_abbr][
-                "participant"
-            ]
+            self.participant_name = NFL_DATA_PI_ABBR_TO_KAMBIDATA[self.team_abbr]["participant"]
             self.participant_id = NFL_DATA_PI_ABBR_TO_KAMBIDATA[self.team_abbr]["id"]
         return self
 

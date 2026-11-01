@@ -1,7 +1,7 @@
 import nfl_data_py as nfl
 
 from oddstracker.domain.model.sportevent import EventOffer, SportEvent
-from oddstracker.domain.teamdata import NFL_DATA_PI_ABBR_TO_KAMBIDATA, TeamData
+from oddstracker.domain.teamdata import NFL_DATA_PI_ABBR_TO_KAMBIDATA, TEAM_ABBRS, TeamData
 from oddstracker.service import get_client
 
 TEAMS_CACHE = None
@@ -37,7 +37,7 @@ async def get_events_by_teamabbr(team_abbr: str) -> list[SportEvent]:
     return await get_client().get_events_by_teamabbr(team_abbr=team_abbr)
 
 
-async def get_team_event_offers(team_abbr: str) -> list[EventOffer]:
+async def get_team_event_offers(team_abbr: TEAM_ABBRS) -> list[EventOffer]:
     team = await get_team_by_abbr(team_abbr)
     if not team or not team.team_nick:
         raise ValueError(f"Team with abbreviation '{team_abbr}' not found.")

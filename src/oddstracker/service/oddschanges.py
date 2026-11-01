@@ -2,7 +2,7 @@ import logging
 
 from pydantic import BaseModel
 
-from oddstracker.domain.model.sportevent import EventOffer
+from oddstracker.domain.model.sportevent import EventOffer, SportEvent
 from oddstracker.service import get_client
 
 logger = logging.getLogger(__name__)
@@ -44,9 +44,19 @@ def _has_changed(current: EventOffer, previous: EventOffer) -> tuple[bool, bool]
     return price_changed, point_changed
 
 
-async def get_linemoves() -> list[EventLineMovesResponse]:
+
+async def get_team_linemoves(team_abbr: str) -> list[EventLineMovesResponse]:
+    team_events = await get_client().get_events_by_teamabbr(team_abbr=team_abbr)
+    if not team_events:
+        logger.info(f"No events found for team {team_abbr}")
+        return []
+    logger.info(f"Fetching line moves for team {team_abbr} with {len(team_events)} events")
+    return await get_linemoves(events=team_events)
+
+async def get_linemoves(events: list[SportEvent] | None = None) -> list[EventLineMovesResponse]:
     logger.info("Fetching all bet offer changes across events")
-    events = await get_client().get_events()
+    if events is None:
+        events = await get_client().get_sportevents()
 
     changes_by_event = []
 
